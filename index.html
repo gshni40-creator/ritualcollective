@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glow Syndicate — beauty & grooming deals, redefined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root{
+    --cream:#FBF5EC;
+    --cream-soft:#F4E9D6;
+    --ink:#590332;
+    --ink-soft:#8C4A63;
+    --ink-faint:#B98C9E;
+    --berry:#D4AF37;
+    --berry-dark:#A6822A;
+    --copper:#E0BB55;
+    --copper-light:#F0DBA0;
+    --copper-dark:#8C6B1F;
+    --sage:#A65D78;
+    --sage-light:#F1DCE2;
+    --blush:#F6E7C9;
+    --white:#FFFFFF;
+    --line: rgba(89,3,50,0.09);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 20% 15%, rgba(224,187,85,0.12), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(212,175,55,0.10), transparent 50%),
+      #F6EEDD;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-family:'Inter', sans-serif;
+    padding:40px 16px;
+    gap:22px;
+  }
+  .showcase-label{
+    text-align:center;
+    color:var(--ink);
+  }
+  .showcase-label .eyebrow{
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--copper-dark);
+    font-weight:700;
+    margin-bottom:6px;
+    display:block;
+  }
+  .showcase-label h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:26px;
+    font-style:italic;
+    color:var(--ink);
+  }
+ 
+  /* ---------- Phone frame ---------- */
+  .phone{
+    width:390px;
+    height:830px;
+    background:var(--ink);
+    border-radius:52px;
+    padding:14px;
+    box-shadow:
+      0 40px 80px -20px rgba(89,3,50,0.45),
+      0 10px 30px -10px rgba(89,3,50,0.35),
+      inset 0 0 0 2px rgba(255,255,255,0.04);
+    position:relative;
+  }
+  .phone::before{
+    content:"";
+    position:absolute;
+    top:28px; left:50%; transform:translateX(-50%);
+    width:120px; height:26px;
+    background:var(--ink);
+    border-radius:20px;
+    z-index:30;
+  }
+  .screen-shell{
+    width:100%; height:100%;
+    background:var(--cream);
+    border-radius:38px;
+    overflow:hidden;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+  }
+  .status-bar{
+    height:48px;
+    flex:0 0 auto;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    padding:0 26px 6px 30px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--ink);
+    background:var(--cream);
+  }
+ 
+  /* ---------- App content area ---------- */
+  .app-body{
+    flex:1 1 auto;
+    overflow-y:auto;
+    position:relative;
+    background:var(--cream);
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+  }
+  .app-body::-webkit-scrollbar{display:none;}
+ 
+  .screen{
+    display:none;
+    min-height:100%;
+    padding-bottom:24px;
+    animation:fadeIn 0.25s ease;
+  }
+  .screen.active{display:block;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+ 
+  /* ---------- Bottom nav ---------- */
+  .tabbar{
+    flex:0 0 auto;
+    display:flex;
+    background:var(--white);
+    border-top:1px solid var(--line);
+    padding:10px 6px 16px;
+  }
+  .tab{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    background:none;
+    border:none;
+    font-family:'Inter';
+    font-size:10.5px;
+    font-weight:600;
+    color:var(--ink-faint);
+    cursor:pointer;
+    letter-spacing:0.01em;
+  }
+  .tab svg{width:22px; height:22px; stroke:var(--ink-faint); fill:none; stroke-width:1.8;}
+  .tab.active{color:var(--berry);}
+  .tab.active svg{stroke:var(--berry);}
+ 
+  /* ---------- Header ---------- */
+  .top-header{
+    padding:6px 20px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brandmark{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .coin-logo{
+    width:30px; height:30px;
+    border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, var(--copper-light), var(--copper) 55%, var(--copper-dark) 100%);
+    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.35), inset 0 -3px 5px rgba(0,0,0,0.25);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces'; font-weight:900; font-size:14px; color:var(--berry-dark);
+  }
+  .brandmark .word{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:16.5px;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+    white-space:nowrap;
+  }
+  .brandmark .word em{
+    font-style:italic; font-weight:500; color:var(--berry);
+  }
+  .icon-btn{
+    width:36px; height:36px;
+    border-radius:50%;
+    background:var(--white);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    position:relative;
+  }
+  .icon-btn svg{width:17px; height:17px; stroke:var(--ink); fill:none; stroke-width:1.8;}
+  .notif-dot{
+    position:absolute; top:6px; right:6px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--berry);
+    border:1.5px solid var(--white);
+    display:none;
+  }
+ 
+  .location-row{
+    padding:0 20px 14px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    display:flex; align-items:center; gap:5px;
+  }
+  .location-row svg{width:13px;height:13px; stroke:var(--berry); fill:none; stroke-width:2;}
+  .location-row b{color:var(--ink); font-weight:700;}
+ 
+  /* ---------- Category chips ---------- */
+  .chip-row{
+    display:flex;
+    gap:8px;
+    padding:0 20px 16px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .chip-row::-webkit-scrollbar{display:none;}
+  .chip{
+    flex:0 0 auto;
+    padding:8px 15px;
+    border-radius:20px;
+    background:var(--white);
+    border:1px solid var(--line);
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--ink-soft);
+    cursor:pointer;
+    white-space:nowrap;
+    transition:all .15s ease;
+  }
+  .chip.active{
+    background:var(--ink);
+    color:var(--cream);
+    border-color:var(--ink);
+  }
+  .chip.model-chip.active{
+    background:var(--sage);
+    border-color:var(--sage);
+  }
+ 
+  .section-title{
+    padding:4px 20px 10px;
+    font-family:'Fraunces';
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .section-title span.tally{
+    font-family:'Inter'; font-weight:600; font-size:11.5px; color:var(--ink-faint);
+  }
+ 
+  /* ---------- Deal cards ---------- */
+  .deal-list{
+    padding:0 20px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .deal-card{
+    background:var(--white);
+    border-radius:20px;
+    border:1px solid var(--line);
+    overflow:hidden;
+    cursor:pointer;
+    position:relative;
+    transition:transform .15s ease;
+  }
+  .deal-card:active{transform:scale(0.98);}
+  .deal-photo{
+    height:108px;
+    position:relative;
+    padding:10px 12px;
+  }
+  .deal-photo .time-pill{
+    position:absolute;
+    top:10px; left:12px;
+    background:rgba(89,3,50,0.55);
+    backdrop-filter:blur(3px);
+    color:#fff;
+    font-size:10.5px;
+    font-weight:700;
+    padding:4px 9px;
+    border-radius:20px;
+    display:flex; align-items:center; gap:4px;
+  }
+  .deal-photo .time-pill svg{width:10px;height:10px; stroke:#fff; fill:none; stroke-width:2.4;}
+  .save-btn{
+    position:absolute; top:10px; right:10px;
+    width:30px; height:30px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.88);
+    display:flex; align-items:center; justify-content:center;
+    border:none; cursor:pointer;
+  }
+  .save-btn svg{width:15px; height:15px; stroke:var(--berry); fill:none; stroke-width:2;}
+  .save-btn.saved svg{fill:var(--berry);}
+ 
+  .coin-badge{
+    position:absolute; left:12px; bottom:-20px;
+    width:56px; height:56px;
+    border-radius:50%;
+    background:radial-gradient(circle at 32% 26%, var(--copper-light), var(--copper) 55%, var(--copper-dark) 100%);
+    box-shadow:
+      0 4px 10px rgba(140,90,46,0.4),
+      inset 0 0 0 2px rgba(255,255,255,0.4),
+      inset 0 -4px 6px rgba(0,0,0,0.22);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:var(--berry-dark);
+    font-family:'Fraunces';
+    z-index:2;
+    border:2px solid var(--white);
+  }
+  .coin-badge b{font-size:16px; font-weight:900; line-height:1;}
+  .coin-badge small{font-size:7px; font-weight:700; letter-spacing:0.03em;}
+ 
+  .model-ribbon{
+    position:absolute; left:12px; bottom:-14px;
+    background:var(--sage);
+    color:#fff;
+    font-size:9.5px;
+    font-weight:800;
+    letter-spacing:0.04em;
+    padding:6px 10px;
+    border-radius:9px;
+    z-index:2;
+    box-shadow:0 4px 10px rgba(166,93,120,0.4);
+    display:flex; align-items:center; gap:4px;
+  }
+  .model-ribbon svg{width:11px;height:11px; stroke:#fff; fill:none; stroke-width:2.2;}
+ 
+  .deal-info{
+    padding:26px 14px 14px;
+  }
+  .deal-info .biz{
+    font-size:10.5px;
+    color:var(--ink-faint);
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    margin-bottom:3px;
+  }
+  .deal-info h4{
+    font-family:'Fraunces';
+    font-weight:600;
+    font-size:15.5px;
+    color:var(--ink);
+    margin-bottom:6px;
+    line-height:1.25;
+  }
+  .price-row{
+    display:flex; align-items:baseline; gap:7px;
+    margin-bottom:6px;
+  }
+  .price-row .now{ font-weight:800; font-size:15px; color:var(--berry);}
+  .price-row .was{ font-size:12.5px; color:var(--ink-faint); text-decoration:line-through;}
+  .meta-row{
+    display:flex; align-items:center; gap:10px;
+    font-size:11.5px; color:var(--ink-soft);
+  }
+  .meta-row .dot{width:3px;height:3px;border-radius:50%;background:var(--ink-faint);}
+  .tag-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;}
+  .req-tag{
+    background:var(--sage-light);
+    color:var(--sage);
+    font-size:10px;
+    font-weight:700;
+    padding:4px 8px;
+    border-radius:8px;
+  }
+  .elig-tag{
+    background:var(--blush);
+    color:var(--berry-dark);
+    font-size:10px;
+    font-weight:700;
+    padding:4px 8px;
+    border-radius:8px;
+  }
+  .combo-ribbon{
+    position:absolute; left:12px; bottom:-14px;
+    background:var(--berry);
+    color:var(--ink);
+    font-size:9.5px;
+    font-weight:800;
+    letter-spacing:0.04em;
+    padding:6px 10px;
+    border-radius:9px;
+    z-index:2;
+    box-shadow:0 4px 10px rgba(212,175,55,0.4);
+    display:flex; align-items:center; gap:4px;
+  }
+  .combo-ribbon svg{width:11px;height:11px; stroke:#fff; fill:none; stroke-width:2.2;}
+  .combo-box{ background:var(--cream-soft); border-radius:14px; padding:14px; margin-bottom:14px;}
+  .combo-box .lbl{ font-size:11px; font-weight:800; color:var(--copper-dark); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:8px;}
+  .combo-box ul{ list-style:none; padding:0; margin:0;}
+  .combo-box li{ font-size:12.5px; color:var(--ink-soft); padding:5px 0; display:flex; align-items:center; gap:8px;}
+  .combo-box li svg{ width:14px;height:14px; stroke:var(--copper); fill:none; stroke-width:2.4; flex:0 0 auto;}
+  .policy-box{ background:var(--white); border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:14px;}
+  .policy-box .lbl{ font-size:11px; font-weight:800; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:8px;}
+  .policy-row{ display:flex; justify-content:space-between; font-size:12.5px; color:var(--ink-soft); padding:4px 0;}
+  .policy-row b{ color:var(--ink); font-weight:700;}
+  .concession-chip-row{ display:flex; gap:8px; padding:0 20px 6px; flex-wrap:wrap;}
+  .concession-chip{
+    padding:8px 14px; border-radius:20px; background:var(--white); border:1px solid var(--line);
+    font-size:12px; font-weight:700; color:var(--ink-soft); cursor:pointer;
+  }
+  .concession-chip.active{ background:var(--berry); border-color:var(--berry); color:var(--ink);}
+  .concession-banner{
+    margin:0 20px 14px; background:var(--blush); border-radius:14px; padding:12px 14px;
+    font-size:12px; color:var(--berry-dark); font-weight:600; display:flex; align-items:center; gap:8px;
+  }
+  .concession-banner svg{ width:15px;height:15px; stroke:var(--berry-dark); fill:none; stroke-width:2; flex:0 0 auto;}
+ 
+  /* ---------- Booking flow ---------- */
+  .booking-chip-row{ display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; margin-bottom:16px; scrollbar-width:none;}
+  .booking-chip-row::-webkit-scrollbar{display:none;}
+  .booking-date-chip{
+    flex:0 0 auto; padding:10px 16px; border-radius:14px; background:var(--cream-soft);
+    border:1.5px solid var(--line); text-align:center; cursor:pointer;
+  }
+  .booking-date-chip .d{ font-size:10.5px; font-weight:700; color:var(--ink-faint); text-transform:uppercase;}
+  .booking-date-chip .n{ font-family:'Fraunces'; font-weight:700; font-size:16px; color:var(--ink); margin-top:2px;}
+  .booking-date-chip.active{ background:var(--ink); border-color:var(--ink);}
+  .booking-date-chip.active .d, .booking-date-chip.active .n{ color:var(--cream);}
+  .time-slot-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-bottom:18px;}
+  .time-slot{
+    text-align:center; padding:11px 4px; border-radius:12px; background:var(--cream-soft);
+    border:1.5px solid var(--line); font-size:12.5px; font-weight:700; color:var(--ink-soft); cursor:pointer;
+  }
+  .time-slot.active{ background:var(--berry); border-color:var(--berry); color:var(--ink);}
+  .time-slot.taken{ opacity:0.35; pointer-events:none; text-decoration:line-through;}
+  .booking-confirm-row{ display:flex; align-items:center; gap:9px; font-size:12px; color:var(--ink-soft); margin-bottom:16px; background:var(--cream-soft); border-radius:12px; padding:11px 13px;}
+  .booking-confirm-row svg{ width:15px;height:15px; stroke:var(--berry); fill:none; stroke-width:2; flex:0 0 auto;}
+ 
+  /* ---------- Loyalty ---------- */
+  .loyalty-card{
+    margin:0 20px 14px; background:var(--white); border:1px solid var(--line); border-radius:18px; padding:16px;
+  }
+  .loyalty-card .lhead{ display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;}
+  .loyalty-card h5{ font-family:'Fraunces'; font-weight:600; font-size:14.5px; color:var(--ink);}
+  .loyalty-card .lprog{ font-size:11px; font-weight:700; color:var(--copper-dark);}
+  .loyalty-card p.reward{ font-size:12px; color:var(--ink-soft); margin-bottom:12px;}
+  .stamp-row{ display:flex; gap:8px; flex-wrap:wrap;}
+  .stamp{
+    width:30px; height:30px; border-radius:50%;
+    border:1.5px dashed var(--copper-light);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .stamp.filled{
+    background:radial-gradient(circle at 32% 26%, var(--copper-light), var(--copper) 55%, var(--copper-dark) 100%);
+    border-style:solid; border-color:var(--copper-dark);
+  }
+  .stamp.filled svg{ width:13px;height:13px; stroke:#fff; fill:none; stroke-width:3;}
+  .loyalty-setup-toggle{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .loyalty-setup-toggle .switch{
+    width:42px; height:24px; border-radius:14px; background:var(--line); position:relative; cursor:pointer; flex:0 0 auto;
+  }
+  .loyalty-setup-toggle .switch.on{ background:var(--berry);}
+  .loyalty-setup-toggle .switch::after{
+    content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff;
+    transition:transform .15s ease;
+  }
+  .loyalty-setup-toggle .switch.on::after{ transform:translateX(18px);}
+ 
+  /* photo gradient backgrounds per category, no external images needed */
+  .bg-nails{ background:linear-gradient(135deg,#F0C9C9,#E8A8B0);}
+  .bg-hair{ background:linear-gradient(135deg,#E7C9A8,#D9A876);}
+  .bg-makeup{ background:linear-gradient(135deg,#DDB8DD,#C98FC9);}
+  .bg-waxing{ background:linear-gradient(135deg,#F4DCC2,#E7BE95);}
+  .bg-brows{ background:linear-gradient(135deg,#C9B7E0,#A98FCB);}
+  .bg-skincare{ background:linear-gradient(135deg,#C8DCC5,#9EBB98);}
+  .bg-spa{ background:linear-gradient(135deg,#CFE0DE,#8FB3AE);}
+  .bg-grooming{ background:linear-gradient(135deg,#D9C6AE,#AD8A63);}
+ 
+  /* ---------- Map screen ---------- */
+  .map-wrap{
+    height:calc(100% - 0px);
+    position:relative;
+  }
+  .map-canvas{
+    height:340px;
+    width:100%;
+    position:relative;
+    background:#F1E9DC;
+  }
+  .leaflet-div-icon{ background:transparent; border:none; }
+  .lf-pin{
+    width:38px; height:38px;
+    border-radius:50% 50% 50% 4px;
+    transform:rotate(45deg);
+    background:radial-gradient(circle at 32% 26%, var(--copper-light), var(--copper) 55%, var(--copper-dark) 100%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 8px rgba(89,3,50,0.28);
+    border:2px solid #fff;
+    cursor:pointer;
+  }
+  .lf-pin.model{ background:var(--sage); }
+  .lf-pin span{
+    transform:rotate(-45deg);
+    font-family:'Fraunces'; font-weight:800; font-size:11px; color:#fff;
+  }
+  .lf-pin.selected{ box-shadow:0 0 0 5px rgba(212,175,55,0.28), 0 4px 8px rgba(89,3,50,0.32); }
+ 
+  .map-list-toggle{
+    position:absolute;
+    top:14px; right:16px;
+    background:var(--ink);
+    color:#fff;
+    font-size:11.5px;
+    font-weight:700;
+    padding:8px 14px;
+    border-radius:20px;
+    display:flex; align-items:center; gap:5px;
+    cursor:pointer;
+    z-index:1000;
+  }
+  .map-loading{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:12.5px; color:var(--ink-faint); background:#F1E9DC; z-index:1;
+  }
+  .map-popup-wrap{ padding:16px 20px 0;}
+ 
+  /* ---------- Bottom sheet (deal detail) ---------- */
+  .sheet-overlay{
+    position:absolute; inset:0;
+    background:rgba(89,3,50,0.5);
+    z-index:40;
+    display:none;
+    align-items:flex-end;
+  }
+  .sheet-overlay.open{display:flex;}
+  .sheet{
+    width:100%;
+    max-height:88%;
+    background:var(--cream);
+    border-radius:28px 28px 0 0;
+    overflow-y:auto;
+    animation:slideUp .28s ease;
+    padding-bottom:28px;
+  }
+  @keyframes slideUp{from{transform:translateY(100%);} to{transform:translateY(0);}}
+  .sheet-handle{
+    width:38px; height:4px; background:var(--line); border-radius:4px;
+    margin:12px auto 6px;
+  }
+  .sheet-photo{ height:150px; margin:0 20px 0; border-radius:18px; position:relative; display:flex; align-items:flex-end; padding:12px;}
+  .sheet-close{
+    position:absolute; top:16px; right:34px;
+    width:30px;height:30px; border-radius:50%;
+    background:rgba(255,255,255,0.9);
+    display:flex; align-items:center; justify-content:center;
+    border:none; cursor:pointer; z-index:2;
+  }
+  .sheet-close svg{width:14px;height:14px;}
+  .sheet-body{ padding:22px 22px 4px;}
+  .sheet-body .biz{ font-size:11px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.03em;}
+  .sheet-body h2{ font-family:'Fraunces'; font-weight:600; font-size:21px; margin:6px 0 10px; color:var(--ink);}
+  .sheet-price{ display:flex; align-items:baseline; gap:9px; margin-bottom:14px;}
+  .sheet-price .now{ font-family:'Fraunces'; font-weight:800; font-size:26px; color:var(--berry);}
+  .sheet-price .was{ font-size:15px; color:var(--ink-faint); text-decoration:line-through;}
+  .sheet-price .pct{ background:var(--copper); color:#fff; font-size:11px; font-weight:800; padding:4px 9px; border-radius:20px;}
+  .sheet-divider{ height:1px; background:var(--line); margin:16px 0;}
+  .sheet-row{ display:flex; align-items:flex-start; gap:10px; margin-bottom:12px; font-size:13px; color:var(--ink-soft); line-height:1.5;}
+  .sheet-row svg{width:16px;height:16px; stroke:var(--berry); fill:none; stroke-width:2; flex:0 0 auto; margin-top:1px;}
+  .req-box{ background:var(--sage-light); border-radius:14px; padding:14px; margin-bottom:14px;}
+  .req-box .lbl{ font-size:11px; font-weight:800; color:var(--sage); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:6px;}
+  .req-box p{ font-size:12.5px; color:#6B2740; line-height:1.5;}
+  .redeem-btn{
+    width:100%;
+    background:var(--berry);
+    color:var(--ink);
+    border:none;
+    padding:15px;
+    border-radius:16px;
+    font-family:'Inter';
+    font-weight:700;
+    font-size:14.5px;
+    cursor:pointer;
+    margin-top:6px;
+  }
+  .redeem-btn.model-btn{ background:var(--sage);}
+ 
+  /* ---------- Voucher screen ---------- */
+  .voucher-card{
+    margin:20px;
+    background:var(--ink);
+    border-radius:22px;
+    padding:26px 22px;
+    color:var(--cream);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .voucher-card::before{
+    content:"";
+    position:absolute; top:-40px; right:-40px;
+    width:140px; height:140px; border-radius:50%;
+    background:radial-gradient(circle, rgba(224,187,85,0.35), transparent 70%);
+  }
+  .voucher-card .check{
+    width:56px; height:56px; border-radius:50%;
+    background:var(--copper);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 14px;
+  }
+  .voucher-card .check svg{width:26px;height:26px; stroke:#fff; fill:none; stroke-width:2.6;}
+  .voucher-card h3{ font-family:'Fraunces'; font-weight:600; font-size:19px; margin-bottom:4px;}
+  .voucher-card p.sub{ font-size:12.5px; color:rgba(250,243,236,0.65); margin-bottom:18px;}
+  .voucher-code{
+    background:rgba(250,243,236,0.08);
+    border:1.5px dashed rgba(250,243,236,0.35);
+    border-radius:14px;
+    padding:14px;
+    font-family:'Fraunces'; font-weight:700; font-size:22px;
+    letter-spacing:0.12em;
+    margin-bottom:14px;
+  }
+  .voucher-card .exp{ font-size:11.5px; color:rgba(250,243,236,0.55);}
+  .sheet-body .done-btn{
+    width:100%; background:var(--ink); color:#fff; border:none; padding:14px; border-radius:14px; font-weight:700; font-size:14px; margin-top:4px; cursor:pointer;
+  }
+ 
+  /* ---------- My Deals ---------- */
+  .subtabs{ display:flex; gap:6px; padding:4px 20px 16px;}
+  .subtab{
+    flex:1; text-align:center; padding:9px; border-radius:12px;
+    background:var(--white); border:1px solid var(--line);
+    font-size:12px; font-weight:700; color:var(--ink-soft); cursor:pointer;
+  }
+  .subtab.active{ background:var(--ink); color:var(--cream); border-color:var(--ink);}
+  .voucher-row{
+    margin:0 20px 12px;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:14px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+  .voucher-row .mini-coin{
+    width:42px;height:42px; border-radius:50%; flex:0 0 auto;
+    background:radial-gradient(circle at 32% 26%, var(--copper-light), var(--copper) 55%, var(--copper-dark) 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces'; font-weight:800; font-size:11px; color:#fff;
+  }
+  .voucher-row .vinfo{ flex:1;}
+  .voucher-row .vinfo h5{ font-family:'Fraunces'; font-size:13.5px; font-weight:600; color:var(--ink); margin-bottom:2px;}
+  .voucher-row .vinfo span{ font-size:11px; color:var(--ink-faint);}
+  .voucher-row .vcode{ font-size:11px; font-weight:800; color:var(--berry); letter-spacing:0.05em;}
+ 
+  .empty-state{
+    text-align:center; padding:60px 40px; color:var(--ink-faint);
+  }
+  .empty-state svg{ width:44px; height:44px; stroke:var(--ink-faint); fill:none; stroke-width:1.4; margin-bottom:14px;}
+  .empty-state p{ font-size:13px; line-height:1.5;}
+ 
+  /* ---------- Profile ---------- */
+  .profile-head{
+    padding:28px 20px 20px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .avatar{
+    width:56px;height:56px; border-radius:50%;
+    background:linear-gradient(135deg, var(--berry), var(--copper));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:'Fraunces'; font-weight:700; font-size:20px;
+  }
+  .profile-head h3{ font-family:'Fraunces'; font-weight:600; font-size:17px; color:var(--ink);}
+  .profile-head span{ font-size:12px; color:var(--ink-soft);}
+ 
+  .plus-card{
+    margin:6px 20px 22px;
+    background:linear-gradient(135deg, #2A0316, var(--berry-dark) 55%, var(--copper-dark));
+    border-radius:20px;
+    padding:20px;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+  .plus-card::after{
+    content:"";
+    position:absolute; bottom:-30px; right:-20px; width:120px;height:120px;
+    background:radial-gradient(circle, rgba(240,219,160,0.35), transparent 70%);
+  }
+  .plus-card .plus-top{ display:flex; align-items:center; gap:8px; margin-bottom:10px;}
+  .plus-card .plus-coin{
+    width:26px;height:26px;border-radius:50%;
+    background:radial-gradient(circle at 32% 26%, var(--copper-light), var(--copper) 60%, var(--copper-dark) 100%);
+  }
+  .plus-card .plus-top b{ font-family:'Fraunces'; font-weight:700; font-size:15px;}
+  .plus-card .soon{ background:rgba(255,255,255,0.15); font-size:9.5px; font-weight:800; padding:3px 8px; border-radius:10px; margin-left:auto;}
+  .plus-card p.desc{ font-size:12.5px; color:rgba(255,255,255,0.75); margin-bottom:14px; line-height:1.5;}
+  .plus-feat{ display:flex; align-items:center; gap:8px; font-size:12px; margin-bottom:8px; color:rgba(255,255,255,0.92);}
+  .plus-feat svg{ width:14px;height:14px; stroke:var(--copper-light); fill:none; stroke-width:2.4;}
+  .plus-btn{
+    margin-top:10px; width:100%; background:var(--copper); border:none; color:#2A0316;
+    font-weight:800; font-size:13px; padding:12px; border-radius:12px; cursor:pointer;
+  }
+ 
+  .profile-list{ margin:0 20px; background:var(--white); border:1px solid var(--line); border-radius:16px; overflow:hidden;}
+  .profile-item{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:15px 16px; border-bottom:1px solid var(--line);
+    font-size:13.5px; font-weight:600; color:var(--ink); cursor:pointer;
+  }
+  .profile-item:last-child{ border-bottom:none;}
+  .profile-item .l{ display:flex; align-items:center; gap:11px;}
+  .profile-item svg{ width:16px;height:16px; stroke:var(--ink-soft); fill:none; stroke-width:1.8;}
+  .profile-item .chev{ stroke:var(--ink-faint);}
+ 
+  /* ---------- Business dashboard ---------- */
+  .biz-header{
+    padding:22px 20px 16px;
+    background:var(--ink);
+    color:var(--cream);
+    border-radius:0 0 24px 24px;
+    margin-bottom:16px;
+  }
+  .biz-header .eyebrow{ font-size:10.5px; font-weight:700; color:var(--copper-light); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;}
+  .biz-header h2{ font-family:'Fraunces'; font-weight:600; font-size:19px; margin-bottom:4px;}
+  .biz-header p{ font-size:12px; color:rgba(250,243,236,0.6);}
+  .biz-back{
+    display:inline-flex; align-items:center; gap:5px; color:var(--copper-light);
+    font-size:12px; font-weight:700; margin-bottom:14px; cursor:pointer;
+  }
+  .biz-back svg{ width:13px;height:13px; stroke:var(--copper-light); fill:none; stroke-width:2.4;}
+ 
+  .form-card{ margin:0 20px 18px; background:var(--white); border:1px solid var(--line); border-radius:18px; padding:18px;}
+  .form-card h4{ font-family:'Fraunces'; font-weight:600; font-size:15px; color:var(--ink); margin-bottom:14px;}
+  .field{ margin-bottom:14px;}
+  .field label{ display:block; font-size:11.5px; font-weight:700; color:var(--ink-soft); margin-bottom:6px;}
+  .field input, .field select, .field textarea{
+    width:100%; border:1px solid var(--line); border-radius:11px; padding:11px 12px;
+    font-family:'Inter'; font-size:13px; color:var(--ink); background:var(--cream-soft);
+  }
+  .field textarea{ resize:none; min-height:64px;}
+  .toggle-row{ display:flex; gap:8px; margin-bottom:14px;}
+  .toggle-opt{
+    flex:1; text-align:center; padding:11px; border-radius:11px; border:1.5px solid var(--line);
+    font-size:12.5px; font-weight:700; color:var(--ink-soft); cursor:pointer; background:var(--cream-soft);
+  }
+  .toggle-opt.active{ background:var(--berry); border-color:var(--berry); color:var(--ink);}
+  .toggle-opt.active.model-toggle{ background:var(--sage); border-color:var(--sage);}
+  .submit-btn{
+    width:100%; background:var(--ink); color:#fff; border:none; padding:14px; border-radius:13px;
+    font-weight:700; font-size:13.5px; cursor:pointer;
+  }
+  .biz-deal-row{
+    margin:0 20px 12px; background:var(--white); border:1px solid var(--line); border-radius:16px; padding:13px 14px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .biz-deal-row .status-dot{ width:8px;height:8px;border-radius:50%; background:#5C8A52; flex:0 0 auto;}
+  .biz-deal-row .binfo{ flex:1;}
+  .biz-deal-row .binfo h5{ font-family:'Fraunces'; font-size:13.5px; font-weight:600; color:var(--ink);}
+  .biz-deal-row .binfo span{ font-size:11px; color:var(--ink-faint);}
+  .claimed-pill{ font-size:10.5px; font-weight:700; color:var(--copper-dark); background:var(--cream-soft); padding:5px 9px; border-radius:8px;}
+ 
+  /* ---------- Reviews & ratings ---------- */
+  .review-summary{
+    display:flex; align-items:center; gap:12px;
+    padding:14px; background:var(--cream-soft); border-radius:14px; margin-bottom:16px;
+  }
+  .review-summary .avg{ font-family:'Fraunces'; font-weight:800; font-size:26px; color:var(--ink);}
+  .review-summary .stars-static{ display:flex; gap:2px; margin:3px 0;}
+  .review-summary .stars-static svg{width:13px;height:13px;}
+  .review-summary .count{ font-size:11.5px; color:var(--ink-faint);}
+  .review-item{ padding:14px 0; border-bottom:1px solid var(--line);}
+  .review-item:last-child{ border-bottom:none;}
+  .review-item .rhead{ display:flex; align-items:center; gap:9px; margin-bottom:6px;}
+  .review-item .r-avatar{
+    width:30px;height:30px;border-radius:50%; flex:0 0 auto;
+    background:linear-gradient(135deg, var(--berry), var(--copper));
+    color:#fff; font-family:'Fraunces'; font-weight:700; font-size:12px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .review-item .r-name{ font-size:12.5px; font-weight:700; color:var(--ink);}
+  .review-item .r-date{ font-size:10.5px; color:var(--ink-faint);}
+  .review-item .r-stars{ display:flex; gap:2px; margin:5px 0 6px;}
+  .review-item .r-stars svg{ width:12px;height:12px;}
+  .review-item p{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin-bottom:8px;}
+  .review-photos{ display:flex; gap:7px; flex-wrap:wrap;}
+  .review-photos img, .review-photos .ph-swatch{
+    width:56px; height:56px; border-radius:10px; object-fit:cover; flex:0 0 auto;
+  }
+ 
+  .star-picker{ display:flex; gap:8px; margin:14px 0 16px;}
+  .star-picker svg{ width:32px; height:32px; cursor:pointer; stroke:var(--copper); stroke-width:1.6; fill:none; transition:all .12s ease;}
+  .star-picker svg.filled{ fill:var(--copper);}
+ 
+  .photo-grid{ display:flex; gap:9px; flex-wrap:wrap; margin-bottom:16px;}
+  .photo-tile{ width:64px; height:64px; border-radius:12px; position:relative; overflow:hidden; flex:0 0 auto;}
+  .photo-tile img{ width:100%; height:100%; object-fit:cover; display:block;}
+  .photo-remove{
+    position:absolute; top:3px; right:3px; width:18px;height:18px; border-radius:50%;
+    background:rgba(89,3,50,0.7); display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .photo-remove svg{ width:9px;height:9px; stroke:#fff; fill:none; stroke-width:2.6;}
+  .photo-add{
+    width:64px; height:64px; border-radius:12px; border:1.5px dashed var(--line);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto;
+    color:var(--ink-faint); background:var(--cream-soft);
+  }
+  .photo-add svg{ width:20px;height:20px; stroke:var(--ink-faint); fill:none; stroke-width:2;}
+ 
+  .mark-used-btn{
+    background:none; border:1.5px solid var(--copper); color:var(--copper-dark);
+    font-size:10.5px; font-weight:700; padding:6px 10px; border-radius:20px; cursor:pointer; white-space:nowrap;
+  }
+  .voucher-row{ align-items:center; }
+  .voucher-row .vinfo .rated-stars{ display:flex; gap:2px; margin-top:3px;}
+  .voucher-row .vinfo .rated-stars svg{ width:11px;height:11px;}
+ 
+  .toast{
+    position:absolute; bottom:100px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:#fff; font-size:12.5px; font-weight:600;
+    padding:11px 18px; border-radius:30px; z-index:60; opacity:0; pointer-events:none;
+    transition:all .25s ease; white-space:nowrap;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+ 
+<div class="showcase-label">
+  <span class="eyebrow">Interactive Prototype</span>
+  <h1>Glow Syndicate — <em>beauty & grooming, redefined</em></h1>
+</div>
+ 
+<div class="phone">
+  <div class="screen-shell">
+ 
+    <div class="status-bar">
+      <span>9:41</span>
+      <span>●●● Glow Syndicate</span>
+    </div>
+ 
+    <div class="app-body" id="appBody">
+ 
+      <!-- ============ DISCOVER ============ -->
+      <section class="screen active" id="screen-discover">
+        <div class="top-header">
+          <div class="brandmark">
+            <div class="coin-logo">G</div>
+            <div class="word">Glow <em>Syndicate</em></div>
+          </div>
+          <div class="icon-btn" id="bellBtn" onclick="openNotifications()">
+            <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            <span class="notif-dot" id="notifDot"></span>
+          </div>
+        </div>
+        <div class="location-row">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Deals near <b>Fortitude Valley, Brisbane</b>
+        </div>
+        <div class="chip-row" id="chipRow"></div>
+        <div class="concession-banner" id="concessionBanner" style="display:none;"></div>
+        <div class="section-title" id="comboSectionTitle" style="display:none;">Combos to book for later <span class="tally" id="comboTally"></span></div>
+        <div class="deal-list" id="comboList" style="margin-bottom:18px;"></div>
+        <div class="section-title">Ending soon <span class="tally" id="dealTally"></span></div>
+        <div class="deal-list" id="dealList"></div>
+      </section>
+ 
+      <!-- ============ MAP ============ -->
+      <section class="screen" id="screen-map">
+        <div class="top-header">
+          <div class="brandmark"><div class="word">Nearby map</div></div>
+        </div>
+        <div class="map-wrap">
+          <div class="map-canvas" id="mapCanvas"></div>
+          <div class="map-list-toggle" onclick="switchTab('discover')">☰ List view</div>
+          <div class="map-popup-wrap" id="mapPopup"></div>
+        </div>
+      </section>
+ 
+      <!-- ============ FAVOURITES ============ -->
+      <section class="screen" id="screen-favourites">
+        <div class="top-header"><div class="brandmark"><div class="word">Favourites</div></div></div>
+        <div class="location-row" style="padding-top:0;">Heart a deal to follow that business — you'll be notified when they post something new.</div>
+        <div class="section-title">Businesses you follow <span class="tally" id="favTally"></span></div>
+        <div id="favouritesList"></div>
+      </section>
+ 
+      <!-- ============ MY DEALS ============ -->
+      <section class="screen" id="screen-mydeals">
+        <div class="top-header"><div class="brandmark"><div class="word">My deals</div></div></div>
+        <div class="subtabs" id="myDealsTabs">
+          <div class="subtab active" data-sub="active" onclick="setMyDealsTab('active')">Active</div>
+          <div class="subtab" data-sub="loyalty" onclick="setMyDealsTab('loyalty')">Loyalty</div>
+          <div class="subtab" data-sub="redeemed" onclick="setMyDealsTab('redeemed')">Redeemed</div>
+        </div>
+        <div id="myDealsList"></div>
+      </section>
+ 
+      <!-- ============ PROFILE ============ -->
+      <section class="screen" id="screen-profile">
+        <div class="profile-head">
+          <div class="avatar">S</div>
+          <div>
+            <h3>Suhani</h3>
+            <span>Member since 2026 · Free plan</span>
+          </div>
+        </div>
+ 
+        <div class="form-card" style="margin:0 20px 16px;">
+          <h4>Concession status</h4>
+          <div id="concessionChips" style="display:flex; gap:8px; flex-wrap:wrap;"></div>
+          <p style="font-size:11px;color:var(--ink-faint);margin-top:10px;line-height:1.4;">Let us know if you're a student, concession, or senior card holder — we'll flag deals with pricing for you across Discover.</p>
+        </div>
+ 
+        <div class="plus-card">
+          <div class="plus-top">
+            <div class="plus-coin"></div>
+            <b>Glow+</b>
+            <span class="soon">Coming soon</span>
+          </div>
+          <p class="desc">A membership for anyone who never wants to pay full price for their routine again.</p>
+          <div class="plus-feat"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Early access to flash deals, before they hit the feed</div>
+          <div class="plus-feat"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Member-only discount tiers, deeper than public offers</div>
+          <div class="plus-feat"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Priority booking on Model Call spots</div>
+          <button class="plus-btn" onclick="toast('We\'ll let you know the moment it launches')">Notify me at launch</button>
+        </div>
+ 
+        <div class="profile-list" style="margin-bottom:16px;">
+          <div class="profile-item" onclick="switchTab('business')">
+            <div class="l"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1"/></svg>List your business on Glow Syndicate</div>
+            <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div class="profile-item" onclick="toast('Payment settings coming soon')">
+            <div class="l"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Payment methods</div>
+            <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div class="profile-item" onclick="toast('Notification settings coming soon')">
+            <div class="l"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Notifications</div>
+            <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div class="profile-item" onclick="toast('You\'re on the Free plan')">
+            <div class="l"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Help & support</div>
+            <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+        </div>
+      </section>
+ 
+      <!-- ============ BUSINESS DASHBOARD ============ -->
+      <section class="screen" id="screen-business">
+        <div class="biz-header">
+          <div class="biz-back" onclick="switchTab('profile')"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Back to profile</div>
+          <div class="eyebrow">For business</div>
+          <h2>Business dashboard</h2>
+          <p>Post a discount, or call for models — reach people nearby in minutes.</p>
+        </div>
+ 
+        <div class="form-card">
+          <h4>Create a new deal</h4>
+          <div class="toggle-row">
+            <div class="toggle-opt active" id="toggleStandard" onclick="setDealType('standard')">Standard</div>
+            <div class="toggle-opt" id="toggleModel" onclick="setDealType('model')">Model call</div>
+            <div class="toggle-opt" id="toggleCombo" onclick="setDealType('combo')">Combo</div>
+          </div>
+          <div class="field">
+            <label>Business name</label>
+            <input id="fBiz" type="text" value="Willow & Bloom Studio" />
+          </div>
+          <div class="field">
+            <label>Cover photo</label>
+            <div class="photo-grid" id="bizPhotoGrid"></div>
+            <p style="font-size:11px;color:var(--ink-faint);margin-top:8px;line-height:1.4;">This is what customers see on your deal card — a real photo of the space or work performs much better than a plain colour.</p>
+          </div>
+          <div class="field">
+            <label>Suburb</label>
+            <input id="fSuburb" type="text" value="Fortitude Valley" />
+          </div>
+          <div class="field">
+            <label>Service / combo name</label>
+            <input id="fService" type="text" placeholder="e.g. Balayage & toner" />
+          </div>
+          <div class="field">
+            <label>Category</label>
+            <select id="fCategory">
+              <option>Hair</option><option>Nails</option><option>Makeup</option>
+              <option>Waxing</option><option>Brows & Lashes</option><option>Skincare</option><option>Massage & Spa</option><option>Grooming</option>
+            </select>
+          </div>
+          <div class="field" id="fieldPercent">
+            <label>Discount</label>
+            <div style="display:flex; gap:10px;">
+              <input id="fOriginal" type="text" placeholder="Original price, e.g. 120" style="flex:1;" />
+              <input id="fPercent" type="text" placeholder="% off, e.g. 40" style="flex:1;" />
+            </div>
+          </div>
+          <div class="field" id="fieldCombo" style="display:none;">
+            <label>What's included (one per line)</label>
+            <textarea id="fComboItems" placeholder="Haircut & style&#10;Full colour&#10;Toner&#10;Blow-dry finish"></textarea>
+          </div>
+          <div class="field" id="fieldReq" style="display:none;">
+            <label>What kind of model are you after?</label>
+            <textarea id="fReq" placeholder="e.g. Long, non-toner-treated hair, available weekday mornings"></textarea>
+          </div>
+          <div class="field">
+            <label>Who is this price for?</label>
+            <select id="fEligibility">
+              <option>Everyone</option><option>Student</option><option>Concession</option><option>Senior</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Spots available</label>
+            <input id="fQty" type="text" placeholder="e.g. 6" />
+          </div>
+          <div class="field" id="fieldWindow">
+            <label>Live for</label>
+            <select id="fWindow">
+              <option>3 hours</option><option>Today only</option><option>This weekend</option><option>7 days</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Cancellation & no-show fees</label>
+            <div style="display:flex; gap:10px;">
+              <input id="fCancelFee" type="text" placeholder="Cancellation fee $, e.g. 20" style="flex:1;" />
+              <input id="fNoShowFee" type="text" placeholder="No-show fee $, e.g. 50" style="flex:1;" />
+            </div>
+            <p style="font-size:11px;color:var(--ink-faint);margin-top:8px;line-height:1.4;">Leave blank for no fee. Shown to customers before they redeem.</p>
+          </div>
+          <button class="submit-btn" onclick="createBizDeal()">Publish deal</button>
+        </div>
+ 
+        <div class="form-card">
+          <div class="loyalty-setup-toggle">
+            <h4 style="margin-bottom:0;">Loyalty programme</h4>
+            <div class="switch" id="loyaltySwitch" onclick="toggleLoyaltySetup()"></div>
+          </div>
+          <div id="loyaltyFields" style="display:none;">
+            <div class="field">
+              <label>Stamps required for a reward</label>
+              <input id="fStamps" type="text" placeholder="e.g. 6" />
+            </div>
+            <div class="field">
+              <label>Reward</label>
+              <input id="fReward" type="text" placeholder="e.g. A free treatment on the house" />
+            </div>
+            <button class="submit-btn" onclick="saveLoyaltyProgram()">Save loyalty programme</button>
+          </div>
+          <p style="font-size:11px;color:var(--ink-faint); line-height:1.4;" id="loyaltyHint">Turn this on to give returning customers a stamp every time they book with you.</p>
+        </div>
+ 
+        <div class="section-title" style="padding-left:20px;">Your active deals</div>
+        <div id="bizDealList"></div>
+      </section>
+ 
+    </div>
+ 
+    <!-- bottom sheet: deal detail -->
+    <div class="sheet-overlay" id="sheetOverlay">
+      <div class="sheet" id="sheetContent"></div>
+    </div>
+ 
+    <div class="toast" id="toast"></div>
+ 
+    <div class="tabbar">
+      <button class="tab active" data-tab="discover" onclick="switchTab('discover')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        Discover
+      </button>
+      <button class="tab" data-tab="map" onclick="switchTab('map')">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        Map
+      </button>
+      <button class="tab" data-tab="favourites" onclick="switchTab('favourites')">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.33-8.9C1.2 8.4 3 5 6.5 5c2 0 3.3 1.1 4 2.3.7-1.2 2-2.3 4-2.3C18 5 19.8 8.4 18.33 12.1 16 16.65 12 21 12 21z"/></svg>
+        Faves
+      </button>
+      <button class="tab" data-tab="mydeals" onclick="switchTab('mydeals')">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M4 7l2-4h12l2 4"/><path d="M9 11a3 3 0 006 0"/></svg>
+        My Deals
+      </button>
+      <button class="tab" data-tab="profile" onclick="switchTab('profile')">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Profile
+      </button>
+    </div>
+  </div>
+</div>
+ 
+<script>
+/* ---------------- DATA ---------------- */
+const CATEGORIES = ["All","Nails","Hair","Makeup","Waxing","Brows & Lashes","Skincare","Massage & Spa","Grooming","Model Calls"];
+ 
+const DEALS = [
+  {id:1, biz:"Willow & Bloom Studio", suburb:"Fortitude Valley", category:"Hair", bg:"bg-hair", title:"Balayage + toner + blow-dry", was:220, now:99, pct:55, time:"2h 10m left", rating:4.9, type:"standard", eligibility:"Everyone", cancelFee:20, noShowFee:50, x:28, y:22},
+  {id:2, biz:"Bare Beauty Bar", suburb:"New Farm", category:"Waxing", bg:"bg-waxing", title:"Full leg + underarm wax", was:80, now:39, pct:51, time:"4h 40m left", rating:4.7, type:"standard", eligibility:"Student", cancelFee:10, noShowFee:25, x:62, y:38},
+  {id:3, biz:"Lacquer Lane", suburb:"West End", category:"Nails", bg:"bg-nails", title:"Gel manicure + soak-off", was:65, now:29, pct:55, time:"1h 05m left", rating:4.8, type:"standard", eligibility:"Everyone", cancelFee:0, noShowFee:20, x:40, y:64},
+  {id:4, biz:"Rêve Makeup Studio", suburb:"South Bank", category:"Makeup", bg:"bg-makeup", title:"Full glam trial session", was:150, now:75, pct:50, time:"6h left", rating:5.0, type:"standard", eligibility:"Everyone", cancelFee:25, noShowFee:60, x:72, y:70},
+  {id:5, biz:"Brow Theory Academy", suburb:"Paddington", category:"Brows & Lashes", bg:"bg-brows", title:"Model needed — brow lamination", was:0, now:0, pct:0, time:"Today only", rating:4.6, type:"model", req:"Fair-to-medium natural brow hair, no recent tint", eligibility:"Everyone", cancelFee:0, noShowFee:0, x:20, y:52},
+  {id:6, biz:"Clay & Co. Skin Studio", suburb:"Toowong", category:"Skincare", bg:"bg-skincare", title:"HydraFacial signature treatment", was:190, now:89, pct:53, time:"3h 20m left", rating:4.9, type:"standard", eligibility:"Everyone", cancelFee:30, noShowFee:70, x:52, y:18},
+  {id:7, biz:"Colour Lab Hair Co.", suburb:"Ascot", category:"Hair", bg:"bg-hair", title:"Model wanted — vivid colour correction", was:0, now:0, pct:0, time:"This weekend", rating:4.5, type:"model", req:"Level 6+ natural base, no bleach in last 6 months", eligibility:"Everyone", cancelFee:0, noShowFee:0, x:80, y:50},
+  {id:8, biz:"Petal Nail Bar", suburb:"Fortitude Valley", category:"Nails", bg:"bg-nails", title:"Builder gel extensions", was:110, now:55, pct:50, time:"5h left", rating:4.7, type:"standard", eligibility:"Concession", cancelFee:10, noShowFee:30, x:34, y:34},
+  {id:9, biz:"House of Lash", suburb:"West End", category:"Brows & Lashes", bg:"bg-brows", title:"Classic lash full set", was:95, now:45, pct:53, time:"2h 50m left", rating:4.8, type:"standard", eligibility:"Everyone", cancelFee:15, noShowFee:40, x:58, y:58},
+  {id:10, biz:"Rêve Makeup Studio", suburb:"South Bank", category:"Makeup", bg:"bg-makeup", title:"Model needed — editorial makeup shoot", was:0, now:0, pct:0, time:"This weekend", rating:5.0, type:"model", req:"Comfortable with bold colour looks, portfolio shared after", eligibility:"Everyone", cancelFee:0, noShowFee:0, x:66, y:26},
+  {id:11, biz:"Still Water Spa House", suburb:"New Farm", category:"Massage & Spa", bg:"bg-spa", title:"60-min deep tissue massage", was:140, now:69, pct:51, time:"3h left", rating:4.9, type:"standard", eligibility:"Senior", cancelFee:20, noShowFee:50, x:46, y:44},
+  {id:12, biz:"Still Water Spa House", suburb:"New Farm", category:"Massage & Spa", bg:"bg-spa", title:"Hot stone back & shoulder ritual", was:110, now:59, pct:46, time:"Today only", rating:4.8, type:"standard", eligibility:"Everyone", cancelFee:20, noShowFee:45, x:50, y:46},
+  {id:13, biz:"Willow & Bloom Studio", suburb:"Fortitude Valley", category:"Hair", bg:"bg-hair", title:"Cut, colour & blow-dry combo", was:280, now:139, pct:50, time:"7 days left", rating:4.9, type:"combo", comboItems:["Haircut & style","Full colour","Toner","Blow-dry finish"], eligibility:"Everyone", cancelFee:20, noShowFee:50, x:24, y:60},
+  {id:14, biz:"Fade & Co. Barbershop", suburb:"West End", category:"Grooming", bg:"bg-grooming", title:"Skin fade + beard trim", was:65, now:35, pct:46, time:"2h 30m left", rating:4.8, type:"standard", eligibility:"Everyone", cancelFee:10, noShowFee:25, x:44, y:30},
+  {id:15, biz:"The Beard Parlour", suburb:"Fortitude Valley", category:"Grooming", bg:"bg-grooming", title:"Hot towel shave & facial combo", was:90, now:49, pct:46, time:"Today only", rating:4.9, type:"standard", eligibility:"Student", cancelFee:10, noShowFee:30, x:30, y:26},
+  {id:16, biz:"Fade & Co. Barbershop", suburb:"West End", category:"Grooming", bg:"bg-grooming", title:"Model wanted — skin fade & design", was:0, now:0, pct:0, time:"This weekend", rating:4.7, type:"model", req:"Short-to-medium hair, comfortable with a sharp fade and line design", eligibility:"Everyone", cancelFee:0, noShowFee:0, x:48, y:34},
+];
+ 
+const REVIEWS = {
+  1: [
+    {name:"Amelia R.", rating:5, date:"2 days ago", text:"Colour turned out exactly like the reference photo, and the toner made it look so much more expensive than I paid.", photos:["bg-hair"]},
+    {name:"Priya K.", rating:4, date:"1 week ago", text:"Lovely result, salon was running about 20 minutes behind though.", photos:[]}
+  ],
+  3: [
+    {name:"Grace T.", rating:5, date:"3 days ago", text:"Gel lasted the full two weeks with zero chipping. Booking again already.", photos:["bg-nails","bg-nails"]}
+  ],
+  6: [
+    {name:"Mei L.", rating:5, date:"5 days ago", text:"Skin genuinely glowed for days afterward. Worth every cent of the discount.", photos:["bg-skincare"]},
+    {name:"Jordan S.", rating:5, date:"2 weeks ago", text:"Very thorough consultation before they even started the treatment.", photos:[]}
+  ],
+  9: [
+    {name:"Isla F.", rating:4, date:"4 days ago", text:"Great retention on the lashes, just wish the appointment had a bit more time for shaping.", photos:["bg-brows"]}
+  ]
+};
+ 
+let currentReviewVoucherIndex = null;
+let currentReviewRating = 0;
+let reviewPhotos = [];
+ 
+let activeCategory = "All";
+let userConcession = "None";
+let favoriteBiz = new Set();
+let notifications = [];
+let bizLoyalty = {
+  "Willow & Bloom Studio": {stampsRequired:6, reward:"A free root touch-up & blow-dry"},
+  "Still Water Spa House": {stampsRequired:5, reward:"A free 30-minute massage"}
+};
+let userStamps = {};
+let bookingDealId = null;
+let bookingDateIndex = 0;
+let bookingTimeSelected = null;
+const TIME_SLOTS = ["9:00am","10:30am","12:00pm","1:30pm","3:00pm","4:30pm"];
+let redeemedVouchers = [];
+let activeVouchers = [];
+let selectedPinId = null;
+let bizDeals = [
+  {dealId:null, biz:"Willow & Bloom Studio", service:"Root touch-up + gloss", category:"Hair", type:"standard", detail:"35% off", qty:8, claimed:3, photo:null},
+];
+let currentDealType = "standard";
+let myDealsTab = "active";
+let currentBizPhoto = null;
+let nextDealId = 17;
+const CATEGORY_BG = {Hair:"bg-hair", Nails:"bg-nails", Makeup:"bg-makeup", Waxing:"bg-waxing", "Brows & Lashes":"bg-brows", Skincare:"bg-skincare", "Massage & Spa":"bg-spa", Grooming:"bg-grooming"};
+ 
+/* ---------------- RENDER: CHIPS ---------------- */
+function renderChips(){
+  const row = document.getElementById('chipRow');
+  row.innerHTML = CATEGORIES.map(c => {
+    const isModel = c === "Model Calls";
+    return `<div class="chip ${isModel ? 'model-chip':''} ${activeCategory===c?'active':''}" onclick="setCategory('${c}')">${c}</div>`;
+  }).join('');
+}
+function setCategory(c){ activeCategory = c; renderChips(); renderDeals(); }
+ 
+/* ---------------- RENDER: DEAL LIST ---------------- */
+function filteredDeals(){
+  if(activeCategory === "All") return DEALS;
+  if(activeCategory === "Model Calls") return DEALS.filter(d=>d.type==='model');
+  return DEALS.filter(d=>d.category===activeCategory);
+}
+function renderDeals(){
+  const list = filteredDeals();
+  const combos = list.filter(d => d.type === 'combo');
+  const rest = list.filter(d => d.type !== 'combo');
+  document.getElementById('comboSectionTitle').style.display = combos.length ? 'flex' : 'none';
+  document.getElementById('comboTally').textContent = combos.length ? combos.length + " combos" : "";
+  document.getElementById('comboList').innerHTML = combos.map(cardHTML).join('');
+  document.getElementById('dealTally').textContent = rest.length + " deals";
+  document.getElementById('dealList').innerHTML = rest.map(cardHTML).join('') || emptyStateHTML("No deals in this category right now — check back soon.");
+  updateConcessionBanner();
+}
+function updateConcessionBanner(){
+  const banner = document.getElementById('concessionBanner');
+  if(userConcession === 'None'){ banner.style.display = 'none'; return; }
+  const count = DEALS.filter(d => d.eligibility === userConcession).length;
+  if(count === 0){ banner.style.display = 'none'; return; }
+  banner.style.display = 'flex';
+  banner.innerHTML = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>${count} deal${count>1?'s':''} nearby with ${userConcession} pricing`;
+}
+function renderConcessionChips(){
+  const options = ["None","Student","Concession","Senior"];
+  const el = document.getElementById('concessionChips');
+  if(!el) return;
+  el.innerHTML = options.map(o => `<div class="concession-chip ${userConcession===o?'active':''}" onclick="setConcession('${o}')">${o}</div>`).join('');
+}
+function setConcession(val){
+  userConcession = val;
+  renderConcessionChips();
+  renderDeals();
+  toast(val === 'None' ? 'Concession status cleared' : `Set to ${val} — matching deals flagged in Discover`);
+}
+function escapeAttr(s){
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+}
+function cardHTML(d){
+  const favorited = favoriteBiz.has(d.biz);
+  const badge = d.type === 'model'
+    ? `<div class="model-ribbon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Model call</div>`
+    : d.type === 'combo'
+    ? `<div class="combo-ribbon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Combo</div>`
+    : `<div class="coin-badge"><b>-${d.pct}%</b><small>OFF</small></div>`;
+  const priceRow = d.type === 'model'
+    ? `<div class="price-row"><span class="now">Free / reduced rate</span></div>`
+    : `<div class="price-row"><span class="now">$${d.now}</span><span class="was">$${d.was}</span></div>`;
+  const modelTag = d.type === 'model' ? `<span class="req-tag">${d.req}</span>` : '';
+  const eligTag = (d.eligibility && d.eligibility !== 'Everyone') ? `<span class="elig-tag">${d.eligibility} price</span>` : '';
+  const tags = (modelTag || eligTag) ? `<div class="tag-row">${modelTag}${eligTag}</div>` : '';
+  const ratingLabel = d.isNew ? 'New listing' : `★ ${d.rating}`;
+  const photoStyle = d.photo ? ` style="background-image:url('${d.photo}'); background-size:cover; background-position:center;"` : '';
+  return `
+  <div class="deal-card" onclick="openDeal(${d.id})">
+    <div class="deal-photo ${d.photo ? '' : d.bg}"${photoStyle}>
+      <span class="time-pill"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>${d.time}</span>
+      <button class="save-btn ${favorited?'saved':''}" data-biz="${escapeAttr(d.biz)}" onclick="event.stopPropagation(); toggleFavorite(this.dataset.biz)">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.33-8.9C1.2 8.4 3 5 6.5 5c2 0 3.3 1.1 4 2.3.7-1.2 2-2.3 4-2.3C18 5 19.8 8.4 18.33 12.1 16 16.65 12 21 12 21z"/></svg>
+      </button>
+      ${badge}
+    </div>
+    <div class="deal-info">
+      <div class="biz">${d.biz} · ${d.suburb}</div>
+      <h4>${d.title}</h4>
+      ${priceRow}
+      <div class="meta-row">${ratingLabel}<span class="dot"></span>${d.category}</div>
+      ${tags}
+    </div>
+  </div>`;
+}
+function toggleFavorite(biz){
+  if(favoriteBiz.has(biz)) favoriteBiz.delete(biz); else favoriteBiz.add(biz);
+  renderDeals();
+  if(document.getElementById('screen-mydeals').classList.contains('active')) renderMyDeals();
+  if(document.getElementById('screen-favourites').classList.contains('active')) renderFavourites();
+}
+function emptyStateHTML(msg){
+  return `<div class="empty-state">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15s1.5 2 4 2 4-2 4-2"/></svg>
+    <p>${msg}</p>
+  </div>`;
+}
+ 
+/* ---------------- REVIEWS ---------------- */
+function starSVG(filled){
+  return `<svg viewBox="0 0 24 24" ${filled?'fill="currentColor" stroke="none"':'fill="none" stroke="currentColor" stroke-width="2"'}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>`;
+}
+function staticStarsHTML(rating, size){
+  let out = '';
+  for(let i=1;i<=5;i++) out += starSVG(i <= Math.round(rating));
+  return `<div class="${size==='sm'?'r-stars':'stars-static'}" style="color:var(--copper)">${out}</div>`;
+}
+function reviewsSectionHTML(dealId){
+  const list = REVIEWS[dealId] || [];
+  const count = list.length;
+  const avg = count ? (list.reduce((s,r)=>s+r.rating,0)/count) : null;
+  const summary = avg
+    ? `<div class="review-summary">
+        <div><div class="avg">${avg.toFixed(1)}</div>${staticStarsHTML(avg)}<div class="count">${count} review${count>1?'s':''}</div></div>
+      </div>`
+    : `<div class="review-summary"><div class="count">No reviews yet — be the first to redeem and share how it went.</div></div>`;
+  const items = list.map(r => `
+    <div class="review-item">
+      <div class="rhead">
+        <div class="r-avatar">${r.name.charAt(0)}</div>
+        <div><div class="r-name">${r.name}</div><div class="r-date">${r.date}</div></div>
+      </div>
+      ${staticStarsHTML(r.rating,'sm')}
+      <p>${r.text}</p>
+      ${(r.photos.length || (r.uploaded && r.uploaded.length)) ? `<div class="review-photos">${r.photos.filter(p=>p!=='__uploaded__').map(p=>`<div class="ph-swatch ${p}"></div>`).join('')}${(r.uploaded||[]).map(u=>`<img src="${u}"/>`).join('')}</div>` : ''}
+    </div>
+  `).join('');
+  return `<div><div style="font-family:'Fraunces'; font-weight:600; font-size:15px; color:var(--ink); margin-bottom:10px;">Reviews</div>${summary}${items}</div>`;
+}
+ 
+/* ---------------- LEAVE A REVIEW FLOW ---------------- */
+function openReviewFlow(voucherIndex){
+  currentReviewVoucherIndex = voucherIndex;
+  currentReviewRating = 0;
+  reviewPhotos = [];
+  const v = activeVouchers[voucherIndex];
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" style="position:static; margin:12px 20px 0 auto; display:flex;" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#590332" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="sheet-body" style="padding-top:6px;">
+      <div class="biz">${v.biz}</div>
+      <h2>How was it?</h2>
+      <p style="font-size:13px; color:var(--ink-soft); margin-bottom:4px;">Rate your ${v.title.toLowerCase()}</p>
+      <div class="star-picker" id="starPicker">${[1,2,3,4,5].map(n=>`<svg data-n="${n}" onclick="pickStar(${n})" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>`).join('')}</div>
+      <div class="field">
+        <label>Tell others how it went</label>
+        <textarea id="reviewText" placeholder="Worth the trip? Anything to know before booking?"></textarea>
+      </div>
+      <div class="field">
+        <label>Add photos (optional)</label>
+        <div class="photo-grid" id="photoGrid">${photoGridHTML()}</div>
+      </div>
+      <button class="redeem-btn" onclick="submitReview()">Post review</button>
+    </div>
+  `;
+  document.getElementById('sheetOverlay').classList.add('open');
+}
+function pickStar(n){
+  currentReviewRating = n;
+  document.querySelectorAll('#starPicker svg').forEach(el=>{
+    el.classList.toggle('filled', parseInt(el.dataset.n) <= n);
+  });
+}
+function photoGridHTML(){
+  const tiles = reviewPhotos.map((src,i) => `
+    <div class="photo-tile"><img src="${src}"/><div class="photo-remove" onclick="removePhoto(${i})"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+  `).join('');
+  const addTile = `<label class="photo-add">
+      <input type="file" accept="image/*" multiple style="display:none" onchange="handlePhotoUpload(event)">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+    </label>`;
+  return tiles + addTile;
+}
+function handlePhotoUpload(event){
+  const files = Array.from(event.target.files || []);
+  let remaining = files.length;
+  if(!remaining) return;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      reviewPhotos.push(e.target.result);
+      document.getElementById('photoGrid').innerHTML = photoGridHTML();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function removePhoto(i){
+  reviewPhotos.splice(i,1);
+  document.getElementById('photoGrid').innerHTML = photoGridHTML();
+}
+function submitReview(){
+  if(currentReviewRating === 0){ toast('Tap a star to rate your visit'); return; }
+  const v = activeVouchers[currentReviewVoucherIndex];
+  const text = document.getElementById('reviewText').value.trim() || "Redeemed via Glow Syndicate.";
+  if(!REVIEWS[v.dealId]) REVIEWS[v.dealId] = [];
+  REVIEWS[v.dealId].unshift({name:"You", rating:currentReviewRating, date:"Just now", text, photos: reviewPhotos.length ? ["__uploaded__"] : [], uploaded: reviewPhotos.slice()});
+  v.rating = currentReviewRating;
+  redeemedVouchers.unshift(v);
+  activeVouchers.splice(currentReviewVoucherIndex,1);
+  closeSheet();
+  toast('Thanks — your review is posted');
+  renderMyDeals();
+}
+ 
+/* ---------------- DEAL DETAIL SHEET ---------------- */
+function openDeal(id){
+  const d = DEALS.find(x=>x.id===id);
+  const overlay = document.getElementById('sheetOverlay');
+  const isModel = d.type === 'model';
+  const isCombo = d.type === 'combo';
+  const priceBlock = isModel
+    ? `<div class="sheet-price"><span class="now">Free / reduced</span></div>`
+    : `<div class="sheet-price"><span class="now">$${d.now}</span><span class="was">$${d.was}</span><span class="pct">-${d.pct}%</span></div>`;
+  const reqBlock = isModel
+    ? `<div class="req-box"><div class="lbl">Model requirements</div><p>${d.req}</p></div>`
+    : '';
+  const comboBlock = isCombo
+    ? `<div class="combo-box"><div class="lbl">What's included</div><ul>${d.comboItems.map(item=>`<li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>${item}</li>`).join('')}</ul></div>`
+    : '';
+  const eligBlock = (d.eligibility && d.eligibility !== 'Everyone')
+    ? `<div class="sheet-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>${d.eligibility} pricing — valid ID may be requested at redemption</div>`
+    : '';
+  const policyBlock = (!isModel)
+    ? `<div class="policy-box">
+        <div class="lbl">Cancellation policy</div>
+        <div class="policy-row"><span>Cancel with less than 24h notice</span><b>${d.cancelFee ? '$'+d.cancelFee+' fee' : 'No fee'}</b></div>
+        <div class="policy-row"><span>No-show</span><b>${d.noShowFee ? '$'+d.noShowFee+' fee' : 'No fee'}</b></div>
+      </div>`
+    : '';
+  const sheetPhotoStyle = d.photo ? ` style="background-image:url('${d.photo}'); background-size:cover; background-position:center;"` : '';
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <div class="sheet-photo ${d.photo ? '' : d.bg}"${sheetPhotoStyle}>
+      <button class="sheet-close" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#590332" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="sheet-body">
+      <div class="biz">${d.biz} · ${d.suburb}</div>
+      <h2>${d.title}</h2>
+      ${priceBlock}
+      ${reqBlock}
+      ${comboBlock}
+      <div class="sheet-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>${d.time}</div>
+      <div class="sheet-row"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${d.suburb}, Brisbane</div>
+      <div class="sheet-row"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Show your voucher code in-store to redeem</div>
+      ${eligBlock}
+      <div class="sheet-divider"></div>
+      ${policyBlock}
+      <button class="redeem-btn ${isModel?'model-btn':''}" onclick="${(isModel || isCombo) ? `redeemDeal(${d.id})` : `openBookingFlow(${d.id})`}">${isModel ? 'Apply as a model' : isCombo ? 'Redeem this combo' : 'Book this deal'}</button>
+      <div class="sheet-divider"></div>
+      ${reviewsSectionHTML(d.id)}
+    </div>
+  `;
+  overlay.classList.add('open');
+}
+function closeSheet(){ document.getElementById('sheetOverlay').classList.remove('open'); }
+ 
+function generateBookingDates(){
+  const days = [];
+  const labels = ["Today","Tomorrow"];
+  const base = new Date(2026,6,5);
+  for(let i=0;i<4;i++){
+    const dt = new Date(base); dt.setDate(base.getDate()+i);
+    const weekday = dt.toLocaleDateString('en-US',{weekday:'short'});
+    const dayNum = dt.getDate();
+    const monthShort = dt.toLocaleDateString('en-US',{month:'short'});
+    days.push({label: i<labels.length ? labels[i] : weekday, sub: `${monthShort} ${dayNum}`, full: `${weekday} ${dayNum} ${monthShort}`});
+  }
+  return days;
+}
+function openBookingFlow(id){
+  bookingDealId = id;
+  bookingDateIndex = 0;
+  bookingTimeSelected = null;
+  renderBookingSheet();
+}
+function renderBookingSheet(){
+  const d = DEALS.find(x=>x.id===bookingDealId);
+  const days = generateBookingDates();
+  const takenMap = [1,3,0,4];
+  const takenIdx = takenMap[bookingDateIndex] ?? -1;
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" style="position:static; margin:12px 20px 0 auto; display:flex;" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#590332" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="sheet-body" style="padding-top:6px;">
+      <div class="biz">${d.biz}</div>
+      <h2>Book your time</h2>
+      <p style="font-size:13px;color:var(--ink-soft);margin-bottom:14px;">${d.title}</p>
+      <div class="booking-chip-row">
+        ${days.map((day,i)=>`<div class="booking-date-chip ${i===bookingDateIndex?'active':''}" onclick="selectBookingDate(${i})"><div class="d">${day.label}</div><div class="n">${day.sub}</div></div>`).join('')}
+      </div>
+      <div class="time-slot-grid">
+        ${TIME_SLOTS.map((t,i)=>`<div class="time-slot ${i===takenIdx?'taken':''} ${bookingTimeSelected===t?'active':''}" onclick="selectBookingTime('${t}')">${t}</div>`).join('')}
+      </div>
+      <div class="booking-confirm-row"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>This books straight into ${d.biz}'s calendar — no back-and-forth needed.</div>
+      <button class="redeem-btn" onclick="confirmBooking()" ${bookingTimeSelected ? '' : 'style="opacity:0.45;pointer-events:none;"'}>Confirm booking</button>
+    </div>
+  `;
+  document.getElementById('sheetOverlay').classList.add('open');
+}
+function selectBookingDate(i){ bookingDateIndex = i; bookingTimeSelected = null; renderBookingSheet(); }
+function selectBookingTime(t){ bookingTimeSelected = t; renderBookingSheet(); }
+function confirmBooking(){
+  if(!bookingTimeSelected) return;
+  const d = DEALS.find(x=>x.id===bookingDealId);
+  const days = generateBookingDates();
+  const day = days[bookingDateIndex];
+  const code = "GS-" + Math.random().toString(36).substring(2,7).toUpperCase();
+  activeVouchers.unshift({dealId:d.id, biz:d.biz, title:d.title, code, bookingDate:day.full, bookingTime:bookingTimeSelected, expiry:"", bg:d.bg});
+  addLoyaltyStamp(d.biz);
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <div class="voucher-card">
+      <div class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>Booking confirmed</h3>
+      <p class="sub">${d.biz} · ${d.title}</p>
+      <div class="voucher-code">${day.full} · ${bookingTimeSelected}</div>
+      <div class="exp">Sent straight to ${d.biz}'s books · reference ${code}</div>
+    </div>
+    <div class="sheet-body">
+      <button class="done-btn" onclick="closeSheet()">Done</button>
+    </div>
+  `;
+  renderMyDeals();
+}
+ 
+function redeemDeal(id){
+  const d = DEALS.find(x=>x.id===id);
+  const code = "GS-" + Math.random().toString(36).substring(2,7).toUpperCase();
+  const expiry = d.type==='model' ? "Confirmation within 24h" : "Valid for 30 days · book anytime";
+  activeVouchers.push({dealId:id, biz:d.biz, title:d.title, code, expiry, bg:d.bg});
+  if(d.type !== 'model') addLoyaltyStamp(d.biz);
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <div class="voucher-card">
+      <div class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>${d.type==='model' ? "You're on the list" : "Deal locked in"}</h3>
+      <p class="sub">${d.biz} · ${d.title}</p>
+      <div class="voucher-code">${code}</div>
+      <div class="exp">${d.type==='model' ? "The studio will confirm your spot within 24 hours" : "Hold onto this code — valid for 30 days, book the appointment whenever suits you"}</div>
+    </div>
+    <div class="sheet-body">
+      <button class="done-btn" onclick="closeSheet()">Done</button>
+    </div>
+  `;
+  renderMyDeals();
+}
+ 
+/* ---------------- MAP ---------------- */
+const SUBURB_COORDS = {
+  "Fortitude Valley": [-27.4560, 153.0350],
+  "New Farm": [-27.4679, 153.0463],
+  "West End": [-27.4820, 153.0080],
+  "South Bank": [-27.4770, 153.0190],
+  "Toowong": [-27.4850, 152.9910],
+  "Ascot": [-27.4270, 153.0620],
+  "Paddington": [-27.4630, 153.0050]
+};
+let leafletMap = null;
+let markersLayer = null;
+ 
+function getDealLatLng(d){
+  const base = SUBURB_COORDS[d.suburb] || [-27.4698, 153.0251];
+  const jitterLat = ((d.id % 7) - 3) * 0.0016;
+  const jitterLng = ((d.id % 5) - 2) * 0.0016;
+  return [base[0] + jitterLat, base[1] + jitterLng];
+}
+function pinIcon(d, selected){
+  const modelClass = d.type === 'model' ? 'model' : '';
+  const selectedClass = selected ? 'selected' : '';
+  const label = d.type === 'model' ? '★' : ('-' + d.pct + '%');
+  return L.divIcon({
+    className: 'leaflet-div-icon',
+    html: `<div class="lf-pin ${modelClass} ${selectedClass}"><span>${label}</span></div>`,
+    iconSize: [38, 38],
+    iconAnchor: [19, 34]
+  });
+}
+function initMap(){
+  if(leafletMap) return;
+  leafletMap = L.map('mapCanvas', { zoomControl: true, attributionControl: true }).setView([-27.4698, 153.0251], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    subdomains: ['a','b','c'],
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(leafletMap);
+  markersLayer = L.layerGroup().addTo(leafletMap);
+}
+function renderMap(){
+  initMap();
+  markersLayer.clearLayers();
+  const list = filteredDeals();
+  list.forEach(d => {
+    const [lat, lng] = getDealLatLng(d);
+    const marker = L.marker([lat, lng], { icon: pinIcon(d, selectedPinId === d.id) });
+    marker.on('click', () => selectPin(d.id));
+    marker.addTo(markersLayer);
+  });
+  setTimeout(() => { if(leafletMap) leafletMap.invalidateSize(); }, 80);
+  renderMapPopup();
+}
+function selectPin(id){ selectedPinId = id; renderMap(); }
+function renderMapPopup(){
+  const wrap = document.getElementById('mapPopup');
+  if(!selectedPinId){ wrap.innerHTML = `<div class="section-title" style="padding-left:0;">Tap a pin to preview a deal</div>`; return; }
+  const d = DEALS.find(x=>x.id===selectedPinId);
+  wrap.innerHTML = `<div class="deal-list" style="padding:0;">${cardHTML(d)}</div>`;
+}
+ 
+/* ---------------- MY DEALS ---------------- */
+function setMyDealsTab(t){
+  myDealsTab = t;
+  document.querySelectorAll('#myDealsTabs .subtab').forEach(el=>{
+    el.classList.toggle('active', el.dataset.sub === t);
+  });
+  renderMyDeals();
+}
+function renderMyDeals(){
+  const container = document.getElementById('myDealsList');
+  if(myDealsTab === 'active'){
+    container.innerHTML = activeVouchers.length ? activeVouchers.map((v,i) => `
+      <div class="voucher-row">
+        <div class="mini-coin ${v.bg}">GS</div>
+        <div class="vinfo"><h5>${v.title}</h5><span>${v.biz} · ${v.bookingDate ? v.bookingDate+' · '+v.bookingTime : v.expiry}</span></div>
+        <button class="mark-used-btn" onclick="openReviewFlow(${i})">Rate visit</button>
+      </div>`).join('') : emptyStateHTML("No active vouchers yet. Book a deal from Discover to see it here.");
+  } else if(myDealsTab === 'loyalty'){
+    const entries = Object.keys(bizLoyalty);
+    container.innerHTML = entries.length ? entries.map(biz => {
+      const program = bizLoyalty[biz];
+      const count = userStamps[biz] || 0;
+      const dots = Array.from({length:program.stampsRequired}, (_,i) => `
+        <div class="stamp ${i < count ? 'filled' : ''}">${i < count ? '<svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>' : ''}</div>
+      `).join('');
+      return `
+      <div class="loyalty-card">
+        <div class="lhead"><h5>${biz}</h5><span class="lprog">${count}/${program.stampsRequired}</span></div>
+        <p class="reward">Reward: ${program.reward}</p>
+        <div class="stamp-row">${dots}</div>
+      </div>`;
+    }).join('') : emptyStateHTML("No loyalty programmes yet. Book with a participating business to start collecting stamps.");
+  } else {
+    container.innerHTML = redeemedVouchers.length ? redeemedVouchers.map(v => `
+      <div class="voucher-row">
+        <div class="mini-coin ${v.bg}">GS</div>
+        <div class="vinfo"><h5>${v.title}</h5>${v.rating ? `<div class="rated-stars" style="color:var(--copper)">${[1,2,3,4,5].map(n=>starSVG(n<=v.rating)).join('')}</div>` : `<span>${v.biz} · used</span>`}</div>
+        <div class="vcode">${v.code}</div>
+      </div>`).join('') : emptyStateHTML("Redeemed vouchers will show up here once you've used them in-store.");
+  }
+}
+ 
+/* ---------------- LOYALTY ---------------- */
+function addLoyaltyStamp(biz){
+  const program = bizLoyalty[biz];
+  if(!program) return;
+  userStamps[biz] = (userStamps[biz] || 0) + 1;
+  if(userStamps[biz] >= program.stampsRequired){
+    userStamps[biz] = 0;
+    const code = "GS-" + Math.random().toString(36).substring(2,7).toUpperCase();
+    activeVouchers.unshift({dealId:null, biz, title:`Loyalty reward: ${program.reward}`, code, expiry:"Reward voucher · valid 30 days", bg:"bg-hair"});
+    toast(`🎉 Reward unlocked at ${biz} — ${program.reward}`);
+  } else {
+    toast(`+1 loyalty stamp at ${biz} (${userStamps[biz]}/${program.stampsRequired})`);
+  }
+}
+ 
+/* ---------------- FAVOURITES ---------------- */
+function renderFavourites(){
+  const list = DEALS.filter(d => favoriteBiz.has(d.biz));
+  document.getElementById('favTally').textContent = favoriteBiz.size ? favoriteBiz.size + " followed" : "";
+  document.getElementById('favouritesList').innerHTML = list.length
+    ? `<div class="deal-list">${list.map(cardHTML).join('')}</div>`
+    : emptyStateHTML("Nothing here yet. Tap the heart on any deal to follow that business and get notified next time they post.");
+}
+ 
+/* ---------------- NOTIFICATIONS ---------------- */
+function updateNotifBadge(){
+  const unread = notifications.filter(n=>!n.read).length;
+  document.getElementById('notifDot').style.display = unread > 0 ? 'block' : 'none';
+}
+function notifyFavoriteDeal(deal){
+  if(!favoriteBiz.has(deal.biz)) return;
+  notifications.unshift({dealId:deal.id, text:`${deal.biz} just posted: ${deal.title}`, time:"Just now", read:false});
+  updateNotifBadge();
+  toast(`🔔 ${deal.biz} posted a new deal`);
+}
+function openNotifications(){
+  const list = notifications.length ? notifications.map(n => `
+    <div class="voucher-row" style="cursor:pointer;" onclick="closeSheet(); openDeal(${n.dealId})">
+      <div class="mini-coin bg-hair" style="font-size:15px;">🔔</div>
+      <div class="vinfo"><h5>${n.text}</h5><span>${n.time}</span></div>
+    </div>`).join('') : emptyStateHTML("No notifications yet. Follow a business from any deal card to hear when they post something new.");
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <div class="sheet-body" style="padding-top:6px;">
+      <h2 style="margin-bottom:6px;">Notifications</h2>
+      <p style="font-size:12.5px; color:var(--ink-soft); margin-bottom:14px;">Updates from businesses you follow in Favourites.</p>
+      ${list}
+    </div>`;
+  document.getElementById('sheetOverlay').classList.add('open');
+  notifications.forEach(n => n.read = true);
+  updateNotifBadge();
+}
+ 
+/* ---------------- BUSINESS DASHBOARD ---------------- */
+function bizPhotoGridHTML(){
+  if(currentBizPhoto){
+    return `<div class="photo-tile" style="width:96px;height:96px;"><img src="${currentBizPhoto}"/><div class="photo-remove" onclick="removeBizPhoto()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>`;
+  }
+  return `<label class="photo-add" style="width:96px;height:96px;">
+      <input type="file" accept="image/*" style="display:none" onchange="handleBizPhotoUpload(event)">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+    </label>`;
+}
+function handleBizPhotoUpload(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    currentBizPhoto = e.target.result;
+    document.getElementById('bizPhotoGrid').innerHTML = bizPhotoGridHTML();
+  };
+  reader.readAsDataURL(file);
+}
+function removeBizPhoto(){
+  currentBizPhoto = null;
+  document.getElementById('bizPhotoGrid').innerHTML = bizPhotoGridHTML();
+}
+ 
+function setDealType(type){
+  currentDealType = type;
+  document.getElementById('toggleStandard').classList.toggle('active', type==='standard');
+  document.getElementById('toggleModel').classList.toggle('active', type==='model');
+  document.getElementById('toggleModel').classList.toggle('model-toggle', type==='model');
+  document.getElementById('toggleCombo').classList.toggle('active', type==='combo');
+  document.getElementById('fieldPercent').style.display = (type==='standard' || type==='combo') ? 'block' : 'none';
+  document.getElementById('fieldReq').style.display = type==='model' ? 'block' : 'none';
+  document.getElementById('fieldCombo').style.display = type==='combo' ? 'block' : 'none';
+  document.getElementById('fieldWindow').style.display = type==='model' ? 'none' : 'block';
+}
+function createBizDeal(){
+  const service = document.getElementById('fService').value.trim();
+  if(!service){ toast('Add a service name first'); return; }
+  const bizName = document.getElementById('fBiz').value || 'Your studio';
+  const suburb = document.getElementById('fSuburb').value || 'Fortitude Valley';
+  const category = document.getElementById('fCategory').value;
+  const eligibility = document.getElementById('fEligibility').value;
+  const cancelFee = parseFloat(document.getElementById('fCancelFee').value) || 0;
+  const noShowFee = parseFloat(document.getElementById('fNoShowFee').value) || 0;
+  const qtyRaw = document.getElementById('fQty').value;
+  const qty = qtyRaw ? parseInt(qtyRaw) || qtyRaw : '—';
+  const windowLabel = document.getElementById('fWindow').value;
+  const id = nextDealId++;
+  const bg = CATEGORY_BG[category] || 'bg-hair';
+ 
+  let newDeal;
+  if(currentDealType === 'standard'){
+    const was = parseFloat(document.getElementById('fOriginal').value) || 0;
+    const pct = parseInt(document.getElementById('fPercent').value) || 0;
+    const now = was ? Math.round(was * (1 - pct/100)) : 0;
+    newDeal = {id, biz:bizName, suburb, category, bg, photo:currentBizPhoto, title:service, was, now, pct, time:windowLabel + ' left', rating:5, isNew:true, type:'standard', eligibility, cancelFee, noShowFee, x: 15 + Math.random()*70, y: 15 + Math.random()*70};
+  } else if(currentDealType === 'combo'){
+    const was = parseFloat(document.getElementById('fOriginal').value) || 0;
+    const pct = parseInt(document.getElementById('fPercent').value) || 0;
+    const now = was ? Math.round(was * (1 - pct/100)) : 0;
+    const comboItems = document.getElementById('fComboItems').value.split('\n').map(s=>s.trim()).filter(Boolean);
+    newDeal = {id, biz:bizName, suburb, category, bg, photo:currentBizPhoto, title:service, was, now, pct, comboItems: comboItems.length ? comboItems : ['Details on request'], time:"30 days left", rating:5, isNew:true, type:'combo', eligibility, cancelFee, noShowFee, x: 15 + Math.random()*70, y: 15 + Math.random()*70};
+  } else {
+    const req = document.getElementById('fReq').value.trim() || 'Model needed — details on request';
+    newDeal = {id, biz:bizName, suburb, category, bg, photo:currentBizPhoto, title:service, time:windowLabel, rating:5, isNew:true, type:'model', req, eligibility, cancelFee:0, noShowFee:0, x: 15 + Math.random()*70, y: 15 + Math.random()*70};
+  }
+  DEALS.unshift(newDeal);
+  notifyFavoriteDeal(newDeal);
+  const detailLabel = currentDealType==='model' ? 'Model call' : `${document.getElementById('fPercent').value || 0}% off${currentDealType==='combo' ? ' · combo' : ''}`;
+  bizDeals.unshift({dealId:id, biz:bizName, service, category, type:currentDealType, detail: detailLabel, qty, claimed:0, photo:currentBizPhoto});
+ 
+  renderDeals();
+  renderBizDeals();
+  toast('Deal published to nearby users');
+ 
+  document.getElementById('fService').value='';
+  document.getElementById('fOriginal').value='';
+  document.getElementById('fPercent').value='';
+  document.getElementById('fReq').value='';
+  document.getElementById('fComboItems').value='';
+  document.getElementById('fCancelFee').value='';
+  document.getElementById('fNoShowFee').value='';
+  document.getElementById('fQty').value='';
+  currentBizPhoto = null;
+  document.getElementById('bizPhotoGrid').innerHTML = bizPhotoGridHTML();
+}
+function toggleLoyaltySetup(){
+  const el = document.getElementById('loyaltySwitch');
+  const on = !el.classList.contains('on');
+  el.classList.toggle('on', on);
+  document.getElementById('loyaltyFields').style.display = on ? 'block' : 'none';
+  document.getElementById('loyaltyHint').style.display = on ? 'none' : 'block';
+  if(!on){
+    const bizName = document.getElementById('fBiz').value || 'Your studio';
+    delete bizLoyalty[bizName];
+    toast('Loyalty programme turned off');
+  }
+}
+function saveLoyaltyProgram(){
+  const bizName = document.getElementById('fBiz').value || 'Your studio';
+  const stamps = parseInt(document.getElementById('fStamps').value) || 6;
+  const reward = document.getElementById('fReward').value.trim() || 'A free treatment';
+  bizLoyalty[bizName] = {stampsRequired: stamps, reward};
+  toast(`Loyalty programme live for ${bizName}`);
+}
+function renderBizDeals(){
+  document.getElementById('bizDealList').innerHTML = bizDeals.map(b => `
+    <div class="biz-deal-row">
+      ${b.photo ? `<img src="${b.photo}" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex:0 0 auto;"/>` : `<div class="status-dot"></div>`}
+      <div class="binfo"><h5>${b.service}</h5><span>${b.category} · ${b.detail}</span></div>
+      <div class="claimed-pill">${b.claimed}/${b.qty} claimed</div>
+    </div>
+  `).join('');
+}
+ 
+/* ---------------- TABS ---------------- */
+function switchTab(tab){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-' + tab).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  const btn = document.querySelector('.tab[data-tab="' + tab + '"]');
+  if(btn) btn.classList.add('active');
+  if(tab === 'map') renderMap();
+  if(tab === 'favourites') renderFavourites();
+  if(tab === 'mydeals') renderMyDeals();
+  document.getElementById('appBody').scrollTop = 0;
+}
+ 
+/* ---------------- TOAST ---------------- */
+let toastTimer;
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove('show'), 2200);
+}
+ 
+/* ---------------- INIT ---------------- */
+renderChips();
+renderConcessionChips();
+renderDeals();
+renderBizDeals();
+document.getElementById('bizPhotoGrid').innerHTML = bizPhotoGridHTML();
+document.getElementById('sheetOverlay').addEventListener('click', function(e){
+  if(e.target === this) closeSheet();
+});
+</script>
+</body>
+</html>
+ 
