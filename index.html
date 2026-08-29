@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glow Syndicate — beauty & grooming deals, redefined</title>
+<title>The Ritual Collective — beauty & grooming deals, redefined</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,28 +11,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
   :root{
-    --cream:#FBF5EC;
-    --cream-soft:#F4E9D6;
-    --ink:#590332;
-    --ink-soft:#8C4A63;
-    --ink-faint:#B98C9E;
-    --berry:#D4AF37;
-    --berry-dark:#A6822A;
-    --copper:#E0BB55;
-    --copper-light:#F0DBA0;
-    --copper-dark:#8C6B1F;
-    --sage:#A65D78;
-    --sage-light:#F1DCE2;
-    --blush:#F6E7C9;
+    --cream:#FAF8F6;
+    --cream-soft:#F0EBEA;
+    --ink:#121212;
+    --ink-soft:#4A4A4A;
+    --ink-faint:#8A8A8A;
+    --berry:#590332;
+    --berry-dark:#3D0121;
+    --copper:#8C1F5C;
+    --copper-light:#D9A9C2;
+    --copper-dark:#2B0116;
+    --sage:#6B6066;
+    --sage-light:#EDEAEA;
+    --blush:#F3DCE8;
     --white:#FFFFFF;
-    --line: rgba(89,3,50,0.09);
+    --line: rgba(18,18,18,0.09);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
     background:
-      radial-gradient(circle at 20% 15%, rgba(224,187,85,0.12), transparent 45%),
-      radial-gradient(circle at 85% 80%, rgba(212,175,55,0.10), transparent 50%),
-      #F6EEDD;
+      radial-gradient(circle at 20% 15%, rgba(140,31,92,0.12), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(89,3,50,0.10), transparent 50%),
+      #F5F2F0;
     min-height:100vh;
     display:flex;
     flex-direction:column;
@@ -62,7 +62,7 @@
     font-style:italic;
     color:var(--ink);
   }
- 
+
   /* ---------- Phone frame ---------- */
   .phone{
     width:390px;
@@ -71,8 +71,8 @@
     border-radius:52px;
     padding:14px;
     box-shadow:
-      0 40px 80px -20px rgba(89,3,50,0.45),
-      0 10px 30px -10px rgba(89,3,50,0.35),
+      0 40px 80px -20px rgba(18,18,18,0.45),
+      0 10px 30px -10px rgba(18,18,18,0.35),
       inset 0 0 0 2px rgba(255,255,255,0.04);
     position:relative;
   }
@@ -106,7 +106,7 @@
     color:var(--ink);
     background:var(--cream);
   }
- 
+
   /* ---------- App content area ---------- */
   .app-body{
     flex:1 1 auto;
@@ -117,7 +117,7 @@
     scrollbar-width:none;
   }
   .app-body::-webkit-scrollbar{display:none;}
- 
+
   .screen{
     display:none;
     min-height:100%;
@@ -126,7 +126,7 @@
   }
   .screen.active{display:block;}
   @keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
- 
+
   /* ---------- Bottom nav ---------- */
   .tabbar{
     flex:0 0 auto;
@@ -153,7 +153,7 @@
   .tab svg{width:22px; height:22px; stroke:var(--ink-faint); fill:none; stroke-width:1.8;}
   .tab.active{color:var(--berry);}
   .tab.active svg{stroke:var(--berry);}
- 
+
   /* ---------- Header ---------- */
   .top-header{
     padding:6px 20px 14px;
@@ -202,7 +202,7 @@
     border:1.5px solid var(--white);
     display:none;
   }
- 
+
   .location-row{
     padding:0 20px 14px;
     font-size:12.5px;
@@ -211,7 +211,7 @@
   }
   .location-row svg{width:13px;height:13px; stroke:var(--berry); fill:none; stroke-width:2;}
   .location-row b{color:var(--ink); font-weight:700;}
- 
+
   /* ---------- Category chips ---------- */
   .chip-row{
     display:flex;
@@ -243,7 +243,7 @@
     background:var(--sage);
     border-color:var(--sage);
   }
- 
+
   .section-title{
     padding:4px 20px 10px;
     font-family:'Fraunces';
@@ -257,7 +257,7 @@
   .section-title span.tally{
     font-family:'Inter'; font-weight:600; font-size:11.5px; color:var(--ink-faint);
   }
- 
+
   /* ---------- Deal cards ---------- */
   .deal-list{
     padding:0 20px;
@@ -283,7 +283,7 @@
   .deal-photo .time-pill{
     position:absolute;
     top:10px; left:12px;
-    background:rgba(89,3,50,0.55);
+    background:rgba(18,18,18,0.55);
     backdrop-filter:blur(3px);
     color:#fff;
     font-size:10.5px;
@@ -303,7 +303,7 @@
   }
   .save-btn svg{width:15px; height:15px; stroke:var(--berry); fill:none; stroke-width:2;}
   .save-btn.saved svg{fill:var(--berry);}
- 
+
   .coin-badge{
     position:absolute; left:12px; bottom:-20px;
     width:56px; height:56px;
@@ -321,7 +321,7 @@
   }
   .coin-badge b{font-size:16px; font-weight:900; line-height:1;}
   .coin-badge small{font-size:7px; font-weight:700; letter-spacing:0.03em;}
- 
+
   .model-ribbon{
     position:absolute; left:12px; bottom:-14px;
     background:var(--sage);
@@ -332,11 +332,11 @@
     padding:6px 10px;
     border-radius:9px;
     z-index:2;
-    box-shadow:0 4px 10px rgba(166,93,120,0.4);
+    box-shadow:0 4px 10px rgba(107,96,102,0.4);
     display:flex; align-items:center; gap:4px;
   }
   .model-ribbon svg{width:11px;height:11px; stroke:#fff; fill:none; stroke-width:2.2;}
- 
+
   .deal-info{
     padding:26px 14px 14px;
   }
@@ -384,17 +384,25 @@
     padding:4px 8px;
     border-radius:8px;
   }
+  .mode-tag{
+    background:var(--cream-soft);
+    color:var(--copper-dark);
+    font-size:10px;
+    font-weight:700;
+    padding:4px 8px;
+    border-radius:8px;
+  }
   .combo-ribbon{
     position:absolute; left:12px; bottom:-14px;
     background:var(--berry);
-    color:var(--ink);
+    color:#fff;
     font-size:9.5px;
     font-weight:800;
     letter-spacing:0.04em;
     padding:6px 10px;
     border-radius:9px;
     z-index:2;
-    box-shadow:0 4px 10px rgba(212,175,55,0.4);
+    box-shadow:0 4px 10px rgba(89,3,50,0.4);
     display:flex; align-items:center; gap:4px;
   }
   .combo-ribbon svg{width:11px;height:11px; stroke:#fff; fill:none; stroke-width:2.2;}
@@ -412,13 +420,13 @@
     padding:8px 14px; border-radius:20px; background:var(--white); border:1px solid var(--line);
     font-size:12px; font-weight:700; color:var(--ink-soft); cursor:pointer;
   }
-  .concession-chip.active{ background:var(--berry); border-color:var(--berry); color:var(--ink);}
+  .concession-chip.active{ background:var(--berry); border-color:var(--berry); color:#fff;}
   .concession-banner{
     margin:0 20px 14px; background:var(--blush); border-radius:14px; padding:12px 14px;
     font-size:12px; color:var(--berry-dark); font-weight:600; display:flex; align-items:center; gap:8px;
   }
   .concession-banner svg{ width:15px;height:15px; stroke:var(--berry-dark); fill:none; stroke-width:2; flex:0 0 auto;}
- 
+
   /* ---------- Booking flow ---------- */
   .booking-chip-row{ display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; margin-bottom:16px; scrollbar-width:none;}
   .booking-chip-row::-webkit-scrollbar{display:none;}
@@ -435,11 +443,11 @@
     text-align:center; padding:11px 4px; border-radius:12px; background:var(--cream-soft);
     border:1.5px solid var(--line); font-size:12.5px; font-weight:700; color:var(--ink-soft); cursor:pointer;
   }
-  .time-slot.active{ background:var(--berry); border-color:var(--berry); color:var(--ink);}
+  .time-slot.active{ background:var(--berry); border-color:var(--berry); color:#fff;}
   .time-slot.taken{ opacity:0.35; pointer-events:none; text-decoration:line-through;}
   .booking-confirm-row{ display:flex; align-items:center; gap:9px; font-size:12px; color:var(--ink-soft); margin-bottom:16px; background:var(--cream-soft); border-radius:12px; padding:11px 13px;}
   .booking-confirm-row svg{ width:15px;height:15px; stroke:var(--berry); fill:none; stroke-width:2; flex:0 0 auto;}
- 
+
   /* ---------- Loyalty ---------- */
   .loyalty-card{
     margin:0 20px 14px; background:var(--white); border:1px solid var(--line); border-radius:18px; padding:16px;
@@ -460,16 +468,43 @@
   }
   .stamp.filled svg{ width:13px;height:13px; stroke:#fff; fill:none; stroke-width:3;}
   .loyalty-setup-toggle{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
-  .loyalty-setup-toggle .switch{
+  .switch{
     width:42px; height:24px; border-radius:14px; background:var(--line); position:relative; cursor:pointer; flex:0 0 auto;
   }
-  .loyalty-setup-toggle .switch.on{ background:var(--berry);}
-  .loyalty-setup-toggle .switch::after{
+  .switch.on{ background:var(--berry);}
+  .switch::after{
     content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff;
     transition:transform .15s ease;
   }
-  .loyalty-setup-toggle .switch.on::after{ transform:translateX(18px);}
- 
+  .switch.on::after{ transform:translateX(18px);}
+
+  /* ---------- Linked subscriptions ---------- */
+  .subscription-row{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line);}
+  .subscription-row:last-child{ border-bottom:none;}
+  .subscription-icon{
+    width:36px;height:36px;border-radius:10px; flex:0 0 auto;
+    background:linear-gradient(135deg, var(--berry), var(--copper));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Fraunces';font-weight:700;font-size:14px;
+  }
+  .subscription-info{ flex:1;}
+  .subscription-info h5{ font-family:'Fraunces'; font-size:13.5px; font-weight:600; color:var(--ink);}
+  .subscription-info span{ font-size:11px; color:var(--ink-faint);}
+  .subscription-info span b{ color:var(--copper-dark); font-weight:700;}
+
+  /* ---------- Partner student perks ---------- */
+  .partner-perk-card{ margin:0 0 12px; background:var(--white); border:1px solid var(--line); border-radius:16px; padding:14px;}
+  .partner-perk-card:last-child{ margin-bottom:0;}
+  .partner-perk-top{ display:flex; align-items:center; gap:12px; margin-bottom:12px;}
+  .partner-perk-icon{
+    width:38px;height:38px;border-radius:10px; flex:0 0 auto;
+    background:linear-gradient(135deg, var(--sage), var(--copper));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Fraunces';font-weight:700;font-size:15px;
+  }
+  .partner-perk-top h5{ font-family:'Fraunces'; font-size:14px; font-weight:600; color:var(--ink);}
+  .partner-perk-top span{ font-size:11.5px; color:var(--ink-soft);}
+  .partner-perk-bottom{ display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .partner-perk-bonus{ font-size:10.5px; font-weight:700; color:var(--copper-dark);}
+
   /* photo gradient backgrounds per category, no external images needed */
   .bg-nails{ background:linear-gradient(135deg,#F0C9C9,#E8A8B0);}
   .bg-hair{ background:linear-gradient(135deg,#E7C9A8,#D9A876);}
@@ -479,7 +514,7 @@
   .bg-skincare{ background:linear-gradient(135deg,#C8DCC5,#9EBB98);}
   .bg-spa{ background:linear-gradient(135deg,#CFE0DE,#8FB3AE);}
   .bg-grooming{ background:linear-gradient(135deg,#D9C6AE,#AD8A63);}
- 
+
   /* ---------- Map screen ---------- */
   .map-wrap{
     height:calc(100% - 0px);
@@ -489,7 +524,7 @@
     height:340px;
     width:100%;
     position:relative;
-    background:#F1E9DC;
+    background:#EDEAEA;
   }
   .leaflet-div-icon{ background:transparent; border:none; }
   .lf-pin{
@@ -498,7 +533,7 @@
     transform:rotate(45deg);
     background:radial-gradient(circle at 32% 26%, var(--copper-light), var(--copper) 55%, var(--copper-dark) 100%);
     display:flex; align-items:center; justify-content:center;
-    box-shadow:0 4px 8px rgba(89,3,50,0.28);
+    box-shadow:0 4px 8px rgba(18,18,18,0.28);
     border:2px solid #fff;
     cursor:pointer;
   }
@@ -507,8 +542,8 @@
     transform:rotate(-45deg);
     font-family:'Fraunces'; font-weight:800; font-size:11px; color:#fff;
   }
-  .lf-pin.selected{ box-shadow:0 0 0 5px rgba(212,175,55,0.28), 0 4px 8px rgba(89,3,50,0.32); }
- 
+  .lf-pin.selected{ box-shadow:0 0 0 5px rgba(89,3,50,0.28), 0 4px 8px rgba(18,18,18,0.32); }
+
   .map-list-toggle{
     position:absolute;
     top:14px; right:16px;
@@ -524,14 +559,14 @@
   }
   .map-loading{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    font-size:12.5px; color:var(--ink-faint); background:#F1E9DC; z-index:1;
+    font-size:12.5px; color:var(--ink-faint); background:#EDEAEA; z-index:1;
   }
   .map-popup-wrap{ padding:16px 20px 0;}
- 
+
   /* ---------- Bottom sheet (deal detail) ---------- */
   .sheet-overlay{
     position:absolute; inset:0;
-    background:rgba(89,3,50,0.5);
+    background:rgba(18,18,18,0.5);
     z-index:40;
     display:none;
     align-items:flex-end;
@@ -572,11 +607,11 @@
   .sheet-row svg{width:16px;height:16px; stroke:var(--berry); fill:none; stroke-width:2; flex:0 0 auto; margin-top:1px;}
   .req-box{ background:var(--sage-light); border-radius:14px; padding:14px; margin-bottom:14px;}
   .req-box .lbl{ font-size:11px; font-weight:800; color:var(--sage); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:6px;}
-  .req-box p{ font-size:12.5px; color:#6B2740; line-height:1.5;}
+  .req-box p{ font-size:12.5px; color:#2B2B2B; line-height:1.5;}
   .redeem-btn{
     width:100%;
     background:var(--berry);
-    color:var(--ink);
+    color:#fff;
     border:none;
     padding:15px;
     border-radius:16px;
@@ -587,7 +622,8 @@
     margin-top:6px;
   }
   .redeem-btn.model-btn{ background:var(--sage);}
- 
+  .redeem-btn.disabled-btn{ background:var(--ink-faint); cursor:default; pointer-events:none;}
+
   /* ---------- Voucher screen ---------- */
   .voucher-card{
     margin:20px;
@@ -603,7 +639,7 @@
     content:"";
     position:absolute; top:-40px; right:-40px;
     width:140px; height:140px; border-radius:50%;
-    background:radial-gradient(circle, rgba(224,187,85,0.35), transparent 70%);
+    background:radial-gradient(circle, rgba(140,31,92,0.35), transparent 70%);
   }
   .voucher-card .check{
     width:56px; height:56px; border-radius:50%;
@@ -627,7 +663,7 @@
   .sheet-body .done-btn{
     width:100%; background:var(--ink); color:#fff; border:none; padding:14px; border-radius:14px; font-weight:700; font-size:14px; margin-top:4px; cursor:pointer;
   }
- 
+
   /* ---------- My Deals ---------- */
   .subtabs{ display:flex; gap:6px; padding:4px 20px 16px;}
   .subtab{
@@ -656,13 +692,28 @@
   .voucher-row .vinfo h5{ font-family:'Fraunces'; font-size:13.5px; font-weight:600; color:var(--ink); margin-bottom:2px;}
   .voucher-row .vinfo span{ font-size:11px; color:var(--ink-faint);}
   .voucher-row .vcode{ font-size:11px; font-weight:800; color:var(--berry); letter-spacing:0.05em;}
- 
+  .voucher-actions{ display:flex; flex-direction:column; gap:6px; align-items:flex-end;}
+
+  /* ---------- Rebook (redeemed vouchers) ---------- */
+  .voucher-card{ margin:0 20px 12px; background:var(--white); border:1px solid var(--line); border-radius:16px; padding:14px;}
+  .voucher-card .voucher-row{ margin:0; border:none; padding:0; border-radius:0; background:none;}
+  .rebook-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    margin-top:12px; padding-top:12px; border-top:1px dashed var(--line);
+    font-size:11.5px; color:var(--ink-faint); line-height:1.4;
+  }
+  .rebook-row.due{ color:var(--berry-dark); font-weight:700;}
+  .rebook-btn{
+    background:var(--berry); color:#fff; border:none; font-size:11px; font-weight:700;
+    padding:8px 13px; border-radius:20px; cursor:pointer; white-space:nowrap; flex:0 0 auto;
+  }
+
   .empty-state{
     text-align:center; padding:60px 40px; color:var(--ink-faint);
   }
   .empty-state svg{ width:44px; height:44px; stroke:var(--ink-faint); fill:none; stroke-width:1.4; margin-bottom:14px;}
   .empty-state p{ font-size:13px; line-height:1.5;}
- 
+
   /* ---------- Profile ---------- */
   .profile-head{
     padding:28px 20px 20px;
@@ -676,10 +727,10 @@
   }
   .profile-head h3{ font-family:'Fraunces'; font-weight:600; font-size:17px; color:var(--ink);}
   .profile-head span{ font-size:12px; color:var(--ink-soft);}
- 
+
   .plus-card{
     margin:6px 20px 22px;
-    background:linear-gradient(135deg, #2A0316, var(--berry-dark) 55%, var(--copper-dark));
+    background:linear-gradient(135deg, #0A0A0A, var(--berry-dark) 55%, var(--copper-dark));
     border-radius:20px;
     padding:20px;
     color:#fff;
@@ -689,7 +740,7 @@
   .plus-card::after{
     content:"";
     position:absolute; bottom:-30px; right:-20px; width:120px;height:120px;
-    background:radial-gradient(circle, rgba(240,219,160,0.35), transparent 70%);
+    background:radial-gradient(circle, rgba(217,169,194,0.35), transparent 70%);
   }
   .plus-card .plus-top{ display:flex; align-items:center; gap:8px; margin-bottom:10px;}
   .plus-card .plus-coin{
@@ -702,10 +753,80 @@
   .plus-feat{ display:flex; align-items:center; gap:8px; font-size:12px; margin-bottom:8px; color:rgba(255,255,255,0.92);}
   .plus-feat svg{ width:14px;height:14px; stroke:var(--copper-light); fill:none; stroke-width:2.4;}
   .plus-btn{
-    margin-top:10px; width:100%; background:var(--copper); border:none; color:#2A0316;
+    margin-top:10px; width:100%; background:var(--copper); border:none; color:#fff;
     font-weight:800; font-size:13px; padding:12px; border-radius:12px; cursor:pointer;
   }
- 
+
+  .glowgrow-card{
+    margin:0 20px 16px;
+    background:linear-gradient(135deg, var(--copper-dark), var(--berry-dark) 55%, #0A0A0A);
+    border-radius:20px;
+    padding:20px;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+  .glowgrow-card::after{
+    content:"";
+    position:absolute; top:-30px; left:-20px; width:130px;height:130px;
+    background:radial-gradient(circle, rgba(217,169,194,0.35), transparent 70%);
+  }
+  .gg-top{ display:flex; align-items:center; gap:10px; margin-bottom:14px; position:relative; z-index:1;}
+  .gg-top b{ font-family:'Fraunces'; font-weight:700; font-size:15px; display:block;}
+  .gg-tier{ font-size:10px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:rgba(255,255,255,0.7);}
+  .gg-balance{ font-family:'Fraunces'; font-weight:800; font-size:32px; margin-bottom:6px; position:relative; z-index:1;}
+  .gg-desc{ font-size:12.5px; color:rgba(255,255,255,0.75); line-height:1.5; margin-bottom:14px; position:relative; z-index:1;}
+  .gg-progress-track{ height:6px; border-radius:6px; background:rgba(255,255,255,0.18); overflow:hidden; margin-bottom:6px; position:relative; z-index:1;}
+  .gg-progress-fill{ height:100%; background:linear-gradient(90deg, var(--copper-light), var(--copper));}
+  .gg-next{ font-size:11px; color:rgba(255,255,255,0.6); position:relative; z-index:1;}
+  .gg-tap-hint{ position:absolute; top:18px; right:18px; z-index:1; opacity:0.7;}
+  .gg-tap-hint svg{ width:16px;height:16px; stroke:#fff; fill:none; stroke-width:2;}
+  .gr-projection{ display:flex; justify-content:space-between; align-items:flex-end; gap:10px; margin:18px 0 8px; height:110px;}
+  .gr-proj-col{ display:flex; flex-direction:column; align-items:center; gap:6px; flex:1;}
+  .gr-proj-bar{ width:100%; max-width:44px; border-radius:8px 8px 0 0; background:linear-gradient(180deg, var(--copper-light), var(--berry));}
+  .gr-proj-amt{ font-family:'Fraunces'; font-weight:700; font-size:13px; color:var(--ink);}
+  .gr-proj-label{ font-size:10.5px; color:var(--ink-faint); text-align:center;}
+  .gr-proj-note{ font-size:11px; color:var(--ink-faint); line-height:1.5; margin-bottom:6px;}
+  .gr-tier-row{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line);}
+  .gr-tier-row:last-child{ border-bottom:none;}
+  .gr-tier-dot{ width:32px;height:32px;border-radius:50%; display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .gr-tier-dot.done{ background:var(--berry);}
+  .gr-tier-dot.done svg{ width:15px;height:15px; stroke:#fff; fill:none; stroke-width:3;}
+  .gr-tier-dot.locked{ background:var(--sage-light);}
+  .gr-tier-dot.locked svg{ width:14px;height:14px; stroke:var(--ink-faint); fill:none; stroke-width:2;}
+  .gr-tier-name{ font-weight:700; font-size:13.5px; color:var(--ink);}
+  .gr-tier-desc{ font-size:11.5px; color:var(--ink-soft);}
+
+  /* ---------- 5-year outlook + referral (stats page) ---------- */
+  .five-yr-row{ display:flex; gap:12px; margin-bottom:14px;}
+  .five-yr-col{
+    flex:1; text-align:center; background:var(--white); border:1px solid var(--line); border-radius:16px; padding:16px 10px;
+  }
+  .five-yr-col.growth{ background:linear-gradient(160deg, #1F2B1D, var(--berry-dark) 65%, var(--copper-dark)); border-color:transparent;}
+  .five-yr-tier{ font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--ink-faint); margin-bottom:6px;}
+  .five-yr-col.growth .five-yr-tier{ color:rgba(255,255,255,0.7);}
+  .five-yr-amt{ font-family:'Fraunces'; font-weight:800; font-size:24px; color:var(--ink);}
+  .five-yr-col.growth .five-yr-amt{ color:#fff;}
+  .cost-waiting-box{
+    background:var(--sage-light); border-radius:14px; padding:14px; margin-bottom:14px;
+  }
+  .cost-waiting-box p{ font-size:12.5px; color:#455A3A; line-height:1.5;}
+  .referral-box{ background:var(--white); border:1px solid var(--line); border-radius:16px; padding:16px;}
+  .referral-box > p{ font-size:12.5px; color:var(--ink-soft); line-height:1.5;}
+  .referral-code-row{ display:flex; gap:10px; align-items:center; margin-bottom:14px;}
+  .referral-code{
+    flex:1; font-family:'Fraunces'; font-weight:700; font-size:15px; letter-spacing:0.08em; color:var(--ink);
+    background:var(--cream-soft); border:1.5px dashed var(--line); border-radius:12px; padding:11px 12px; text-align:center;
+  }
+  .referral-copy-btn{
+    background:var(--berry); color:#fff; border:none; font-size:12.5px; font-weight:700;
+    padding:12px 16px; border-radius:12px; cursor:pointer; white-space:nowrap;
+  }
+  .referral-stats-row{ display:flex; gap:12px; border-top:1px solid var(--line); padding-top:14px;}
+  .referral-stats-row > div{ flex:1; text-align:center;}
+  .referral-stats-row b{ display:block; font-family:'Fraunces'; font-weight:800; font-size:19px; color:var(--ink);}
+  .referral-stats-row span{ font-size:11px; color:var(--ink-faint);}
+
   .profile-list{ margin:0 20px; background:var(--white); border:1px solid var(--line); border-radius:16px; overflow:hidden;}
   .profile-item{
     display:flex; align-items:center; justify-content:space-between;
@@ -716,7 +837,7 @@
   .profile-item .l{ display:flex; align-items:center; gap:11px;}
   .profile-item svg{ width:16px;height:16px; stroke:var(--ink-soft); fill:none; stroke-width:1.8;}
   .profile-item .chev{ stroke:var(--ink-faint);}
- 
+
   /* ---------- Business dashboard ---------- */
   .biz-header{
     padding:22px 20px 16px;
@@ -733,7 +854,7 @@
     font-size:12px; font-weight:700; margin-bottom:14px; cursor:pointer;
   }
   .biz-back svg{ width:13px;height:13px; stroke:var(--copper-light); fill:none; stroke-width:2.4;}
- 
+
   .form-card{ margin:0 20px 18px; background:var(--white); border:1px solid var(--line); border-radius:18px; padding:18px;}
   .form-card h4{ font-family:'Fraunces'; font-weight:600; font-size:15px; color:var(--ink); margin-bottom:14px;}
   .field{ margin-bottom:14px;}
@@ -748,7 +869,7 @@
     flex:1; text-align:center; padding:11px; border-radius:11px; border:1.5px solid var(--line);
     font-size:12.5px; font-weight:700; color:var(--ink-soft); cursor:pointer; background:var(--cream-soft);
   }
-  .toggle-opt.active{ background:var(--berry); border-color:var(--berry); color:var(--ink);}
+  .toggle-opt.active{ background:var(--berry); border-color:var(--berry); color:#fff;}
   .toggle-opt.active.model-toggle{ background:var(--sage); border-color:var(--sage);}
   .submit-btn{
     width:100%; background:var(--ink); color:#fff; border:none; padding:14px; border-radius:13px;
@@ -756,14 +877,14 @@
   }
   .biz-deal-row{
     margin:0 20px 12px; background:var(--white); border:1px solid var(--line); border-radius:16px; padding:13px 14px;
-    display:flex; align-items:center; gap:12px;
   }
+  .biz-deal-row .row-top{ display:flex; align-items:center; gap:12px;}
   .biz-deal-row .status-dot{ width:8px;height:8px;border-radius:50%; background:#5C8A52; flex:0 0 auto;}
   .biz-deal-row .binfo{ flex:1;}
   .biz-deal-row .binfo h5{ font-family:'Fraunces'; font-size:13.5px; font-weight:600; color:var(--ink);}
   .biz-deal-row .binfo span{ font-size:11px; color:var(--ink-faint);}
   .claimed-pill{ font-size:10.5px; font-weight:700; color:var(--copper-dark); background:var(--cream-soft); padding:5px 9px; border-radius:8px;}
- 
+
   /* ---------- Reviews & ratings ---------- */
   .review-summary{
     display:flex; align-items:center; gap:12px;
@@ -791,17 +912,17 @@
   .review-photos img, .review-photos .ph-swatch{
     width:56px; height:56px; border-radius:10px; object-fit:cover; flex:0 0 auto;
   }
- 
+
   .star-picker{ display:flex; gap:8px; margin:14px 0 16px;}
   .star-picker svg{ width:32px; height:32px; cursor:pointer; stroke:var(--copper); stroke-width:1.6; fill:none; transition:all .12s ease;}
   .star-picker svg.filled{ fill:var(--copper);}
- 
+
   .photo-grid{ display:flex; gap:9px; flex-wrap:wrap; margin-bottom:16px;}
   .photo-tile{ width:64px; height:64px; border-radius:12px; position:relative; overflow:hidden; flex:0 0 auto;}
   .photo-tile img{ width:100%; height:100%; object-fit:cover; display:block;}
   .photo-remove{
     position:absolute; top:3px; right:3px; width:18px;height:18px; border-radius:50%;
-    background:rgba(89,3,50,0.7); display:flex; align-items:center; justify-content:center; cursor:pointer;
+    background:rgba(18,18,18,0.7); display:flex; align-items:center; justify-content:center; cursor:pointer;
   }
   .photo-remove svg{ width:9px;height:9px; stroke:#fff; fill:none; stroke-width:2.6;}
   .photo-add{
@@ -810,7 +931,7 @@
     color:var(--ink-faint); background:var(--cream-soft);
   }
   .photo-add svg{ width:20px;height:20px; stroke:var(--ink-faint); fill:none; stroke-width:2;}
- 
+
   .mark-used-btn{
     background:none; border:1.5px solid var(--copper); color:var(--copper-dark);
     font-size:10.5px; font-weight:700; padding:6px 10px; border-radius:20px; cursor:pointer; white-space:nowrap;
@@ -818,7 +939,109 @@
   .voucher-row{ align-items:center; }
   .voucher-row .vinfo .rated-stars{ display:flex; gap:2px; margin-top:3px;}
   .voucher-row .vinfo .rated-stars svg{ width:11px;height:11px;}
- 
+
+  .mode-pill{ font-size:9.5px; font-weight:800; color:#fff; background:var(--sage); padding:4px 8px; border-radius:8px; text-transform:uppercase; letter-spacing:0.02em;}
+
+  /* ---------- Applicant / interested list ---------- */
+  .applicant-panel{ margin-top:12px; padding-top:12px; border-top:1px solid var(--line);}
+  .applicant-panel .lbl{ font-size:11px; font-weight:800; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:10px;}
+  .applicant-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .applicant-row:last-child{ margin-bottom:0;}
+  .applicant-thumb{
+    width:34px;height:34px;border-radius:50%; flex:0 0 auto; object-fit:cover;
+    background:linear-gradient(135deg, var(--berry), var(--copper));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Fraunces';font-weight:700;font-size:13px;
+  }
+  .applicant-name{ flex:1; font-size:12.5px; font-weight:700; color:var(--ink);}
+  .applicant-select-btn{
+    background:var(--berry); color:#fff; border:none; font-size:11px; font-weight:700;
+    padding:7px 12px; border-radius:20px; cursor:pointer; white-space:nowrap;
+  }
+  .applicant-select-btn[disabled]{ background:var(--ink-faint); cursor:default;}
+  .selected-banner{
+    background:var(--sage-light); color:var(--sage); font-size:11.5px; font-weight:700;
+    padding:9px 12px; border-radius:10px; margin-top:10px;
+  }
+
+  /* ---------- Business/Customer mode switch + business tab bar ---------- */
+  .tabbar-group{ display:flex; flex:1;}
+  .tabbar-business{ display:none;}
+  .tabbar.biz-mode .tabbar-customer{ display:none;}
+  .tabbar.biz-mode .tabbar-business{ display:flex;}
+
+  /* ---------- Business dashboard stats ---------- */
+  .stat-row{ display:flex; gap:10px; margin:0 20px 16px;}
+  .stat-col{ flex:1; text-align:center; background:var(--white); border:1px solid var(--line); border-radius:16px; padding:14px 6px;}
+  .stat-col b{ display:block; font-family:'Fraunces'; font-weight:800; font-size:19px; color:var(--ink); margin-bottom:2px;}
+  .stat-col span{ font-size:10px; color:var(--ink-faint); line-height:1.3; display:block;}
+  .quick-action-row{ display:flex; gap:10px; margin:0 20px 18px;}
+  .quick-action-btn{
+    flex:1; background:var(--white); border:1px solid var(--line); border-radius:14px; padding:14px 8px;
+    text-align:center; cursor:pointer; font-size:11.5px; font-weight:700; color:var(--ink);
+  }
+  .quick-action-btn svg{ width:20px;height:20px; stroke:var(--berry); fill:none; stroke-width:1.8; margin-bottom:6px;}
+
+  /* ---------- Team roster ---------- */
+  .trainee-card{
+    margin:0 20px 12px; background:var(--white); border:1px solid var(--line); border-radius:16px;
+    padding:14px; display:flex; gap:12px; align-items:flex-start;
+  }
+  .trainee-card .t-avatar{
+    width:44px;height:44px;border-radius:50%; flex:0 0 auto;
+    background:linear-gradient(135deg, var(--sage), var(--copper));
+    color:#fff; font-family:'Fraunces'; font-weight:700; font-size:16px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .trainee-card .t-info{ flex:1;}
+  .trainee-card .t-top{ display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .trainee-card h5{ font-family:'Fraunces'; font-weight:600; font-size:14px; color:var(--ink);}
+  .trainee-card .t-role{ font-size:10px; font-weight:800; color:var(--sage); text-transform:uppercase; letter-spacing:0.03em; margin:2px 0 6px;}
+  .trainee-card p{ font-size:12px; color:var(--ink-soft); line-height:1.45;}
+  .trainee-remove{ cursor:pointer; color:var(--ink-faint); flex:0 0 auto;}
+  .trainee-remove svg{ width:15px;height:15px; stroke:var(--ink-faint); fill:none; stroke-width:2;}
+
+  /* ---------- Price list ---------- */
+  .price-row-item{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line);}
+  .price-row-item:last-child{ border-bottom:none;}
+  .price-row-item .pi-name{ font-size:13px; color:var(--ink); font-weight:600;}
+  .price-row-item .pi-right{ display:flex; align-items:center; gap:10px;}
+  .price-row-item b{ font-family:'Fraunces'; font-weight:700; color:var(--ink); font-size:14px;}
+  .price-row-item .pr-remove{ cursor:pointer; color:var(--ink-faint);}
+  .price-row-item .pr-remove svg{ width:14px;height:14px; stroke:var(--ink-faint); fill:none; stroke-width:2.2;}
+
+  /* ---------- Messaging ---------- */
+  .msg-thread{ padding:4px 4px 10px; display:flex; flex-direction:column; gap:10px; max-height:340px; overflow-y:auto;}
+  .msg-row{ display:flex;}
+  .msg-row.mine{ justify-content:flex-end;}
+  .msg-bubble{
+    max-width:78%; padding:10px 13px; border-radius:16px; font-size:12.5px; line-height:1.45;
+    background:var(--white); border:1px solid var(--line); color:var(--ink);
+  }
+  .msg-row.mine .msg-bubble{ background:var(--berry); color:#fff; border-color:var(--berry);}
+  .msg-row.system .msg-bubble{ background:var(--sage-light); color:#455A3A; border-color:transparent; font-style:italic;}
+  .msg-meta{ font-size:9.5px; color:var(--ink-faint); margin-top:4px;}
+  .msg-row.mine .msg-meta{ text-align:right;}
+  .msg-quick-row{ display:flex; gap:7px; flex-wrap:wrap; margin:12px 0 10px;}
+  .msg-quick-chip{
+    background:var(--cream-soft); border:1px solid var(--line); color:var(--ink-soft);
+    font-size:11px; font-weight:700; padding:7px 11px; border-radius:16px; cursor:pointer;
+  }
+  .msg-input-row{ display:flex; gap:8px; margin-top:8px;}
+  .msg-input-row input{
+    flex:1; border:1px solid var(--line); border-radius:20px; padding:11px 16px;
+    font-family:'Inter'; font-size:12.5px; background:var(--cream-soft); color:var(--ink);
+  }
+  .msg-send-btn{
+    background:var(--ink); color:#fff; border:none; width:40px; height:40px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto;
+  }
+  .msg-send-btn svg{ width:16px;height:16px; stroke:#fff; fill:none; stroke-width:2.2;}
+  .message-btn{
+    background:none; border:1.5px solid var(--berry); color:var(--berry-dark);
+    font-size:10.5px; font-weight:700; padding:6px 10px; border-radius:20px; cursor:pointer; white-space:nowrap;
+  }
+  .voucher-card .deposit-line{ font-size:12px; color:var(--copper-light); font-weight:700; margin-bottom:10px;}
+
   .toast{
     position:absolute; bottom:100px; left:50%; transform:translateX(-50%) translateY(20px);
     background:var(--ink); color:#fff; font-size:12.5px; font-weight:600;
@@ -829,46 +1052,59 @@
 </style>
 </head>
 <body>
- 
+
 <div class="showcase-label">
   <span class="eyebrow">Interactive Prototype</span>
-  <h1>Glow Syndicate — <em>beauty & grooming, redefined</em></h1>
+  <h1>The Ritual Collective — <em>beauty & grooming, redefined</em></h1>
 </div>
- 
+
 <div class="phone">
   <div class="screen-shell">
- 
+
     <div class="status-bar">
       <span>9:41</span>
-      <span>●●● Glow Syndicate</span>
+      <span>●●● The Ritual Collective</span>
     </div>
- 
+
     <div class="app-body" id="appBody">
- 
+
       <!-- ============ DISCOVER ============ -->
-      <section class="screen active" id="screen-discover">
+      <section class="screen active" id="screen-home">
         <div class="top-header">
           <div class="brandmark">
-            <div class="coin-logo">G</div>
-            <div class="word">Glow <em>Syndicate</em></div>
+            <div class="coin-logo">R</div>
+            <div class="word">The Ritual <em>Collective</em></div>
           </div>
           <div class="icon-btn" id="bellBtn" onclick="openNotifications()">
             <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
             <span class="notif-dot" id="notifDot"></span>
           </div>
         </div>
-        <div class="location-row">
-          <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          Deals near <b>Fortitude Valley, Brisbane</b>
+
+        <div class="glowgrow-card" style="margin:0 20px 16px; cursor:pointer;" onclick="openGrowthRitual()">
+          <div class="gg-tap-hint"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+          <div class="gg-top">
+            <div class="plus-coin"></div>
+            <div>
+              <b>Your Growth Ritual</b><br/>
+              <span class="gg-tier" id="ggTier">Cautious tier</span>
+            </div>
+          </div>
+          <div class="gg-balance" id="ggBalance">$14.85</div>
+          <p class="gg-desc">5% of every booking goes here automatically — no extra cost to you, ever.</p>
+          <div class="gg-progress-track"><div class="gg-progress-fill" id="ggProgressFill" style="width:59%;"></div></div>
+          <p class="gg-next" id="ggNext">$10.15 to go until Growth tier · tap to see your growth potential</p>
         </div>
-        <div class="chip-row" id="chipRow"></div>
-        <div class="concession-banner" id="concessionBanner" style="display:none;"></div>
-        <div class="section-title" id="comboSectionTitle" style="display:none;">Combos to book for later <span class="tally" id="comboTally"></span></div>
-        <div class="deal-list" id="comboList" style="margin-bottom:18px;"></div>
-        <div class="section-title">Ending soon <span class="tally" id="dealTally"></span></div>
-        <div class="deal-list" id="dealList"></div>
+
+        <div class="section-title" style="padding-left:20px;">My deals</div>
+        <div class="subtabs" id="myDealsTabs">
+          <div class="subtab active" data-sub="active" onclick="setMyDealsTab('active')">Active</div>
+          <div class="subtab" data-sub="loyalty" onclick="setMyDealsTab('loyalty')">Loyalty</div>
+          <div class="subtab" data-sub="redeemed" onclick="setMyDealsTab('redeemed')">Redeemed</div>
+        </div>
+        <div id="myDealsList"></div>
       </section>
- 
+
       <!-- ============ MAP ============ -->
       <section class="screen" id="screen-map">
         <div class="top-header">
@@ -880,7 +1116,7 @@
           <div class="map-popup-wrap" id="mapPopup"></div>
         </div>
       </section>
- 
+
       <!-- ============ FAVOURITES ============ -->
       <section class="screen" id="screen-favourites">
         <div class="top-header"><div class="brandmark"><div class="word">Favourites</div></div></div>
@@ -888,18 +1124,22 @@
         <div class="section-title">Businesses you follow <span class="tally" id="favTally"></span></div>
         <div id="favouritesList"></div>
       </section>
- 
-      <!-- ============ MY DEALS ============ -->
-      <section class="screen" id="screen-mydeals">
-        <div class="top-header"><div class="brandmark"><div class="word">My deals</div></div></div>
-        <div class="subtabs" id="myDealsTabs">
-          <div class="subtab active" data-sub="active" onclick="setMyDealsTab('active')">Active</div>
-          <div class="subtab" data-sub="loyalty" onclick="setMyDealsTab('loyalty')">Loyalty</div>
-          <div class="subtab" data-sub="redeemed" onclick="setMyDealsTab('redeemed')">Redeemed</div>
+
+      <!-- ============ DISCOVER ============ -->
+      <section class="screen" id="screen-discover">
+        <div class="top-header"><div class="brandmark"><div class="word">Discover</div></div></div>
+        <div class="location-row">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Deals near <b>Fortitude Valley, Brisbane</b>
         </div>
-        <div id="myDealsList"></div>
+        <div class="chip-row" id="chipRow"></div>
+        <div class="concession-banner" id="concessionBanner" style="display:none;"></div>
+        <div class="section-title" id="comboSectionTitle" style="display:none;">Combos to book for later <span class="tally" id="comboTally"></span></div>
+        <div class="deal-list" id="comboList" style="margin-bottom:18px;"></div>
+        <div class="section-title">Ending soon <span class="tally" id="dealTally"></span></div>
+        <div class="deal-list" id="dealList"></div>
       </section>
- 
+
       <!-- ============ PROFILE ============ -->
       <section class="screen" id="screen-profile">
         <div class="profile-head">
@@ -909,17 +1149,51 @@
             <span>Member since 2026 · Free plan</span>
           </div>
         </div>
- 
+
+        <div class="form-card" style="margin:0 20px 16px;">
+          <h4 style="margin-bottom:10px;">App view</h4>
+          <p style="font-size:11px;color:var(--ink-faint);margin:-4px 0 12px;line-height:1.4;">Switch to Business to manage your listing, team and bookings — the same account, a different lens.</p>
+          <div class="toggle-row app-mode-switch" style="margin-bottom:0;">
+            <div class="toggle-opt active" data-mode="customer" onclick="switchAppMode('customer')">Customer</div>
+            <div class="toggle-opt" data-mode="business" onclick="switchAppMode('business')">Business</div>
+          </div>
+        </div>
+
         <div class="form-card" style="margin:0 20px 16px;">
           <h4>Concession status</h4>
           <div id="concessionChips" style="display:flex; gap:8px; flex-wrap:wrap;"></div>
           <p style="font-size:11px;color:var(--ink-faint);margin-top:10px;line-height:1.4;">Let us know if you're a student, concession, or senior card holder — we'll flag deals with pricing for you across Discover.</p>
         </div>
- 
+
+        <div class="form-card" style="margin:0 20px 16px;">
+          <h4>About me</h4>
+          <p style="font-size:11px;color:var(--ink-faint);margin:-8px 0 14px;line-height:1.4;">Tell businesses a bit about your hair and preferences, and add a few photos — handy when you apply for a Model Call or a Choose Your Customer spot.</p>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:8px;">Hair type</label>
+            <div id="hairTypeChips" style="display:flex; gap:8px; flex-wrap:wrap;"></div>
+          </div>
+          <div class="field" style="margin-bottom:14px;">
+            <label>Preferences & notes</label>
+            <textarea id="fAboutNotes" placeholder="e.g. Colour-treated, avoid ammonia, prefer quiet appointments"></textarea>
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label>My style photos</label>
+            <div class="photo-grid" id="stylePhotoGrid"></div>
+            <p style="font-size:11px;color:var(--ink-faint);margin-top:8px;line-height:1.4;">Optional, and only shown to businesses you actually apply to.</p>
+          </div>
+        </div>
+
+        <div class="form-card" style="margin:0 20px 16px;">
+          <h4>Linked subscriptions</h4>
+          <p style="font-size:11px;color:var(--ink-faint);margin:-8px 0 14px;line-height:1.4;">Link your bank once, and we'll spot recurring subscriptions like these automatically. Turn on round-up for any of them and the difference to a round number goes straight into your Growth Ritual — no extra thinking required.</p>
+          <div id="subscriptionList"></div>
+          <p style="font-size:11px;color:var(--ink-faint);margin-top:4px;line-height:1.4;">Shown here with sample data for now — this becomes real once bank-linking is switched on.</p>
+        </div>
+
         <div class="plus-card">
           <div class="plus-top">
             <div class="plus-coin"></div>
-            <b>Glow+</b>
+            <b>Ritual+</b>
             <span class="soon">Coming soon</span>
           </div>
           <p class="desc">A membership for anyone who never wants to pay full price for their routine again.</p>
@@ -928,10 +1202,18 @@
           <div class="plus-feat"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Priority booking on Model Call spots</div>
           <button class="plus-btn" onclick="toast('We\'ll let you know the moment it launches')">Notify me at launch</button>
         </div>
- 
+
         <div class="profile-list" style="margin-bottom:16px;">
-          <div class="profile-item" onclick="switchTab('business')">
-            <div class="l"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1"/></svg>List your business on Glow Syndicate</div>
+          <div class="profile-item" onclick="switchTab('home')">
+            <div class="l"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>View your Growth Ritual</div>
+            <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div class="profile-item" onclick="openPartnerPerks()">
+            <div class="l"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>Partner student perks</div>
+            <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div class="profile-item" onclick="switchAppMode('business')">
+            <div class="l"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1"/></svg>List your business on The Ritual Collective</div>
             <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
           </div>
           <div class="profile-item" onclick="toast('Payment settings coming soon')">
@@ -948,16 +1230,47 @@
           </div>
         </div>
       </section>
- 
-      <!-- ============ BUSINESS DASHBOARD ============ -->
-      <section class="screen" id="screen-business">
+
+      <!-- ============ BUSINESS: DASHBOARD ============ -->
+      <section class="screen" id="screen-bizhome">
         <div class="biz-header">
-          <div class="biz-back" onclick="switchTab('profile')"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Back to profile</div>
           <div class="eyebrow">For business</div>
-          <h2>Business dashboard</h2>
-          <p>Post a discount, or call for models — reach people nearby in minutes.</p>
+          <h2 id="bizHomeName">Willow & Bloom Studio</h2>
+          <p>Here's how things are looking this week.</p>
         </div>
- 
+
+        <div class="stat-row">
+          <div class="stat-col"><b id="statActiveDeals">0</b><span>Active deals</span></div>
+          <div class="stat-col"><b id="statClaimed">0</b><span>Spots claimed</span></div>
+          <div class="stat-col"><b id="statBookings">0</b><span>Bookings</span></div>
+          <div class="stat-col"><b id="statTeam">0</b><span>Team members</span></div>
+        </div>
+
+        <div class="quick-action-row">
+          <div class="quick-action-btn" onclick="switchTab('bizdeals')">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New deal
+          </div>
+          <div class="quick-action-btn" onclick="switchTab('bizteam')">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Team
+          </div>
+          <div class="quick-action-btn" onclick="switchTab('bizbookings')">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>Bookings
+          </div>
+        </div>
+
+        <div class="section-title" style="padding-left:20px;">Your active deals</div>
+        <div id="bizDealListHome"></div>
+      </section>
+
+      <!-- ============ BUSINESS: DEALS ============ -->
+      <section class="screen" id="screen-bizdeals">
+        <div class="biz-header">
+          <div class="biz-back" onclick="switchAppMode('customer','profile')"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Back to portfolio</div>
+          <div class="eyebrow">For business</div>
+          <h2>Deals & pricing</h2>
+          <p>Post a discount, call for models, or list your standard prices.</p>
+        </div>
+
         <div class="form-card">
           <h4>Create a new deal</h4>
           <div class="toggle-row">
@@ -989,6 +1302,13 @@
               <option>Waxing</option><option>Brows & Lashes</option><option>Skincare</option><option>Massage & Spa</option><option>Grooming</option>
             </select>
           </div>
+          <div class="field" id="fieldMode">
+            <label>How should this get filled?</label>
+            <div class="toggle-row" style="margin-bottom:0;">
+              <div class="toggle-opt active" id="toggleModeOpen" onclick="setDealMode('open')">Open call<br><span style="font-weight:500;font-size:10.5px;">first come, first served</span></div>
+              <div class="toggle-opt" id="toggleModeChoose" onclick="setDealMode('choose')">Choose your customer<br><span style="font-weight:500;font-size:10.5px;">review & pick who gets it</span></div>
+            </div>
+          </div>
           <div class="field" id="fieldPercent">
             <label>Discount</label>
             <div style="display:flex; gap:10px;">
@@ -1001,8 +1321,21 @@
             <textarea id="fComboItems" placeholder="Haircut & style&#10;Full colour&#10;Toner&#10;Blow-dry finish"></textarea>
           </div>
           <div class="field" id="fieldReq" style="display:none;">
+            <label>Hair/skin type wanted</label>
+            <select id="fModelHairType">
+              <option>Any type</option><option>Straight</option><option>Wavy</option><option>Curly</option><option>Coily</option><option>Colour-treated</option>
+            </select>
+          </div>
+          <div class="field" id="fieldReqDetail" style="display:none;">
             <label>What kind of model are you after?</label>
             <textarea id="fReq" placeholder="e.g. Long, non-toner-treated hair, available weekday mornings"></textarea>
+          </div>
+          <div class="field">
+            <label>Who's performing this? (optional)</label>
+            <select id="fAssignedTrainee">
+              <option value="">Not specified</option>
+            </select>
+            <p style="font-size:11px;color:var(--ink-faint);margin-top:8px;line-height:1.4;">Shown to the customer so they know who's doing their service — great for showcasing trainees building their portfolio.</p>
           </div>
           <div class="field">
             <label>Who is this price for?</label>
@@ -1021,16 +1354,21 @@
             </select>
           </div>
           <div class="field">
-            <label>Cancellation & no-show fees</label>
+            <label>Deposit & cancellation window</label>
             <div style="display:flex; gap:10px;">
-              <input id="fCancelFee" type="text" placeholder="Cancellation fee $, e.g. 20" style="flex:1;" />
-              <input id="fNoShowFee" type="text" placeholder="No-show fee $, e.g. 50" style="flex:1;" />
+              <input id="fDeposit" type="text" placeholder="Deposit $, e.g. 20" style="flex:1;" />
+              <select id="fFreeCancelWindow" style="flex:1;">
+                <option value="2">Free cancel up to 2h before</option>
+                <option value="6">Free cancel up to 6h before</option>
+                <option value="24" selected>Free cancel up to 24h before</option>
+                <option value="48">Free cancel up to 48h before</option>
+              </select>
             </div>
-            <p style="font-size:11px;color:var(--ink-faint);margin-top:8px;line-height:1.4;">Leave blank for no fee. Shown to customers before they redeem.</p>
+            <p style="font-size:11px;color:var(--ink-faint);margin-top:8px;line-height:1.4;">Leave the deposit blank for no deposit. The deposit is credited toward the service if the customer shows up, refunded in full if they cancel before your window closes, and kept if they cancel late or no-show — no chasing anyone down after the fact.</p>
           </div>
           <button class="submit-btn" onclick="createBizDeal()">Publish deal</button>
         </div>
- 
+
         <div class="form-card">
           <div class="loyalty-setup-toggle">
             <h4 style="margin-bottom:0;">Loyalty programme</h4>
@@ -1049,49 +1387,162 @@
           </div>
           <p style="font-size:11px;color:var(--ink-faint); line-height:1.4;" id="loyaltyHint">Turn this on to give returning customers a stamp every time they book with you.</p>
         </div>
- 
+
+        <div class="form-card">
+          <h4>Price list</h4>
+          <p style="font-size:11px;color:var(--ink-faint);margin:-8px 0 12px;line-height:1.4;">Your standard menu — shown on your public profile, separate from flash deals and model calls.</p>
+          <div id="priceListRows"></div>
+          <div class="field" style="display:flex; gap:10px; margin:14px 0 10px;">
+            <input id="fPriceService" type="text" placeholder="Service, e.g. Balayage" style="flex:2;" />
+            <input id="fPriceAmount" type="text" placeholder="$" style="flex:1;" />
+          </div>
+          <button class="submit-btn" onclick="addPriceListItem()">Add to price list</button>
+        </div>
+
         <div class="section-title" style="padding-left:20px;">Your active deals</div>
         <div id="bizDealList"></div>
       </section>
- 
+
+      <!-- ============ BUSINESS: TEAM ============ -->
+      <section class="screen" id="screen-bizteam">
+        <div class="biz-header">
+          <div class="eyebrow">For business</div>
+          <h2>Your team</h2>
+          <p>Showcase who's training and who's senior — customers see this on the deals they book.</p>
+        </div>
+
+        <div class="form-card">
+          <h4>Add a team member</h4>
+          <div class="field">
+            <label>Name</label>
+            <input id="fTraineeName" type="text" placeholder="e.g. Ava Thompson" />
+          </div>
+          <div class="field">
+            <label>Role / skill level</label>
+            <select id="fTraineeRole">
+              <option>Trainee</option><option>Level 1 Apprentice</option><option>Level 2 Apprentice</option><option>Senior Stylist</option><option>Studio Owner</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Specialty</label>
+            <input id="fTraineeSpecialty" type="text" placeholder="e.g. Colour & balayage" />
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label>Short bio</label>
+            <textarea id="fTraineeBio" placeholder="e.g. Second-year apprentice building her colour portfolio"></textarea>
+          </div>
+          <button class="submit-btn" style="margin-top:14px;" onclick="addTrainee()">Add to team</button>
+        </div>
+
+        <div class="section-title" style="padding-left:20px;">Meet the team</div>
+        <div id="teamList"></div>
+      </section>
+
+      <!-- ============ BUSINESS: BOOKINGS ============ -->
+      <section class="screen" id="screen-bizbookings">
+        <div class="biz-header">
+          <div class="eyebrow">For business</div>
+          <h2>Bookings</h2>
+          <p>Everything customers have booked with you, active and completed.</p>
+        </div>
+        <div id="bizBookingsList"></div>
+      </section>
+
+      <!-- ============ BUSINESS: SETTINGS ============ -->
+      <section class="screen" id="screen-bizsettings">
+        <div class="biz-header">
+          <div class="eyebrow">For business</div>
+          <h2>Business settings</h2>
+          <p>Manage how your listing appears and switch back to customer view any time.</p>
+        </div>
+
+        <div class="form-card">
+          <h4 style="margin-bottom:10px;">App view</h4>
+          <div class="toggle-row app-mode-switch" style="margin-bottom:0;">
+            <div class="toggle-opt" data-mode="customer" onclick="switchAppMode('customer','profile')">Customer</div>
+            <div class="toggle-opt active" data-mode="business" onclick="switchAppMode('business')">Business</div>
+          </div>
+        </div>
+
+        <div class="profile-list" style="margin-bottom:16px;">
+          <div class="profile-item" onclick="toast('Payout settings coming soon')">
+            <div class="l"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Payout methods</div>
+            <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div class="profile-item" onclick="toast('Notification settings coming soon')">
+            <div class="l"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Notifications</div>
+            <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div class="profile-item" onclick="toast('You\'re on the Free business plan')">
+            <div class="l"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Help & support</div>
+            <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+        </div>
+      </section>
+
     </div>
- 
+
     <!-- bottom sheet: deal detail -->
     <div class="sheet-overlay" id="sheetOverlay">
       <div class="sheet" id="sheetContent"></div>
     </div>
- 
+
     <div class="toast" id="toast"></div>
- 
-    <div class="tabbar">
-      <button class="tab active" data-tab="discover" onclick="switchTab('discover')">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-        Discover
-      </button>
-      <button class="tab" data-tab="map" onclick="switchTab('map')">
-        <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-        Map
-      </button>
-      <button class="tab" data-tab="favourites" onclick="switchTab('favourites')">
-        <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.33-8.9C1.2 8.4 3 5 6.5 5c2 0 3.3 1.1 4 2.3.7-1.2 2-2.3 4-2.3C18 5 19.8 8.4 18.33 12.1 16 16.65 12 21 12 21z"/></svg>
-        Faves
-      </button>
-      <button class="tab" data-tab="mydeals" onclick="switchTab('mydeals')">
-        <svg viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M4 7l2-4h12l2 4"/><path d="M9 11a3 3 0 006 0"/></svg>
-        My Deals
-      </button>
-      <button class="tab" data-tab="profile" onclick="switchTab('profile')">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-        Profile
-      </button>
+
+    <div class="tabbar" id="tabbar">
+      <div class="tabbar-group tabbar-customer">
+        <button class="tab active" data-tab="home" onclick="switchTab('home')">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          Home
+        </button>
+        <button class="tab" data-tab="discover" onclick="switchTab('discover')">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          Discover
+        </button>
+        <button class="tab" data-tab="favourites" onclick="switchTab('favourites')">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.33-8.9C1.2 8.4 3 5 6.5 5c2 0 3.3 1.1 4 2.3.7-1.2 2-2.3 4-2.3C18 5 19.8 8.4 18.33 12.1 16 16.65 12 21 12 21z"/></svg>
+          Faves
+        </button>
+        <button class="tab" data-tab="map" onclick="switchTab('map')">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Map
+        </button>
+        <button class="tab" data-tab="profile" onclick="switchTab('profile')">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          Portfolio
+        </button>
+      </div>
+      <div class="tabbar-group tabbar-business">
+        <button class="tab" data-tab="bizhome" onclick="switchTab('bizhome')">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          Dashboard
+        </button>
+        <button class="tab" data-tab="bizdeals" onclick="switchTab('bizdeals')">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          Deals
+        </button>
+        <button class="tab" data-tab="bizteam" onclick="switchTab('bizteam')">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          Team
+        </button>
+        <button class="tab" data-tab="bizbookings" onclick="switchTab('bizbookings')">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+          Bookings
+        </button>
+        <button class="tab" data-tab="bizsettings" onclick="switchTab('bizsettings')">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H4a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H10a1.65 1.65 0 001-1.51V4a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V10a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          Settings
+        </button>
+      </div>
     </div>
   </div>
 </div>
- 
+
 <script>
 /* ---------------- DATA ---------------- */
 const CATEGORIES = ["All","Nails","Hair","Makeup","Waxing","Brows & Lashes","Skincare","Massage & Spa","Grooming","Model Calls"];
- 
+const CURRENT_USER = "Suhani";
+
 const DEALS = [
   {id:1, biz:"Willow & Bloom Studio", suburb:"Fortitude Valley", category:"Hair", bg:"bg-hair", title:"Balayage + toner + blow-dry", was:220, now:99, pct:55, time:"2h 10m left", rating:4.9, type:"standard", eligibility:"Everyone", cancelFee:20, noShowFee:50, x:28, y:22},
   {id:2, biz:"Bare Beauty Bar", suburb:"New Farm", category:"Waxing", bg:"bg-waxing", title:"Full leg + underarm wax", was:80, now:39, pct:51, time:"4h 40m left", rating:4.7, type:"standard", eligibility:"Student", cancelFee:10, noShowFee:25, x:62, y:38},
@@ -1110,7 +1561,36 @@ const DEALS = [
   {id:15, biz:"The Beard Parlour", suburb:"Fortitude Valley", category:"Grooming", bg:"bg-grooming", title:"Hot towel shave & facial combo", was:90, now:49, pct:46, time:"Today only", rating:4.9, type:"standard", eligibility:"Student", cancelFee:10, noShowFee:30, x:30, y:26},
   {id:16, biz:"Fade & Co. Barbershop", suburb:"West End", category:"Grooming", bg:"bg-grooming", title:"Model wanted — skin fade & design", was:0, now:0, pct:0, time:"This weekend", rating:4.7, type:"model", req:"Short-to-medium hair, comfortable with a sharp fade and line design", eligibility:"Everyone", cancelFee:0, noShowFee:0, x:48, y:34},
 ];
- 
+
+/* Normalise every deal with the new fields (deposit/cancellation window, fill mode, applicants)
+   without having to hand-edit every literal above. */
+DEALS.forEach(d => {
+  if(d.depositAmount === undefined) d.depositAmount = d.noShowFee || 0;
+  if(d.freeCancelHours === undefined) d.freeCancelHours = 24;
+  if(d.mode === undefined) d.mode = 'open';
+  if(d.interested === undefined) d.interested = [];
+  if(d.selectedApplicant === undefined) d.selectedApplicant = null;
+  if(d.assignedTrainee === undefined) d.assignedTrainee = null;
+});
+/* Seed the four existing model calls as "Choose your customer" — the mode makes the most
+   natural sense there, and it means the demo has a populated applicant list out of the box. */
+const SEED_INTERESTED = {
+  5: [{name:"Maya T.", photo:null}, {name:"Jordan K.", photo:null}],
+  7: [{name:"Priya S.", photo:null}],
+  10: [{name:"Alex R.", photo:null}, {name:"Nadia F.", photo:null}, {name:"Chen W.", photo:null}],
+  16: [{name:"Sam D.", photo:null}],
+};
+[5,7,10,16].forEach(id => {
+  const d = DEALS.find(x=>x.id===id);
+  if(d){ d.mode = 'choose'; d.interested = SEED_INTERESTED[id] ? SEED_INTERESTED[id].slice() : []; }
+});
+/* Seed a couple of deals with a team member assigned, so the "who's doing your service"
+   showcase has real data before anyone touches the business dashboard. */
+[5,7].forEach(id => {
+  const d = DEALS.find(x=>x.id===id);
+  if(d) d.assignedTrainee = 1;
+});
+
 const REVIEWS = {
   1: [
     {name:"Amelia R.", rating:5, date:"2 days ago", text:"Colour turned out exactly like the reference photo, and the toner made it look so much more expensive than I paid.", photos:["bg-hair"]},
@@ -1127,11 +1607,57 @@ const REVIEWS = {
     {name:"Isla F.", rating:4, date:"4 days ago", text:"Great retention on the lashes, just wish the appointment had a bit more time for shaping.", photos:["bg-brows"]}
   ]
 };
- 
+
 let currentReviewVoucherIndex = null;
 let currentReviewRating = 0;
 let reviewPhotos = [];
- 
+
+/* ---------------- GROWTH RITUAL BALANCE ---------------- */
+const GROWTH_TIER_THRESHOLD = 25;
+let growthBalance = 14.85;
+let referralCode = "SUHANI2H4";
+let referralStats = { invited: 2, bonusEarned: 4 };
+
+/* ---------------- LINKED SUBSCRIPTIONS (mocked — real once bank-linking is live) ---------------- */
+let linkedSubscriptions = [
+  {id:1, name:"Netflix", plan:"Premium plan", amount:24.99, roundUpTo:30, enabled:false},
+  {id:2, name:"Anytime Fitness", plan:"Membership", amount:54.99, roundUpTo:60, enabled:false},
+  {id:3, name:"Spotify", plan:"Premium", amount:12.99, roundUpTo:15, enabled:false},
+];
+
+/* ---------------- PARTNER STUDENT PERKS (Tier 2 brand partnerships) ---------------- */
+let partnerPerks = [
+  {id:1, brand:"Netflix", tagline:"50% off Premium, student verified", bonus:1, claimed:false},
+  {id:2, brand:"Anytime Fitness", tagline:"Student membership pricing, no lock-in contract", bonus:2, claimed:false},
+  {id:3, brand:"Spotify", tagline:"Student plan — half the price, same Premium features", bonus:1, claimed:false},
+];
+
+/* ---------------- APP MODE (customer vs business interface) ---------------- */
+let appMode = 'customer';
+function switchAppMode(mode, targetTab){
+  appMode = mode;
+  document.getElementById('tabbar').classList.toggle('biz-mode', mode === 'business');
+  document.querySelectorAll('.app-mode-switch .toggle-opt').forEach(o => {
+    o.classList.toggle('active', o.dataset.mode === mode);
+  });
+  switchTab(targetTab || (mode === 'business' ? 'bizhome' : 'home'));
+}
+
+/* ---------------- BUSINESS: TEAM ROSTER ---------------- */
+let trainees = [
+  {id:1, name:"Ava Thompson", role:"Level 2 Apprentice", specialty:"Colour & balayage", bio:"Second-year apprentice building her colour portfolio — every model call is supervised."},
+  {id:2, name:"Priya Nair", role:"Senior Stylist", specialty:"Precision cuts & styling", bio:"Runs the floor most weekdays and mentors the apprentices on cut technique."},
+];
+let nextTraineeId = 3;
+
+/* ---------------- BUSINESS: PRICE LIST ---------------- */
+let priceList = [
+  {id:1, service:"Women's haircut & blow-dry", price:65},
+  {id:2, service:"Full colour & toner", price:150},
+  {id:3, service:"Balayage", price:220},
+];
+let nextPriceId = 4;
+
 let activeCategory = "All";
 let userConcession = "None";
 let favoriteBiz = new Set();
@@ -1145,18 +1671,39 @@ let bookingDealId = null;
 let bookingDateIndex = 0;
 let bookingTimeSelected = null;
 const TIME_SLOTS = ["9:00am","10:30am","12:00pm","1:30pm","3:00pm","4:30pm"];
-let redeemedVouchers = [];
+/* Two seeded redeemed vouchers so the rebook-timing feature has something to show
+   without needing real weeks to actually pass in a demo session — one past its
+   typical rebook window (shows the "time to rebook" prompt), one not yet due
+   (shows the "we'll nudge you in ~N weeks" informational state). */
+let redeemedVouchers = [
+  {dealId:1, biz:"Willow & Bloom Studio", title:"Balayage + toner + blow-dry", code:"RC-8F3KQ", bg:"bg-hair", rating:5, daysSinceRedeemed:49},
+  {dealId:3, biz:"Lacquer Lane", title:"Gel manicure + soak-off", code:"RC-2M9PL", bg:"bg-nails", rating:4, daysSinceRedeemed:10},
+];
 let activeVouchers = [];
+
+/* ---------------- REBOOK TIMING (use the timing advantage before a business can) ---------------- */
+const REBOOK_INTERVAL_DAYS = {
+  Hair: 42, Nails: 21, Makeup: 30, Waxing: 28, "Brows & Lashes": 21, Skincare: 28, "Massage & Spa": 30, Grooming: 28,
+};
+function rebookIntervalDays(category){
+  return REBOOK_INTERVAL_DAYS[category] || 30;
+}
 let selectedPinId = null;
 let bizDeals = [
-  {dealId:null, biz:"Willow & Bloom Studio", service:"Root touch-up + gloss", category:"Hair", type:"standard", detail:"35% off", qty:8, claimed:3, photo:null},
+  {dealId:null, biz:"Willow & Bloom Studio", service:"Root touch-up + gloss", category:"Hair", type:"standard", mode:"open", detail:"35% off", qty:8, claimed:3, photo:null},
 ];
 let currentDealType = "standard";
+let currentDealMode = "open";
 let myDealsTab = "active";
 let currentBizPhoto = null;
+
+/* per-booking message threads, keyed by voucher code */
+let messageThreads = {};
+let currentThreadCode = null;
+let currentThreadRole = 'customer';
 let nextDealId = 17;
 const CATEGORY_BG = {Hair:"bg-hair", Nails:"bg-nails", Makeup:"bg-makeup", Waxing:"bg-waxing", "Brows & Lashes":"bg-brows", Skincare:"bg-skincare", "Massage & Spa":"bg-spa", Grooming:"bg-grooming"};
- 
+
 /* ---------------- RENDER: CHIPS ---------------- */
 function renderChips(){
   const row = document.getElementById('chipRow');
@@ -1166,7 +1713,7 @@ function renderChips(){
   }).join('');
 }
 function setCategory(c){ activeCategory = c; renderChips(); renderDeals(); }
- 
+
 /* ---------------- RENDER: DEAL LIST ---------------- */
 function filteredDeals(){
   if(activeCategory === "All") return DEALS;
@@ -1204,6 +1751,46 @@ function setConcession(val){
   renderDeals();
   toast(val === 'None' ? 'Concession status cleared' : `Set to ${val} — matching deals flagged in Discover`);
 }
+
+/* ---------------- ABOUT ME (portfolio) ---------------- */
+let stylePhotos = [];
+const HAIR_TYPES = ["Straight","Wavy","Curly","Coily","Colour-treated","Fine","Thick"];
+let selectedHairTypes = new Set();
+function renderHairTypeChips(){
+  const el = document.getElementById('hairTypeChips');
+  if(!el) return;
+  el.innerHTML = HAIR_TYPES.map(t => `<div class="concession-chip ${selectedHairTypes.has(t)?'active':''}" onclick="toggleHairType('${t}')">${t}</div>`).join('');
+}
+function toggleHairType(t){
+  if(selectedHairTypes.has(t)) selectedHairTypes.delete(t); else selectedHairTypes.add(t);
+  renderHairTypeChips();
+}
+function stylePhotoGridHTML(){
+  const tiles = stylePhotos.map((src,i) => `
+    <div class="photo-tile"><img src="${src}"/><div class="photo-remove" onclick="removeStylePhoto(${i})"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+  `).join('');
+  const addTile = `<label class="photo-add">
+      <input type="file" accept="image/*" multiple style="display:none" onchange="handleStylePhotoUpload(event)">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+    </label>`;
+  return tiles + addTile;
+}
+function handleStylePhotoUpload(event){
+  const files = Array.from(event.target.files || []);
+  if(!files.length) return;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      stylePhotos.push(e.target.result);
+      document.getElementById('stylePhotoGrid').innerHTML = stylePhotoGridHTML();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function removeStylePhoto(i){
+  stylePhotos.splice(i,1);
+  document.getElementById('stylePhotoGrid').innerHTML = stylePhotoGridHTML();
+}
 function escapeAttr(s){
   return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
 }
@@ -1219,7 +1806,10 @@ function cardHTML(d){
     : `<div class="price-row"><span class="now">$${d.now}</span><span class="was">$${d.was}</span></div>`;
   const modelTag = d.type === 'model' ? `<span class="req-tag">${d.req}</span>` : '';
   const eligTag = (d.eligibility && d.eligibility !== 'Everyone') ? `<span class="elig-tag">${d.eligibility} price</span>` : '';
-  const tags = (modelTag || eligTag) ? `<div class="tag-row">${modelTag}${eligTag}</div>` : '';
+  const modeTag = (d.mode === 'choose') ? `<span class="mode-tag">Business picks who gets this</span>` : '';
+  const cardTrainee = d.assignedTrainee ? trainees.find(t=>t.id===d.assignedTrainee) : null;
+  const traineeTag = cardTrainee ? `<span class="req-tag">With ${cardTrainee.name} · ${cardTrainee.role}</span>` : '';
+  const tags = (modelTag || eligTag || modeTag || traineeTag) ? `<div class="tag-row">${modelTag}${eligTag}${modeTag}${traineeTag}</div>` : '';
   const ratingLabel = d.isNew ? 'New listing' : `★ ${d.rating}`;
   const photoStyle = d.photo ? ` style="background-image:url('${d.photo}'); background-size:cover; background-position:center;"` : '';
   return `
@@ -1243,7 +1833,7 @@ function cardHTML(d){
 function toggleFavorite(biz){
   if(favoriteBiz.has(biz)) favoriteBiz.delete(biz); else favoriteBiz.add(biz);
   renderDeals();
-  if(document.getElementById('screen-mydeals').classList.contains('active')) renderMyDeals();
+  if(document.getElementById('screen-home').classList.contains('active')) renderMyDeals();
   if(document.getElementById('screen-favourites').classList.contains('active')) renderFavourites();
 }
 function emptyStateHTML(msg){
@@ -1252,7 +1842,7 @@ function emptyStateHTML(msg){
     <p>${msg}</p>
   </div>`;
 }
- 
+
 /* ---------------- REVIEWS ---------------- */
 function starSVG(filled){
   return `<svg viewBox="0 0 24 24" ${filled?'fill="currentColor" stroke="none"':'fill="none" stroke="currentColor" stroke-width="2"'}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>`;
@@ -1284,7 +1874,7 @@ function reviewsSectionHTML(dealId){
   `).join('');
   return `<div><div style="font-family:'Fraunces'; font-weight:600; font-size:15px; color:var(--ink); margin-bottom:10px;">Reviews</div>${summary}${items}</div>`;
 }
- 
+
 /* ---------------- LEAVE A REVIEW FLOW ---------------- */
 function openReviewFlow(voucherIndex){
   currentReviewVoucherIndex = voucherIndex;
@@ -1293,7 +1883,7 @@ function openReviewFlow(voucherIndex){
   const v = activeVouchers[voucherIndex];
   document.getElementById('sheetContent').innerHTML = `
     <div class="sheet-handle"></div>
-    <button class="sheet-close" style="position:static; margin:12px 20px 0 auto; display:flex;" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#590332" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <button class="sheet-close" style="position:static; margin:12px 20px 0 auto; display:flex;" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#121212" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     <div class="sheet-body" style="padding-top:6px;">
       <div class="biz">${v.biz}</div>
       <h2>How was it?</h2>
@@ -1348,17 +1938,18 @@ function removePhoto(i){
 function submitReview(){
   if(currentReviewRating === 0){ toast('Tap a star to rate your visit'); return; }
   const v = activeVouchers[currentReviewVoucherIndex];
-  const text = document.getElementById('reviewText').value.trim() || "Redeemed via Glow Syndicate.";
+  const text = document.getElementById('reviewText').value.trim() || "Redeemed via The Ritual Collective.";
   if(!REVIEWS[v.dealId]) REVIEWS[v.dealId] = [];
   REVIEWS[v.dealId].unshift({name:"You", rating:currentReviewRating, date:"Just now", text, photos: reviewPhotos.length ? ["__uploaded__"] : [], uploaded: reviewPhotos.slice()});
   v.rating = currentReviewRating;
+  v.daysSinceRedeemed = 0;
   redeemedVouchers.unshift(v);
   activeVouchers.splice(currentReviewVoucherIndex,1);
   closeSheet();
   toast('Thanks — your review is posted');
   renderMyDeals();
 }
- 
+
 /* ---------------- DEAL DETAIL SHEET ---------------- */
 function openDeal(id){
   const d = DEALS.find(x=>x.id===id);
@@ -1369,26 +1960,52 @@ function openDeal(id){
     ? `<div class="sheet-price"><span class="now">Free / reduced</span></div>`
     : `<div class="sheet-price"><span class="now">$${d.now}</span><span class="was">$${d.was}</span><span class="pct">-${d.pct}%</span></div>`;
   const reqBlock = isModel
-    ? `<div class="req-box"><div class="lbl">Model requirements</div><p>${d.req}</p></div>`
+    ? `<div class="req-box"><div class="lbl">Model requirements</div><p>${d.hairTypeWanted && d.hairTypeWanted !== 'Any type' ? `<b>${d.hairTypeWanted} hair.</b> ` : ''}${d.req}</p></div>`
     : '';
   const comboBlock = isCombo
     ? `<div class="combo-box"><div class="lbl">What's included</div><ul>${d.comboItems.map(item=>`<li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>${item}</li>`).join('')}</ul></div>`
     : '';
+  const sheetTrainee = d.assignedTrainee ? trainees.find(t=>t.id===d.assignedTrainee) : null;
+  const traineeBlock = sheetTrainee
+    ? `<div class="req-box"><div class="lbl">Who's doing your service</div><p><b>${sheetTrainee.name}</b> — ${sheetTrainee.role} · ${sheetTrainee.specialty}</p></div>`
+    : '';
   const eligBlock = (d.eligibility && d.eligibility !== 'Everyone')
     ? `<div class="sheet-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>${d.eligibility} pricing — valid ID may be requested at redemption</div>`
     : '';
+  const depositLine = d.depositAmount
+    ? `<div class="policy-row"><span>Deposit to book</span><b>$${d.depositAmount} · credited to your total</b></div>`
+    : `<div class="policy-row"><span>Deposit to book</span><b>No deposit needed</b></div>`;
   const policyBlock = (!isModel)
     ? `<div class="policy-box">
-        <div class="lbl">Cancellation policy</div>
-        <div class="policy-row"><span>Cancel with less than 24h notice</span><b>${d.cancelFee ? '$'+d.cancelFee+' fee' : 'No fee'}</b></div>
-        <div class="policy-row"><span>No-show</span><b>${d.noShowFee ? '$'+d.noShowFee+' fee' : 'No fee'}</b></div>
+        <div class="lbl">Deposit & cancellation policy</div>
+        ${depositLine}
+        <div class="policy-row"><span>Free to cancel until</span><b>${d.freeCancelHours}h before your appointment</b></div>
+        <div class="policy-row"><span>After that / no-show</span><b>${d.depositAmount ? 'Deposit is kept' : 'No fee'}</b></div>
       </div>`
     : '';
   const sheetPhotoStyle = d.photo ? ` style="background-image:url('${d.photo}'); background-size:cover; background-position:center;"` : '';
+
+  /* Choose Your Customer button/state logic */
+  let ctaHTML;
+  const alreadyApplied = d.interested.some(a=>a.name===CURRENT_USER);
+  if(d.mode === 'choose' && !isCombo){
+    if(d.selectedApplicant === CURRENT_USER){
+      ctaHTML = `<button class="redeem-btn ${isModel?'model-btn':''}" onclick="${isModel ? `redeemDeal(${d.id})` : `openBookingFlow(${d.id})`}">You got the spot — continue to booking</button>`;
+    } else if(d.selectedApplicant){
+      ctaHTML = `<button class="redeem-btn disabled-btn">This spot has been filled</button>`;
+    } else if(alreadyApplied){
+      ctaHTML = `<button class="redeem-btn disabled-btn">You're on the list — waiting on ${d.biz}</button>`;
+    } else {
+      ctaHTML = `<button class="redeem-btn ${isModel?'model-btn':''}" onclick="applyInterest(${d.id})">Put your name down</button>`;
+    }
+  } else {
+    ctaHTML = `<button class="redeem-btn ${isModel?'model-btn':''}" onclick="${(isModel || isCombo) ? `redeemDeal(${d.id})` : `openBookingFlow(${d.id})`}">${isModel ? 'Apply as a model' : isCombo ? 'Redeem this combo' : 'Book this deal'}</button>`;
+  }
+
   document.getElementById('sheetContent').innerHTML = `
     <div class="sheet-handle"></div>
     <div class="sheet-photo ${d.photo ? '' : d.bg}"${sheetPhotoStyle}>
-      <button class="sheet-close" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#590332" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="sheet-close" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#121212" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <div class="sheet-body">
       <div class="biz">${d.biz} · ${d.suburb}</div>
@@ -1396,13 +2013,14 @@ function openDeal(id){
       ${priceBlock}
       ${reqBlock}
       ${comboBlock}
+      ${traineeBlock}
       <div class="sheet-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>${d.time}</div>
       <div class="sheet-row"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${d.suburb}, Brisbane</div>
       <div class="sheet-row"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Show your voucher code in-store to redeem</div>
       ${eligBlock}
       <div class="sheet-divider"></div>
       ${policyBlock}
-      <button class="redeem-btn ${isModel?'model-btn':''}" onclick="${(isModel || isCombo) ? `redeemDeal(${d.id})` : `openBookingFlow(${d.id})`}">${isModel ? 'Apply as a model' : isCombo ? 'Redeem this combo' : 'Book this deal'}</button>
+      ${ctaHTML}
       <div class="sheet-divider"></div>
       ${reviewsSectionHTML(d.id)}
     </div>
@@ -1410,7 +2028,266 @@ function openDeal(id){
   overlay.classList.add('open');
 }
 function closeSheet(){ document.getElementById('sheetOverlay').classList.remove('open'); }
- 
+
+/* ---------------- GROWTH RITUAL DETAIL SHEET ---------------- */
+function renderGrowthCard(){
+  const bal = document.getElementById('ggBalance');
+  if(!bal) return;
+  bal.textContent = `$${growthBalance.toFixed(2)}`;
+  const pct = Math.min(100, Math.round((growthBalance / GROWTH_TIER_THRESHOLD) * 100));
+  document.getElementById('ggProgressFill').style.width = pct + '%';
+  if(growthBalance >= GROWTH_TIER_THRESHOLD){
+    document.getElementById('ggTier').textContent = 'Growth tier';
+    document.getElementById('ggNext').textContent = "You've reached Growth tier · tap to see your growth potential";
+  } else {
+    const toGo = (GROWTH_TIER_THRESHOLD - growthBalance).toFixed(2);
+    document.getElementById('ggNext').textContent = `$${toGo} to go until Growth tier · tap to see your growth potential`;
+  }
+}
+function openGrowthRitual(){
+  const overlay = document.getElementById('sheetOverlay');
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" style="position:static; margin:12px 20px 0 auto; display:flex;" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#121212" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="sheet-body" style="padding-top:6px;">
+      <h2>Your Growth Ritual</h2>
+      <div class="sheet-price"><span class="now">$${growthBalance.toFixed(2)}</span></div>
+      <p class="sheet-row" style="border:none;">5% of every booking goes here automatically — no extra cost to you, ever.</p>
+
+      <div class="sheet-divider"></div>
+
+      <div class="lbl" style="font-size:11px; font-weight:800; color:var(--sage); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:10px;">Your growth potential</div>
+      <p class="gr-proj-note">A simple projection if you keep booking at your current pace — no extra effort, no extra cost.</p>
+      <div class="gr-projection">
+        <div class="gr-proj-col"><div class="gr-proj-bar" style="height:18px;"></div><div class="gr-proj-amt">$${growthBalance.toFixed(2)}</div><div class="gr-proj-label">Now</div></div>
+        <div class="gr-proj-col"><div class="gr-proj-bar" style="height:42px;"></div><div class="gr-proj-amt">$38</div><div class="gr-proj-label">3 months</div></div>
+        <div class="gr-proj-col"><div class="gr-proj-bar" style="height:64px;"></div><div class="gr-proj-amt">$72</div><div class="gr-proj-label">6 months</div></div>
+        <div class="gr-proj-col"><div class="gr-proj-bar" style="height:90px;"></div><div class="gr-proj-amt">$156</div><div class="gr-proj-label">12 months</div></div>
+      </div>
+
+      <div class="sheet-divider"></div>
+
+      <div class="lbl" style="font-size:11px; font-weight:800; color:var(--sage); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:6px;">Tiers</div>
+      <div class="gr-tier-row">
+        <div class="gr-tier-dot done"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><div class="gr-tier-name">Cautious</div><div class="gr-tier-desc">Your balance sits steady — no risk, always there.</div></div>
+      </div>
+      <div class="gr-tier-row">
+        <div class="gr-tier-dot locked"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></div>
+        <div><div class="gr-tier-name">Growth</div><div class="gr-tier-desc">Unlocks at $25 — take a 2-minute quiz to understand it first.</div></div>
+      </div>
+
+      <div class="sheet-row" style="cursor:pointer; margin-top:16px; padding:13px 14px; background:var(--white); border:1px solid var(--line); border-radius:14px; align-items:center;" onclick="closeSheet(); openGrowthStats();">
+        <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+        <span style="flex:1; font-weight:700; color:var(--ink);">See your 5-year outlook &amp; refer a friend for $2</span>
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+
+      <button class="redeem-btn" style="margin-top:12px;" onclick="toast('The 2-minute quiz is coming soon')">Take the quiz to unlock Growth tier</button>
+    </div>
+  `;
+  overlay.classList.add('open');
+}
+
+/* ---------------- GROWTH STATS + REFERRAL ---------------- */
+function computeFiveYearOutlook(){
+  const paceRatio = growthBalance / 14.85;
+  const annualPace = 156 * paceRatio;
+  const cautious5yr = annualPace * 5;
+  const growth5yr = cautious5yr * 1.17;
+  const costOfWaitingPerYear = (growth5yr - cautious5yr) / 5;
+  return {
+    cautious5yr: Math.round(cautious5yr),
+    growth5yr: Math.round(growth5yr),
+    costOfWaiting: Math.round(growth5yr - cautious5yr),
+    costOfWaitingPerYear: Math.round(costOfWaitingPerYear)
+  };
+}
+function openGrowthStats(){
+  const overlay = document.getElementById('sheetOverlay');
+  const o = computeFiveYearOutlook();
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" style="position:static; margin:12px 20px 0 auto; display:flex;" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#121212" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="sheet-body" style="padding-top:6px;">
+      <h2>Your stats</h2>
+      <p class="sheet-row" style="border:none;">Where your Growth Ritual balance is headed if you keep booking at your current pace — no extra effort, no extra cost.</p>
+
+      <div class="sheet-divider"></div>
+
+      <div class="lbl" style="font-size:11px; font-weight:800; color:var(--sage); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:10px;">In 5 years</div>
+      <div class="five-yr-row">
+        <div class="five-yr-col">
+          <div class="five-yr-tier">Cautious tier</div>
+          <div class="five-yr-amt">$${o.cautious5yr}</div>
+        </div>
+        <div class="five-yr-col growth">
+          <div class="five-yr-tier">Growth tier</div>
+          <div class="five-yr-amt">$${o.growth5yr}</div>
+        </div>
+      </div>
+      <div class="cost-waiting-box">
+        <div class="lbl" style="margin-bottom:4px;">What staying Cautious costs you</div>
+        <p>Staying in Cautious tier instead of Growth means leaving roughly <b>$${o.costOfWaiting}</b> on the table over 5 years — about <b>$${o.costOfWaitingPerYear}/year</b> you don't get back. The earlier you switch, the more it compounds.</p>
+      </div>
+
+      <div class="sheet-divider"></div>
+
+      <div class="lbl" style="font-size:11px; font-weight:800; color:var(--sage); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:6px;">Refer a friend</div>
+      <div class="referral-box">
+        <p style="margin-bottom:12px;">Invite a friend to The Ritual Collective — when they book their first deal, you both get <b>$2</b> added to your Growth Ritual balance.</p>
+        <div class="referral-code-row">
+          <span class="referral-code">${referralCode}</span>
+          <button class="referral-copy-btn" onclick="shareReferral()">Share invite link</button>
+        </div>
+        <div class="referral-stats-row">
+          <div><b>${referralStats.invited}</b><span>friends joined</span></div>
+          <div><b>$${referralStats.bonusEarned}</b><span>bonus earned</span></div>
+        </div>
+      </div>
+    </div>
+  `;
+  overlay.classList.add('open');
+}
+function shareReferral(){
+  const link = `theritualcollective.app/invite/${referralCode}`;
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(link);
+    }
+  }catch(e){ /* clipboard not available in this preview — link is still shown on screen */ }
+  referralStats.invited += 1;
+  referralStats.bonusEarned += 2;
+  growthBalance = Math.round((growthBalance + 2) * 100) / 100;
+  renderGrowthCard();
+  toast('Invite link copied — you\'ll each get $2 once they book their first deal');
+  if(document.getElementById('sheetOverlay').classList.contains('open')) openGrowthStats();
+}
+
+/* ---------------- LINKED SUBSCRIPTIONS (round-up opt-in) ---------------- */
+function subscriptionListHTML(){
+  return linkedSubscriptions.map(s => {
+    const roundUp = (s.roundUpTo - s.amount).toFixed(2);
+    return `
+    <div class="subscription-row">
+      <div class="subscription-icon">${s.name.charAt(0)}</div>
+      <div class="subscription-info">
+        <h5>${s.name}</h5>
+        <span>${s.plan} · $${s.amount.toFixed(2)}/mo${s.enabled ? ` · <b>+$${roundUp} to Growth Ritual</b>` : ''}</span>
+      </div>
+      <div class="switch ${s.enabled ? 'on' : ''}" onclick="toggleSubscriptionRoundUp(${s.id})"></div>
+    </div>`;
+  }).join('');
+}
+function renderSubscriptionList(){
+  const el = document.getElementById('subscriptionList');
+  if(el) el.innerHTML = subscriptionListHTML();
+}
+function toggleSubscriptionRoundUp(id){
+  const s = linkedSubscriptions.find(x=>x.id===id);
+  if(!s) return;
+  s.enabled = !s.enabled;
+  const roundUp = Math.round((s.roundUpTo - s.amount) * 100) / 100;
+  growthBalance = Math.round((growthBalance + (s.enabled ? roundUp : -roundUp)) * 100) / 100;
+  renderSubscriptionList();
+  renderGrowthCard();
+  toast(s.enabled
+    ? `Round-up on for ${s.name} — $${roundUp.toFixed(2)} added to your Growth Ritual this month`
+    : `Round-up turned off for ${s.name}`);
+}
+
+/* ---------------- PARTNER STUDENT PERKS ---------------- */
+function openPartnerPerks(){
+  const overlay = document.getElementById('sheetOverlay');
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" style="position:static; margin:12px 20px 0 auto; display:flex;" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#121212" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="sheet-body" style="padding-top:6px;">
+      <h2>Partner student perks</h2>
+      <p class="sheet-row" style="border:none;">Brands backing the next generation — their own student pricing, offered through The Ritual Collective. Kept separate from your beauty deals on purpose.</p>
+      <div class="sheet-divider"></div>
+      <div id="partnerPerksList"></div>
+    </div>
+  `;
+  renderPartnerPerksList();
+  overlay.classList.add('open');
+}
+function renderPartnerPerksList(){
+  const el = document.getElementById('partnerPerksList');
+  if(!el) return;
+  el.innerHTML = partnerPerks.map(p => `
+    <div class="partner-perk-card">
+      <div class="partner-perk-top">
+        <div class="partner-perk-icon">${p.brand.charAt(0)}</div>
+        <div>
+          <h5>${p.brand}</h5>
+          <span>${p.tagline}</span>
+        </div>
+      </div>
+      <div class="partner-perk-bottom">
+        <span class="partner-perk-bonus">+$${p.bonus} to your Growth Ritual on sign-up</span>
+        ${p.claimed
+          ? `<button class="redeem-btn disabled-btn" style="width:auto; margin:0; padding:9px 16px; font-size:12px;">Claimed</button>`
+          : `<button class="referral-copy-btn" onclick="claimPartnerPerk(${p.id})">Get this perk</button>`}
+      </div>
+    </div>
+  `).join('');
+}
+function claimPartnerPerk(id){
+  const p = partnerPerks.find(x=>x.id===id);
+  if(!p || p.claimed) return;
+  p.claimed = true;
+  growthBalance = Math.round((growthBalance + p.bonus) * 100) / 100;
+  renderGrowthCard();
+  renderPartnerPerksList();
+  toast(`Redirecting to ${p.brand}'s student sign-up — $${p.bonus} added to your Growth Ritual as their way of backing you`);
+}
+
+/* ---------------- CHOOSE YOUR CUSTOMER: applying + selecting ---------------- */
+function applyInterest(id){
+  const d = DEALS.find(x=>x.id===id);
+  if(!d || d.selectedApplicant) return;
+  if(d.interested.some(a=>a.name===CURRENT_USER)){ toast("You're already on the list for this one"); return; }
+  d.interested.push({name:CURRENT_USER, photo: stylePhotos[0] || null});
+  toast(`You're on the list — ${d.biz} will pick who gets this spot`);
+  openDeal(id);
+}
+function applicantThumbHTML(a){
+  if(a.photo) return `<img class="applicant-thumb" src="${a.photo}"/>`;
+  return `<div class="applicant-thumb">${a.name.charAt(0)}</div>`;
+}
+function selectApplicant(dealId, name){
+  const d = DEALS.find(x=>x.id===dealId);
+  if(!d) return;
+  d.selectedApplicant = name;
+  renderBizDeals();
+  toast(`${name} selected — they've been notified`);
+  if(name === CURRENT_USER){
+    notifications.unshift({dealId:d.id, text:`Good news — ${d.biz} picked you for "${d.title}"! Tap to book your time.`, time:"Just now", read:false});
+    updateNotifBadge();
+  }
+}
+function applicantPanelHTML(d, forBusiness){
+  if(d.mode !== 'choose') return '';
+  if(!forBusiness) return '';
+  if(d.selectedApplicant){
+    return `<div class="applicant-panel"><div class="selected-banner">Selected: ${d.selectedApplicant}</div></div>`;
+  }
+  if(!d.interested.length){
+    return `<div class="applicant-panel"><div class="lbl">Interested (0)</div><p style="font-size:11.5px;color:var(--ink-faint);">No one's put their name down yet.</p></div>`;
+  }
+  return `<div class="applicant-panel">
+    <div class="lbl">Interested (${d.interested.length})</div>
+    ${d.interested.map(a => `
+      <div class="applicant-row">
+        ${applicantThumbHTML(a)}
+        <div class="applicant-name">${a.name}</div>
+        <button class="applicant-select-btn" onclick="selectApplicant(${d.id}, '${escapeAttr(a.name)}')">Select</button>
+      </div>
+    `).join('')}
+  </div>`;
+}
+
 function generateBookingDates(){
   const days = [];
   const labels = ["Today","Tomorrow"];
@@ -1435,9 +2312,12 @@ function renderBookingSheet(){
   const days = generateBookingDates();
   const takenMap = [1,3,0,4];
   const takenIdx = takenMap[bookingDateIndex] ?? -1;
+  const depositNote = d.depositAmount
+    ? `<div class="booking-confirm-row"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>A $${d.depositAmount} deposit is held on booking — credited to your total, free to cancel up to ${d.freeCancelHours}h before.</div>`
+    : '';
   document.getElementById('sheetContent').innerHTML = `
     <div class="sheet-handle"></div>
-    <button class="sheet-close" style="position:static; margin:12px 20px 0 auto; display:flex;" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#590332" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <button class="sheet-close" style="position:static; margin:12px 20px 0 auto; display:flex;" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#121212" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     <div class="sheet-body" style="padding-top:6px;">
       <div class="biz">${d.biz}</div>
       <h2>Book your time</h2>
@@ -1449,6 +2329,7 @@ function renderBookingSheet(){
         ${TIME_SLOTS.map((t,i)=>`<div class="time-slot ${i===takenIdx?'taken':''} ${bookingTimeSelected===t?'active':''}" onclick="selectBookingTime('${t}')">${t}</div>`).join('')}
       </div>
       <div class="booking-confirm-row"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>This books straight into ${d.biz}'s calendar — no back-and-forth needed.</div>
+      ${depositNote}
       <button class="redeem-btn" onclick="confirmBooking()" ${bookingTimeSelected ? '' : 'style="opacity:0.45;pointer-events:none;"'}>Confirm booking</button>
     </div>
   `;
@@ -1461,15 +2342,17 @@ function confirmBooking(){
   const d = DEALS.find(x=>x.id===bookingDealId);
   const days = generateBookingDates();
   const day = days[bookingDateIndex];
-  const code = "GS-" + Math.random().toString(36).substring(2,7).toUpperCase();
-  activeVouchers.unshift({dealId:d.id, biz:d.biz, title:d.title, code, bookingDate:day.full, bookingTime:bookingTimeSelected, expiry:"", bg:d.bg});
+  const code = "RC-" + Math.random().toString(36).substring(2,7).toUpperCase();
+  activeVouchers.unshift({dealId:d.id, biz:d.biz, title:d.title, code, bookingDate:day.full, bookingTime:bookingTimeSelected, expiry:"", bg:d.bg, depositAmount:d.depositAmount, freeCancelHours:d.freeCancelHours});
   addLoyaltyStamp(d.biz);
+  seedBookingThread(code, d);
   document.getElementById('sheetContent').innerHTML = `
     <div class="sheet-handle"></div>
     <div class="voucher-card">
       <div class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h3>Booking confirmed</h3>
       <p class="sub">${d.biz} · ${d.title}</p>
+      ${d.depositAmount ? `<div class="deposit-line">$${d.depositAmount} deposit paid · credited to your total</div>` : ''}
       <div class="voucher-code">${day.full} · ${bookingTimeSelected}</div>
       <div class="exp">Sent straight to ${d.biz}'s books · reference ${code}</div>
     </div>
@@ -1479,13 +2362,14 @@ function confirmBooking(){
   `;
   renderMyDeals();
 }
- 
+
 function redeemDeal(id){
   const d = DEALS.find(x=>x.id===id);
-  const code = "GS-" + Math.random().toString(36).substring(2,7).toUpperCase();
+  const code = "RC-" + Math.random().toString(36).substring(2,7).toUpperCase();
   const expiry = d.type==='model' ? "Confirmation within 24h" : "Valid for 30 days · book anytime";
-  activeVouchers.push({dealId:id, biz:d.biz, title:d.title, code, expiry, bg:d.bg});
+  activeVouchers.push({dealId:id, biz:d.biz, title:d.title, code, expiry, bg:d.bg, depositAmount:d.depositAmount, freeCancelHours:d.freeCancelHours});
   if(d.type !== 'model') addLoyaltyStamp(d.biz);
+  seedBookingThread(code, d);
   document.getElementById('sheetContent').innerHTML = `
     <div class="sheet-handle"></div>
     <div class="voucher-card">
@@ -1501,7 +2385,82 @@ function redeemDeal(id){
   `;
   renderMyDeals();
 }
- 
+
+/* ---------------- MESSAGING ---------------- */
+function seedBookingThread(code, d){
+  const thread = [];
+  if(d.depositAmount){
+    thread.push({from:'system', text:`Free cancellation until ${d.freeCancelHours}h before your appointment at ${d.biz}. After that, your $${d.depositAmount} deposit isn't refunded.`, time:"Just now"});
+  } else {
+    thread.push({from:'system', text:`Your booking with ${d.biz} is confirmed. Message them here if you need to change anything.`, time:"Just now"});
+  }
+  messageThreads[code] = thread;
+}
+function findVoucherByCode(code){
+  return activeVouchers.find(v=>v.code===code) || redeemedVouchers.find(v=>v.code===code);
+}
+function openMessageThread(code, role){
+  currentThreadCode = code;
+  currentThreadRole = role;
+  if(!messageThreads[code]) messageThreads[code] = [];
+  renderMessageThread();
+}
+function msgRowHTML(m){
+  if(m.from === 'system') return `<div class="msg-row system"><div class="msg-bubble">${m.text}</div></div>`;
+  const mine = m.from === currentThreadRole;
+  return `<div class="msg-row ${mine?'mine':''}"><div><div class="msg-bubble">${m.text}</div><div class="msg-meta">${m.time}</div></div></div>`;
+}
+function renderMessageThread(){
+  const code = currentThreadCode;
+  const v = findVoucherByCode(code);
+  const bizName = v ? v.biz : "your business";
+  const thread = messageThreads[code] || [];
+  const quickReplies = currentThreadRole === 'business'
+    ? `<div class="msg-quick-row">
+        <div class="msg-quick-chip" onclick="sendQuickMessage('Please arrive 10 minutes early.')">Arrive 10 min early</div>
+        <div class="msg-quick-chip" onclick="sendQuickMessage('Please bring a reference photo if you have one.')">Bring a reference photo</div>
+        <div class="msg-quick-chip" onclick="sendQuickMessage('Quick reminder — your free cancellation window is closing soon.')">Cancellation reminder</div>
+      </div>`
+    : '';
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" style="position:static; margin:12px 20px 0 auto; display:flex;" onclick="closeSheet()"><svg viewBox="0 0 24 24" stroke="#121212" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="sheet-body" style="padding-top:6px;">
+      <div class="biz">${currentThreadRole === 'business' ? 'Messaging customer for' : 'Messaging'}</div>
+      <h2>${bizName}</h2>
+      <div class="msg-thread" id="msgThread">${thread.map(msgRowHTML).join('') || '<p style="font-size:12px;color:var(--ink-faint);">No messages yet.</p>'}</div>
+      ${quickReplies}
+      <div class="msg-input-row">
+        <input id="msgInput" type="text" placeholder="${currentThreadRole==='business' ? 'Message your customer…' : 'Message '+bizName+'…'}" onkeydown="if(event.key==='Enter') sendMessage()"/>
+        <button class="msg-send-btn" onclick="sendMessage()"><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+      </div>
+    </div>
+  `;
+  document.getElementById('sheetOverlay').classList.add('open');
+  const threadEl = document.getElementById('msgThread');
+  if(threadEl) threadEl.scrollTop = threadEl.scrollHeight;
+}
+function sendMessage(){
+  const input = document.getElementById('msgInput');
+  const text = input.value.trim();
+  if(!text) return;
+  messageThreads[currentThreadCode].push({from: currentThreadRole, text, time:"Just now"});
+  input.value = '';
+  renderMessageThread();
+  const v = findVoucherByCode(currentThreadCode);
+  if(currentThreadRole === 'business'){
+    toast(`Message sent to your customer`);
+    notifications.unshift({dealId: v ? v.dealId : null, text:`New message from ${v ? v.biz : 'your business'}`, time:"Just now", read:false});
+    updateNotifBadge();
+  } else {
+    toast(`Message sent to ${v ? v.biz : 'the business'}`);
+  }
+}
+function sendQuickMessage(text){
+  document.getElementById('msgInput').value = text;
+  sendMessage();
+}
+
 /* ---------------- MAP ---------------- */
 const SUBURB_COORDS = {
   "Fortitude Valley": [-27.4560, 153.0350],
@@ -1514,7 +2473,7 @@ const SUBURB_COORDS = {
 };
 let leafletMap = null;
 let markersLayer = null;
- 
+
 function getDealLatLng(d){
   const base = SUBURB_COORDS[d.suburb] || [-27.4698, 153.0251];
   const jitterLat = ((d.id % 7) - 3) * 0.0016;
@@ -1562,7 +2521,7 @@ function renderMapPopup(){
   const d = DEALS.find(x=>x.id===selectedPinId);
   wrap.innerHTML = `<div class="deal-list" style="padding:0;">${cardHTML(d)}</div>`;
 }
- 
+
 /* ---------------- MY DEALS ---------------- */
 function setMyDealsTab(t){
   myDealsTab = t;
@@ -1576,9 +2535,12 @@ function renderMyDeals(){
   if(myDealsTab === 'active'){
     container.innerHTML = activeVouchers.length ? activeVouchers.map((v,i) => `
       <div class="voucher-row">
-        <div class="mini-coin ${v.bg}">GS</div>
+        <div class="mini-coin ${v.bg}">RC</div>
         <div class="vinfo"><h5>${v.title}</h5><span>${v.biz} · ${v.bookingDate ? v.bookingDate+' · '+v.bookingTime : v.expiry}</span></div>
-        <button class="mark-used-btn" onclick="openReviewFlow(${i})">Rate visit</button>
+        <div class="voucher-actions">
+          <button class="mark-used-btn" onclick="openReviewFlow(${i})">Rate visit</button>
+          <button class="message-btn" onclick="openMessageThread('${v.code}', 'customer')">Message</button>
+        </div>
       </div>`).join('') : emptyStateHTML("No active vouchers yet. Book a deal from Discover to see it here.");
   } else if(myDealsTab === 'loyalty'){
     const entries = Object.keys(bizLoyalty);
@@ -1596,15 +2558,73 @@ function renderMyDeals(){
       </div>`;
     }).join('') : emptyStateHTML("No loyalty programmes yet. Book with a participating business to start collecting stamps.");
   } else {
-    container.innerHTML = redeemedVouchers.length ? redeemedVouchers.map(v => `
-      <div class="voucher-row">
-        <div class="mini-coin ${v.bg}">GS</div>
-        <div class="vinfo"><h5>${v.title}</h5>${v.rating ? `<div class="rated-stars" style="color:var(--copper)">${[1,2,3,4,5].map(n=>starSVG(n<=v.rating)).join('')}</div>` : `<span>${v.biz} · used</span>`}</div>
-        <div class="vcode">${v.code}</div>
+    container.innerHTML = redeemedVouchers.length ? redeemedVouchers.map((v,idx) => `
+      <div class="voucher-card">
+        <div class="voucher-row">
+          <div class="mini-coin ${v.bg}">RC</div>
+          <div class="vinfo"><h5>${v.title}</h5>${v.rating ? `<div class="rated-stars" style="color:var(--copper)">${[1,2,3,4,5].map(n=>starSVG(n<=v.rating)).join('')}</div>` : `<span>${v.biz} · used</span>`}</div>
+          <div class="vcode">${v.code}</div>
+        </div>
+        ${rebookRowHTML(v, idx)}
       </div>`).join('') : emptyStateHTML("Redeemed vouchers will show up here once you've used them in-store.");
   }
 }
- 
+
+/* ---------------- REBOOK TIMING ---------------- */
+function rebookRowHTML(v, index){
+  if(!v.dealId) return '';
+  const deal = DEALS.find(d=>d.id===v.dealId);
+  const category = deal ? deal.category : 'General';
+  const interval = rebookIntervalDays(category);
+  const daysSince = v.daysSinceRedeemed || 0;
+  if(daysSince >= interval){
+    return `<div class="rebook-row due">
+      <span>Time to rebook with ${v.biz}?</span>
+      <button class="rebook-btn" onclick="openRebookSheet(${index})">Book again</button>
+    </div>`;
+  }
+  const weeksLeft = Math.max(1, Math.round((interval - daysSince) / 7));
+  return `<div class="rebook-row">
+    <span>We'll nudge you to rebook in about ${weeksLeft} week${weeksLeft>1?'s':''} — typical for ${category.toLowerCase()}</span>
+  </div>`;
+}
+function openRebookSheet(index){
+  const v = redeemedVouchers[index];
+  const deal = v.dealId ? DEALS.find(d=>d.id===v.dealId) : null;
+  const category = deal ? deal.category : 'General';
+  const interval = rebookIntervalDays(category);
+  const overlay = document.getElementById('sheetOverlay');
+  document.getElementById('sheetContent').innerHTML = `
+    <div class="sheet-handle"></div>
+    <div class="sheet-body" style="padding-top:22px;">
+      <div class="biz">${v.biz}</div>
+      <h2>Rebook: ${v.title}</h2>
+      <div class="req-box">
+        <div class="lbl">Why now</div>
+        <p>Most ${category.toLowerCase()} clients rebook roughly every ${Math.round(interval/7)} weeks. You're right in that window — we're getting in before ${v.biz} even has to ask, and before their regular slots fill up.</p>
+      </div>
+      <div class="sheet-row"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Same service as your last visit</div>
+      <div class="sheet-row"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${v.biz}</div>
+      <div class="sheet-divider"></div>
+      <button class="redeem-btn" onclick="confirmRebook(${index})">Confirm rebooking</button>
+    </div>
+  `;
+  overlay.classList.add('open');
+}
+function confirmRebook(index){
+  const v = redeemedVouchers[index];
+  const deal = v.dealId ? DEALS.find(d=>d.id===v.dealId) : null;
+  const code = "RC-" + Math.random().toString(36).substring(2,7).toUpperCase();
+  activeVouchers.unshift({
+    dealId: v.dealId, biz: v.biz, title: v.title, code,
+    bookingDate: "Booked just now", bookingTime: "", expiry: "",
+    bg: v.bg, depositAmount: deal ? deal.depositAmount : 0, freeCancelHours: deal ? deal.freeCancelHours : 24,
+  });
+  closeSheet();
+  toast(`Rebooked with ${v.biz} — before they even had to ask`);
+  renderMyDeals();
+}
+
 /* ---------------- LOYALTY ---------------- */
 function addLoyaltyStamp(biz){
   const program = bizLoyalty[biz];
@@ -1612,14 +2632,14 @@ function addLoyaltyStamp(biz){
   userStamps[biz] = (userStamps[biz] || 0) + 1;
   if(userStamps[biz] >= program.stampsRequired){
     userStamps[biz] = 0;
-    const code = "GS-" + Math.random().toString(36).substring(2,7).toUpperCase();
+    const code = "RC-" + Math.random().toString(36).substring(2,7).toUpperCase();
     activeVouchers.unshift({dealId:null, biz, title:`Loyalty reward: ${program.reward}`, code, expiry:"Reward voucher · valid 30 days", bg:"bg-hair"});
     toast(`🎉 Reward unlocked at ${biz} — ${program.reward}`);
   } else {
     toast(`+1 loyalty stamp at ${biz} (${userStamps[biz]}/${program.stampsRequired})`);
   }
 }
- 
+
 /* ---------------- FAVOURITES ---------------- */
 function renderFavourites(){
   const list = DEALS.filter(d => favoriteBiz.has(d.biz));
@@ -1628,7 +2648,7 @@ function renderFavourites(){
     ? `<div class="deal-list">${list.map(cardHTML).join('')}</div>`
     : emptyStateHTML("Nothing here yet. Tap the heart on any deal to follow that business and get notified next time they post.");
 }
- 
+
 /* ---------------- NOTIFICATIONS ---------------- */
 function updateNotifBadge(){
   const unread = notifications.filter(n=>!n.read).length;
@@ -1657,7 +2677,7 @@ function openNotifications(){
   notifications.forEach(n => n.read = true);
   updateNotifBadge();
 }
- 
+
 /* ---------------- BUSINESS DASHBOARD ---------------- */
 function bizPhotoGridHTML(){
   if(currentBizPhoto){
@@ -1682,7 +2702,7 @@ function removeBizPhoto(){
   currentBizPhoto = null;
   document.getElementById('bizPhotoGrid').innerHTML = bizPhotoGridHTML();
 }
- 
+
 function setDealType(type){
   currentDealType = type;
   document.getElementById('toggleStandard').classList.toggle('active', type==='standard');
@@ -1691,8 +2711,15 @@ function setDealType(type){
   document.getElementById('toggleCombo').classList.toggle('active', type==='combo');
   document.getElementById('fieldPercent').style.display = (type==='standard' || type==='combo') ? 'block' : 'none';
   document.getElementById('fieldReq').style.display = type==='model' ? 'block' : 'none';
+  document.getElementById('fieldReqDetail').style.display = type==='model' ? 'block' : 'none';
   document.getElementById('fieldCombo').style.display = type==='combo' ? 'block' : 'none';
   document.getElementById('fieldWindow').style.display = type==='model' ? 'none' : 'block';
+  document.getElementById('fieldMode').style.display = type==='combo' ? 'none' : 'block';
+}
+function setDealMode(mode){
+  currentDealMode = mode;
+  document.getElementById('toggleModeOpen').classList.toggle('active', mode==='open');
+  document.getElementById('toggleModeChoose').classList.toggle('active', mode==='choose');
 }
 function createBizDeal(){
   const service = document.getElementById('fService').value.trim();
@@ -1701,47 +2728,53 @@ function createBizDeal(){
   const suburb = document.getElementById('fSuburb').value || 'Fortitude Valley';
   const category = document.getElementById('fCategory').value;
   const eligibility = document.getElementById('fEligibility').value;
-  const cancelFee = parseFloat(document.getElementById('fCancelFee').value) || 0;
-  const noShowFee = parseFloat(document.getElementById('fNoShowFee').value) || 0;
+  const depositAmount = parseFloat(document.getElementById('fDeposit').value) || 0;
+  const freeCancelHours = parseInt(document.getElementById('fFreeCancelWindow').value) || 24;
   const qtyRaw = document.getElementById('fQty').value;
   const qty = qtyRaw ? parseInt(qtyRaw) || qtyRaw : '—';
   const windowLabel = document.getElementById('fWindow').value;
+  const mode = currentDealType === 'combo' ? 'open' : currentDealMode;
   const id = nextDealId++;
   const bg = CATEGORY_BG[category] || 'bg-hair';
- 
+  const assignedTraineeRaw = document.getElementById('fAssignedTrainee').value;
+  const assignedTrainee = assignedTraineeRaw ? parseInt(assignedTraineeRaw) : null;
+
   let newDeal;
   if(currentDealType === 'standard'){
     const was = parseFloat(document.getElementById('fOriginal').value) || 0;
     const pct = parseInt(document.getElementById('fPercent').value) || 0;
     const now = was ? Math.round(was * (1 - pct/100)) : 0;
-    newDeal = {id, biz:bizName, suburb, category, bg, photo:currentBizPhoto, title:service, was, now, pct, time:windowLabel + ' left', rating:5, isNew:true, type:'standard', eligibility, cancelFee, noShowFee, x: 15 + Math.random()*70, y: 15 + Math.random()*70};
+    newDeal = {id, biz:bizName, suburb, category, bg, photo:currentBizPhoto, title:service, was, now, pct, time:windowLabel + ' left', rating:5, isNew:true, type:'standard', eligibility, depositAmount, freeCancelHours, mode, assignedTrainee, interested:[], selectedApplicant:null, x: 15 + Math.random()*70, y: 15 + Math.random()*70};
   } else if(currentDealType === 'combo'){
     const was = parseFloat(document.getElementById('fOriginal').value) || 0;
     const pct = parseInt(document.getElementById('fPercent').value) || 0;
     const now = was ? Math.round(was * (1 - pct/100)) : 0;
     const comboItems = document.getElementById('fComboItems').value.split('\n').map(s=>s.trim()).filter(Boolean);
-    newDeal = {id, biz:bizName, suburb, category, bg, photo:currentBizPhoto, title:service, was, now, pct, comboItems: comboItems.length ? comboItems : ['Details on request'], time:"30 days left", rating:5, isNew:true, type:'combo', eligibility, cancelFee, noShowFee, x: 15 + Math.random()*70, y: 15 + Math.random()*70};
+    newDeal = {id, biz:bizName, suburb, category, bg, photo:currentBizPhoto, title:service, was, now, pct, comboItems: comboItems.length ? comboItems : ['Details on request'], time:"30 days left", rating:5, isNew:true, type:'combo', eligibility, depositAmount, freeCancelHours, mode:'open', assignedTrainee, interested:[], selectedApplicant:null, x: 15 + Math.random()*70, y: 15 + Math.random()*70};
   } else {
     const req = document.getElementById('fReq').value.trim() || 'Model needed — details on request';
-    newDeal = {id, biz:bizName, suburb, category, bg, photo:currentBizPhoto, title:service, time:windowLabel, rating:5, isNew:true, type:'model', req, eligibility, cancelFee:0, noShowFee:0, x: 15 + Math.random()*70, y: 15 + Math.random()*70};
+    const hairTypeWanted = document.getElementById('fModelHairType').value;
+    newDeal = {id, biz:bizName, suburb, category, bg, photo:currentBizPhoto, title:service, time:windowLabel, rating:5, isNew:true, type:'model', req, hairTypeWanted, eligibility, depositAmount:0, freeCancelHours:24, mode, assignedTrainee, interested:[], selectedApplicant:null, x: 15 + Math.random()*70, y: 15 + Math.random()*70};
   }
   DEALS.unshift(newDeal);
   notifyFavoriteDeal(newDeal);
   const detailLabel = currentDealType==='model' ? 'Model call' : `${document.getElementById('fPercent').value || 0}% off${currentDealType==='combo' ? ' · combo' : ''}`;
-  bizDeals.unshift({dealId:id, biz:bizName, service, category, type:currentDealType, detail: detailLabel, qty, claimed:0, photo:currentBizPhoto});
- 
+  bizDeals.unshift({dealId:id, biz:bizName, service, category, type:currentDealType, mode, detail: detailLabel, qty, claimed:0, photo:currentBizPhoto});
+
   renderDeals();
   renderBizDeals();
+  renderBizBookings();
+  renderBizDashboard();
   toast('Deal published to nearby users');
- 
+
   document.getElementById('fService').value='';
   document.getElementById('fOriginal').value='';
   document.getElementById('fPercent').value='';
   document.getElementById('fReq').value='';
   document.getElementById('fComboItems').value='';
-  document.getElementById('fCancelFee').value='';
-  document.getElementById('fNoShowFee').value='';
+  document.getElementById('fDeposit').value='';
   document.getElementById('fQty').value='';
+  document.getElementById('fAssignedTrainee').value='';
   currentBizPhoto = null;
   document.getElementById('bizPhotoGrid').innerHTML = bizPhotoGridHTML();
 }
@@ -1764,16 +2797,130 @@ function saveLoyaltyProgram(){
   bizLoyalty[bizName] = {stampsRequired: stamps, reward};
   toast(`Loyalty programme live for ${bizName}`);
 }
-function renderBizDeals(){
-  document.getElementById('bizDealList').innerHTML = bizDeals.map(b => `
+function bizDealRowsHTML(){
+  return bizDeals.map(b => {
+    const deal = b.dealId ? DEALS.find(d=>d.id===b.dealId) : null;
+    const modePill = (deal && deal.mode === 'choose') ? `<span class="mode-pill">Choose customer</span>` : '';
+    const applicantPanel = deal ? applicantPanelHTML(deal, true) : '';
+    const trainee = (deal && deal.assignedTrainee) ? trainees.find(t=>t.id===deal.assignedTrainee) : null;
+    const traineePill = trainee ? `<span class="mode-pill" style="background:var(--copper);">${trainee.name.split(' ')[0]}</span>` : '';
+    return `
     <div class="biz-deal-row">
-      ${b.photo ? `<img src="${b.photo}" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex:0 0 auto;"/>` : `<div class="status-dot"></div>`}
-      <div class="binfo"><h5>${b.service}</h5><span>${b.category} · ${b.detail}</span></div>
-      <div class="claimed-pill">${b.claimed}/${b.qty} claimed</div>
+      <div class="row-top">
+        ${b.photo ? `<img src="${b.photo}" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex:0 0 auto;"/>` : `<div class="status-dot"></div>`}
+        <div class="binfo"><h5>${b.service}</h5><span>${b.category} · ${b.detail}</span></div>
+        ${modePill}
+        ${traineePill}
+        <div class="claimed-pill">${b.claimed}/${b.qty} claimed</div>
+      </div>
+      ${applicantPanel}
     </div>
-  `).join('');
+  `;}).join('');
 }
- 
+function renderBizDeals(){
+  const html = bizDeals.length ? bizDealRowsHTML() : emptyStateHTML('No deals live yet — publish one from the Deals tab.');
+  const el1 = document.getElementById('bizDealList'); if(el1) el1.innerHTML = html;
+  const el2 = document.getElementById('bizDealListHome'); if(el2) el2.innerHTML = html;
+}
+function renderBizBookings(){
+  const el = document.getElementById('bizBookingsList');
+  if(!el) return;
+  const bizName = document.getElementById('fBiz') ? (document.getElementById('fBiz').value || 'Your studio') : 'Your studio';
+  const bookings = [...activeVouchers, ...redeemedVouchers].filter(v => v.biz === bizName);
+  el.innerHTML = bookings.length ? bookings.map(v => `
+    <div class="voucher-row">
+      <div class="mini-coin ${v.bg||'bg-hair'}">RC</div>
+      <div class="vinfo"><h5>${v.title}</h5><span>${v.bookingDate ? v.bookingDate+' · '+v.bookingTime : v.code}</span></div>
+      <button class="message-btn" onclick="openMessageThread('${v.code}', 'business')">Message</button>
+    </div>
+  `).join('') : emptyStateHTML(`No bookings for ${bizName} yet — they'll show up here as soon as someone books.`);
+}
+function renderBizDashboard(){
+  const nameEl = document.getElementById('bizHomeName');
+  if(!nameEl) return;
+  const bizName = document.getElementById('fBiz') ? (document.getElementById('fBiz').value || 'Your studio') : 'Your studio';
+  nameEl.textContent = bizName;
+  document.getElementById('statActiveDeals').textContent = bizDeals.length;
+  document.getElementById('statClaimed').textContent = bizDeals.reduce((s,b)=>s + (b.claimed||0), 0);
+  const bookings = [...activeVouchers, ...redeemedVouchers].filter(v => v.biz === bizName);
+  document.getElementById('statBookings').textContent = bookings.length;
+  document.getElementById('statTeam').textContent = trainees.length;
+}
+
+/* ---------------- BUSINESS: TEAM ROSTER ---------------- */
+function renderTraineeOptions(){
+  const sel = document.getElementById('fAssignedTrainee');
+  if(!sel) return;
+  const current = sel.value;
+  sel.innerHTML = `<option value="">Not specified</option>` + trainees.map(t => `<option value="${t.id}">${t.name} — ${t.role}</option>`).join('');
+  if(trainees.some(t=>String(t.id)===current)) sel.value = current;
+}
+function renderTeamList(){
+  const el = document.getElementById('teamList');
+  if(!el) return;
+  el.innerHTML = trainees.length ? trainees.map(t => `
+    <div class="trainee-card">
+      <div class="t-avatar">${t.name.charAt(0)}</div>
+      <div class="t-info">
+        <div class="t-top">
+          <h5>${t.name}</h5>
+          <div class="trainee-remove" onclick="removeTrainee(${t.id})"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+        </div>
+        <div class="t-role">${t.role} · ${t.specialty}</div>
+        <p>${t.bio}</p>
+      </div>
+    </div>
+  `).join('') : emptyStateHTML('No team members added yet — add your first below.');
+}
+function addTrainee(){
+  const name = document.getElementById('fTraineeName').value.trim();
+  if(!name){ toast('Add a name first'); return; }
+  const role = document.getElementById('fTraineeRole').value;
+  const specialty = document.getElementById('fTraineeSpecialty').value.trim() || 'General services';
+  const bio = document.getElementById('fTraineeBio').value.trim() || `${role} at the studio.`;
+  trainees.push({id: nextTraineeId++, name, role, specialty, bio});
+  renderTeamList();
+  renderTraineeOptions();
+  renderBizDashboard();
+  toast(`${name} added to the team`);
+  document.getElementById('fTraineeName').value='';
+  document.getElementById('fTraineeSpecialty').value='';
+  document.getElementById('fTraineeBio').value='';
+}
+function removeTrainee(id){
+  trainees = trainees.filter(t=>t.id!==id);
+  renderTeamList();
+  renderTraineeOptions();
+  renderBizDashboard();
+  toast('Team member removed');
+}
+
+/* ---------------- BUSINESS: PRICE LIST ---------------- */
+function renderPriceList(){
+  const el = document.getElementById('priceListRows');
+  if(!el) return;
+  el.innerHTML = priceList.length ? priceList.map(p => `
+    <div class="price-row-item">
+      <span class="pi-name">${p.service}</span>
+      <div class="pi-right"><b>$${p.price}</b><span class="pr-remove" onclick="removePriceListItem(${p.id})"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></span></div>
+    </div>
+  `).join('') : emptyStateHTML('No standard prices added yet.');
+}
+function addPriceListItem(){
+  const service = document.getElementById('fPriceService').value.trim();
+  const price = parseFloat(document.getElementById('fPriceAmount').value);
+  if(!service || !price){ toast('Add a service and a price first'); return; }
+  priceList.push({id: nextPriceId++, service, price});
+  renderPriceList();
+  toast(`${service} added to your price list`);
+  document.getElementById('fPriceService').value='';
+  document.getElementById('fPriceAmount').value='';
+}
+function removePriceListItem(id){
+  priceList = priceList.filter(p=>p.id!==id);
+  renderPriceList();
+}
+
 /* ---------------- TABS ---------------- */
 function switchTab(tab){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -1783,10 +2930,15 @@ function switchTab(tab){
   if(btn) btn.classList.add('active');
   if(tab === 'map') renderMap();
   if(tab === 'favourites') renderFavourites();
-  if(tab === 'mydeals') renderMyDeals();
+  if(tab === 'bizhome'){ renderBizDashboard(); renderBizDeals(); }
+  if(tab === 'bizdeals') renderBizDeals();
+  if(tab === 'bizteam') renderTeamList();
+  if(tab === 'bizbookings') renderBizBookings();
+  if(tab === 'home') renderMyDeals();
+  if(tab === 'discover') renderDeals();
   document.getElementById('appBody').scrollTop = 0;
 }
- 
+
 /* ---------------- TOAST ---------------- */
 let toastTimer;
 function toast(msg){
@@ -1796,12 +2948,22 @@ function toast(msg){
   clearTimeout(toastTimer);
   toastTimer = setTimeout(()=>el.classList.remove('show'), 2200);
 }
- 
+
 /* ---------------- INIT ---------------- */
 renderChips();
 renderConcessionChips();
+renderHairTypeChips();
+renderGrowthCard();
+renderSubscriptionList();
+document.getElementById('stylePhotoGrid').innerHTML = stylePhotoGridHTML();
 renderDeals();
+renderMyDeals();
+renderTraineeOptions();
+renderTeamList();
+renderPriceList();
 renderBizDeals();
+renderBizBookings();
+renderBizDashboard();
 document.getElementById('bizPhotoGrid').innerHTML = bizPhotoGridHTML();
 document.getElementById('sheetOverlay').addEventListener('click', function(e){
   if(e.target === this) closeSheet();
@@ -1809,4 +2971,3 @@ document.getElementById('sheetOverlay').addEventListener('click', function(e){
 </script>
 </body>
 </html>
- 
